@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <filter id="m1uvak1jpa" width="140%" height="140%" x="-15%" y="-10%" filterUnits="objectBoundingBox">
+            <feOffset dx="2" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <circle id="smguqlysyb" cx="20" cy="20" r="20"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <g transform="translate(-192.000000, -728.000000) translate(120.000000, 728.000000) translate(72.000000, 0.000000)">
+                            <use fill="#000" filter="url(#m1uvak1jpa)" xlink:href="#smguqlysyb"/>
+                            <use fill="#FFF" fill-opacity=".15" xlink:href="#smguqlysyb"/>
+                        </g>
+                        <g fill="#FFF" fill-rule="nonzero">
+                            <path d="M16.277 1.156C15.817.314 15.316.16 14.297.1 13.279.03 10.72 0 8.502 0 6.28 0 3.72.03 2.703.1 1.686.16 1.185.312.719 1.155.244 1.997 0 3.446 0 5.996V6.006c0 2.54.244 4 .72 4.832.465.842.965.995 1.982 1.066 1.018.061 3.578.097 5.8.097 2.218 0 4.777-.036 5.796-.096 1.019-.07 1.52-.224 1.98-1.066.48-.832.722-2.292.722-4.831V6v-.003c0-2.552-.242-4-.723-4.842zM7 10V3l5 3.5L7 10z" transform="translate(-192.000000, -728.000000) translate(120.000000, 728.000000) translate(72.000000, 0.000000) translate(12.000000, 14.000000)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

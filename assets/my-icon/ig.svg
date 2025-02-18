@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <filter id="h7lr0d8z9a" width="170%" height="170%" x="-30%" y="-25%" filterUnits="objectBoundingBox">
+            <feOffset dx="2" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <circle id="mo6g9npvlb" cx="20" cy="20" r="20"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <g transform="translate(-120.000000, -728.000000) translate(120.000000, 728.000000)">
+                            <use fill="#000" filter="url(#h7lr0d8z9a)" xlink:href="#mo6g9npvlb"/>
+                            <use fill="#FFF" fill-opacity=".15" xlink:href="#mo6g9npvlb"/>
+                        </g>
+                        <g fill="#FFF" fill-rule="nonzero" stroke="#FFF" stroke-width=".2">
+                            <path d="M12.763 0H4.737C2.125 0 0 2.125 0 4.737v8.026C0 15.375 2.125 17.5 4.737 17.5h8.026c2.612 0 4.737-2.125 4.737-4.737V4.737C17.5 2.125 15.375 0 12.763 0zm3.711 12.763c0 2.046-1.665 3.711-3.711 3.711H4.737c-2.046 0-3.711-1.665-3.711-3.711V4.737c0-2.046 1.665-3.711 3.711-3.711h8.026c2.046 0 3.711 1.665 3.711 3.711v8.026z" transform="translate(-120.000000, -728.000000) translate(120.000000, 728.000000) translate(11.500000, 11.500000)"/>
+                            <path d="M8.75 4C6.13 4 4 6.13 4 8.75s2.13 4.75 4.75 4.75 4.75-2.13 4.75-4.75S11.37 4 8.75 4zm0 8.482c-2.058 0-3.732-1.674-3.732-3.732 0-2.058 1.674-3.732 3.732-3.732 2.058 0 3.732 1.674 3.732 3.732 0 2.058-1.674 3.732-3.732 3.732z" transform="translate(-120.000000, -728.000000) translate(120.000000, 728.000000) translate(11.500000, 11.500000)"/>
+                            <path d="M13.5 2.5c-.827 0-1.5.673-1.5 1.5s.673 1.5 1.5 1.5S15 4.827 15 4s-.673-1.5-1.5-1.5zm0 1.912c-.227 0-.412-.185-.412-.412 0-.227.185-.412.412-.412.227 0 .412.185.412.412 0 .227-.185.412-.412.412z" transform="translate(-120.000000, -728.000000) translate(120.000000, 728.000000) translate(11.500000, 11.500000)"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

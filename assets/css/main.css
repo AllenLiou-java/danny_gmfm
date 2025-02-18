@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Noto Sans TC";
+  src: url("@/assets/fonts/NotoSansTC-Regular.ttf");
+}
+
+@font-face {
+    font-family: "PaintingChoco";
+    src: url("@/assets/fonts/Painting_With_Chocolate.ttf");
+}
+
+@font-face {
+    font-family: "PingFang";
+    src: url("@/assets/fonts/PingFangMedium.ttf");
+}
+
+@theme {
+  /* 設定主色 */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-primary: #0b1215;
+  --color-secondary: #141a1d;
+  --color-yellow: #fbff9e;
+  
+  
+
+  /* 設定文字類別 */
+  --font-paintinfChoco: PaintingChoco, sans-serif;
+  --font-pingFang: PingFang, sans-serif;
+  --font-notoSansTC: 'Noto Sans TC', sans-serif;
+
+  /* 重設斷點 */
+  /* --breakpoint-sm: 30rem; */
+}
+
+@layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  p,h1,h2,h3,h4,ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* 透過 --spacing() 函數，可以產生基於theme中的spacing ，等同於= calc(var(--spacing) * 4)*/
+@layer components {
+  /* .btn-primary {
+    border-radius: calc(infinity * 1px);
+    background-color: var(--color-yellow);
+    padding-inline: --spacing(5);
+    padding-block: --spacing(2);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-white);
+      }
+    }
+  }
+
+  .card {
+    background-color: var(--color-white);
+    border-radius: var(--rounded-lg);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-xl);
+  } */
+}
+
+@utility container {
+  padding-inline: 10px;
+  margin-inline: auto;
+  
+  @variant sm {
+    padding-inline: 20px;
+  }
+  
+  @variant lg {
+    padding-inline: 80px;
+  }
+  
+  @variant xl {
+    padding-inline: 120px;
+  }
+}
+
+/* 新增tailwind所沒有的開箱即用class */
+/* @utility content-auto {
+  content-visibility: auto;
+} */
+
+/* 使用 @variant 將tinlwind可用的variant 加入倒客製化的class*/
+.my-element {
+  background: white;
+  @variant dark {
+    @variant hover {
+      background: black;
+    }
+  }
+}
+
+/* 使用@apply 將目前存在的 utility classes 加到客製化的class */
+/* .select2-search {
+  @apply rounded border border-yellow;
+} */
