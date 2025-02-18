@@ -42,7 +42,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  modules: ['@nuxt/icon', '@pinia/nuxt', '@nuxt/image'],
+  modules: ['@nuxt/icon', '@pinia/nuxt'],
   icon: {
     serverBundle: {
       collections: ['mdi']
