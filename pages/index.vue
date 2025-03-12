@@ -114,10 +114,11 @@
                 :src="imageSrc(topicItem.imgurl)"
                 :alt="topicItem.label_en"
               />
-              <span
-                class="absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] overflow-hidden px-6 text-ellipsis whitespace-nowrap"
-                >{{ topicItem.label }}</span
+              <p
+                class="absolute bottom-3 w-full overflow-hidden px-2 text-center text-ellipsis whitespace-nowrap"
               >
+                {{ topicItem.label }}
+              </p>
             </NuxtLink>
           </SwiperSlide>
         </Swiper>
