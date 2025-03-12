@@ -106,7 +106,7 @@
           <SwiperSlide
             v-for="topicItem in topicList"
             :key="topicItem.label_en"
-            class="w-[156px] overflow-hidden rounded-[5px] sm:w-[180px] md:w-[240px]"
+            class="relative w-[156px] overflow-hidden rounded-[5px] sm:w-[180px] md:w-[240px]"
           >
             <NuxtLink class="relative" :to="topicItem.route">
               <img
