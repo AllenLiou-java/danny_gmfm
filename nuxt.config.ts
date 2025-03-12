@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   app: {
     head: {
       charset: 'utf-8',
@@ -42,7 +42,10 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  modules: ['@nuxt/icon', '@pinia/nuxt'],
+  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper'],
+  swiper: {
+    modules: ['navigation', 'pagination', 'effect-creative']
+  },
   icon: {
     serverBundle: {
       collections: ['mdi']
@@ -53,9 +56,6 @@ export default defineNuxtConfig({
         dir: './assets/my-icon'
       }
     ]
-  },
-  image: {
-    dir: 'assets/images'
   },
   runtimeConfig: {
     airtableApiKey: '',

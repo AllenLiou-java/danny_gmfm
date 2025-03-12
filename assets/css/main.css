@@ -77,19 +77,21 @@
 }
 
 @utility container {
-  padding-inline: 10px;
+  padding-inline: 20px;
   margin-inline: auto;
   
   @variant sm {
-    padding-inline: 20px;
+    padding-inline: 24px;
   }
   
   @variant lg {
-    padding-inline: 80px;
+    padding-inline: 20px;
+    max-width: 1280px;
   }
   
   @variant xl {
-    padding-inline: 120px;
+    padding-inline: 40px;
+    max-width: 1280px;
   }
 }
 
@@ -97,6 +99,12 @@
 /* @utility content-auto {
   content-visibility: auto;
 } */
+
+@utility writing-mode-vertical-lr {
+  writing-mode: vertical-lr;
+} 
+
+
 
 /* 使用 @variant 將tinlwind可用的variant 加入倒客製化的class*/
 .my-element {
@@ -107,6 +115,8 @@
     }
   }
 }
+
+
 
 /* 使用@apply 將目前存在的 utility classes 加到客製化的class */
 /* .select2-search {

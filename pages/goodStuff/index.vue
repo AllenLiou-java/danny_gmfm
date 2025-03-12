@@ -1,5 +1,5 @@
 <template>
-  <div>Footer</div>
+  <div>goodStuff index</div>
 </template>
 
 <script setup></script>

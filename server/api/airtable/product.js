@@ -1,9 +1,9 @@
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event)
+
   const data = airtableApi('/product/listRecords', {
     method: 'post',
-    body: {
-      sort: [{ field: 'product_no', direction: 'asc' }]
-    }
+    body
   })
     .then((res) => {
       return res
