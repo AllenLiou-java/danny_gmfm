@@ -1,5 +1,5 @@
 <template>
-  <div>aboutMe page</div>
+  <div class="nav-space h-[100vh]">aboutMe page</div>
 </template>
 
 <script setup></script>

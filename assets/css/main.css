@@ -122,3 +122,7 @@
 /* .select2-search {
   @apply rounded border border-yellow;
 } */
+
+.nav-space {
+  @apply pt-13 sm:pt-31 lg:pt-18
+}

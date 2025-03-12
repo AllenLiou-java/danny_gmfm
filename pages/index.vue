@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bg-[url(~/assets/images/banner/banner-bg-mobile.jpg)] bg-cover bg-center bg-no-repeat pb-3 sm:bg-[url(~/assets/images/banner/banner-bg.jpg)] sm:pb-8"
+      class="nav-space bg-[url(~/assets/images/banner/banner-bg-mobile.jpg)] bg-cover bg-center bg-no-repeat pb-3 sm:bg-[url(~/assets/images/banner/banner-bg.jpg)] sm:pb-8"
     >
       <div class="relative container h-screen">
         <h2
@@ -102,23 +102,25 @@
       </ul>
 
       <div class="lg:hidden">
-        <Swiper class="-mr-5 h-[300px] sm:-mr-6" v-bind="topicSwiperConfig">
+        <Swiper class="-mr-5 sm:-mr-6" v-bind="topicSwiperConfig">
           <SwiperSlide
             v-for="topicItem in topicList"
             :key="topicItem.label_en"
-            class="relative w-[156px] overflow-hidden rounded-[5px] sm:w-[180px] md:w-[240px]"
+            class="overflow-hidden rounded-[5px]"
           >
-            <NuxtLink class="relative" :to="topicItem.route">
-              <img
-                class="h-full w-full object-cover"
-                :src="imageSrc(topicItem.imgurl)"
-                :alt="topicItem.label_en"
-              />
-              <p
-                class="absolute bottom-3 w-full overflow-hidden px-2 text-center text-ellipsis whitespace-nowrap"
-              >
-                {{ topicItem.label }}
-              </p>
+            <NuxtLink :to="topicItem.route">
+              <div class="relative">
+                <img
+                  class="h-full w-full object-cover"
+                  :src="imageSrc(topicItem.imgurl)"
+                  :alt="topicItem.label_en"
+                />
+                <p
+                  class="absolute bottom-3 w-full overflow-hidden px-2 text-center text-ellipsis whitespace-nowrap"
+                >
+                  {{ topicItem.label }}
+                </p>
+              </div>
             </NuxtLink>
           </SwiperSlide>
         </Swiper>

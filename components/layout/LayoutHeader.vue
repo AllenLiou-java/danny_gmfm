@@ -1,7 +1,7 @@
 <template>
   <div class="fixed inset-x-0 z-100">
     <div
-      class="flex items-center justify-between gap-10 py-2.5"
+      class="flex items-center justify-between gap-x-20 py-2.5 lg:gap-x-6"
       :class="
         headerActive ? 'mt-4 rounded-xl bg-secondary px-3 opacity-90 duration-300 ease-linear' : ''
       "
@@ -11,14 +11,14 @@
         to="/"
         >秋天剩旅行</NuxtLink
       >
-      <ul class="flex flex-wrap gap-2 sm:gap-x-10">
+      <ul class="flex flex-wrap gap-x-2 sm:gap-x-8">
         <li v-for="routeItem in routeList" :key="routeItem.label" class="group hidden sm:block">
           <div v-if="routeItem.items.length > 0" class="relative">
-            <div class="relative pb-[17px]">
+            <div class="relative py-3">
               <span class="text-[18px]">{{ routeItem.label }}</span>
               <Icon :name="routeItem.icon" size="24px" class="align-top" />
               <div
-                class="absolute bottom-2 h-1 w-full rounded-[3px] bg-white group-hover:block"
+                class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:block"
                 :class="currentPageName === routeItem.label_en ? 'bg-yellow sm:block' : 'hidden'"
               ></div>
             </div>
@@ -34,20 +34,24 @@
               </div>
             </div>
           </div>
-          <div v-else class="relative cursor-pointer pb-[17px]">
+          <div v-else class="relative cursor-pointer py-3">
             <NuxtLink :to="routeItem.route">{{ routeItem.label }}</NuxtLink>
             <div
-              class="absolute bottom-2 h-1 w-full rounded-[3px] bg-white group-hover:block"
+              class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:block"
               :class="currentPageName === routeItem.label_en ? 'block bg-yellow' : 'hidden'"
             ></div>
           </div>
         </li>
         <li class="group relative">
           <NuxtLink to="/search">
-            <img class="size-[30px] object-cover" :src="imageSrc('/search.png')" alt="searchBtn" />
+            <img
+              class="relative size-[30px] object-cover sm:top-3"
+              :src="imageSrc('/search.png')"
+              alt="searchBtn"
+            />
           </NuxtLink>
           <div
-            class="absolute h-1 w-full rounded-[3px] bg-white group-hover:block"
+            class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:block"
             :class="currentPageName === 'search' ? 'block bg-yellow' : 'hidden'"
           ></div>
         </li>
