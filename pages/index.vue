@@ -328,7 +328,7 @@ const { imageSrc } = getImageSrc()
 const { videoPath } = getVideoRoute()
 const { productPath } = getGoodStuffRoute()
 
-const { data: latestVideo } = useFetch('/api/airtable/video', {
+const { data: latestVideo } = await useFetch('/api/airtable/video', {
   method: 'post',
   body: {
     maxRecords: 5,
@@ -337,7 +337,7 @@ const { data: latestVideo } = useFetch('/api/airtable/video', {
   }
 })
 
-const { data: latestProduct } = useFetch('/api/airtable/product', {
+const { data: latestProduct } = await useFetch('/api/airtable/product', {
   method: 'post',
   body: {
     maxRecords: 3,
@@ -346,7 +346,7 @@ const { data: latestProduct } = useFetch('/api/airtable/product', {
   }
 })
 
-const { data: cooperationList } = useFetch('/api/airtable/cooperation')
+const { data: cooperationList } = await useFetch('/api/airtable/cooperation')
 
 const socialMediaList = ref([
   {
@@ -487,6 +487,10 @@ const friendSwiperConfig = {
     }
   }
 }
+
+onMounted(() => {
+  console.log('mounted')
+})
 </script>
 
 <style scoped>

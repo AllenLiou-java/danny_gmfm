@@ -3,7 +3,7 @@
     <div
       class="flex items-center justify-between gap-x-20 py-2.5 lg:gap-x-6"
       :class="
-        headerActive ? 'mt-4 rounded-xl bg-secondary px-3 opacity-90 duration-300 ease-linear' : ''
+        headerActive ? 'mt-4 rounded-xl bg-secondary px-3 opacity-94 duration-300 ease-linear' : ''
       "
     >
       <NuxtLink
