@@ -89,6 +89,9 @@ export default function (code_category, code_area, code_relatedTopic) {
   }
 
   return {
-    videoPath
+    videoPath,
+    code_video_category,
+    code_video_area,
+    code_video_relatedTopic
   }
 }

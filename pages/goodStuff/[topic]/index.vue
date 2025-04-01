@@ -20,9 +20,6 @@
         :subclass-selected="subclassSelected"
       />
       <VideoListView />
-      topic/type/index
-      <p>{{ $route.params.topic }} / {{ $route.params.type }}</p>
-      <NuxtLink to="/video/topic1/north/test123">vid</NuxtLink>
     </div>
   </div>
 </template>

@@ -126,3 +126,7 @@
 .nav-space {
   @apply pt-13 sm:pt-31 lg:pt-18
 }
+
+.flex-center {
+  @apply flex justify-center items-center
+}
