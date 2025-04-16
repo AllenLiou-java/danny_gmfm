@@ -36,10 +36,10 @@
             <p class="mb-1 text-[12px] tracking-widest sm:text-[16px] md:writing-mode-vertical-lr">
               <span class="mr-1 text-[8px] text-yellow md:mb-1">●</span>LATEST&ensp;VIDEO
             </p>
-            <NuxtLink to="/video/">
+            <NuxtLink :to="`/video/detail/${latestVideo[0].id}`">
               <img
                 class="relative h-[65px] w-[120px] rounded-[10px] object-cover duration-300 sm:h-[116px] sm:w-[214px] md:-left-3 md:h-[140px] md:w-[257px] md:hover:scale-109"
-                :src="latestVideo.records[0].fields.cover_image[0].url"
+                :src="latestVideo[0].cover_image"
                 alt="latestVideoImg"
               />
             </NuxtLink>
@@ -94,7 +94,7 @@
               :alt="topicItem.label_en"
             />
             <span
-              class="absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] overflow-hidden px-6 text-ellipsis whitespace-nowrap"
+              class="text-shorten absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] px-6"
               >{{ topicItem.label }}</span
             >
           </NuxtLink>
@@ -115,9 +115,7 @@
                   :src="imageSrc(topicItem.imgurl)"
                   :alt="topicItem.label_en"
                 />
-                <p
-                  class="absolute bottom-3 w-full overflow-hidden px-2 text-center text-ellipsis whitespace-nowrap"
-                >
+                <p class="text-shorten absolute bottom-3 w-full px-2 text-center">
                   {{ topicItem.label }}
                 </p>
               </div>
@@ -137,28 +135,17 @@
       <div class="relative container">
         <ul class="mb-6 grid grid-cols-6 gap-5 lg:mb-8">
           <li
-            v-for="videoItem in latestVideo.records"
+            v-for="videoItem in latestVideo"
             :key="videoItem.id"
             class="group relative col-span-6 shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] md:col-span-3 lg:col-span-2 lg:nth-1:col-span-3 lg:nth-2:col-span-3"
           >
-            <NuxtLink
-              :to="
-                videoPath(
-                  videoItem.fields.category,
-                  videoItem.fields.area,
-                  videoItem.fields.related_topic
-                )
-              "
-            >
+            <NuxtLink :to="`/video/detail/${videoItem.id}`">
               <img
                 class="h-full w-full overflow-hidden rounded-[5px] object-cover duration-300 group-hover:scale-105"
-                :src="videoItem.fields.cover_image[0].url"
+                :src="videoItem.cover_image"
                 alt="cover-img"
               />
-              <span
-                class="absolute bottom-0 w-full overflow-hidden p-3 text-ellipsis whitespace-nowrap"
-                >{{ videoItem.fields.title }}</span
-              >
+              <span class="text-shorten absolute bottom-0 w-full p-3">{{ videoItem.title }}</span>
             </NuxtLink>
           </li>
         </ul>
@@ -228,9 +215,7 @@
                   alt="cover-img"
                 />
                 <div class="bg-primary">
-                  <p
-                    class="mb-3 overflow-hidden px-3 pt-3 text-[14px] leading-8 text-ellipsis whitespace-nowrap"
-                  >
+                  <p class="text-shorten mb-3 px-3 pt-3 text-[14px] leading-8">
                     {{ productItem.fields.name }}
                   </p>
 
@@ -292,15 +277,13 @@
 
 <script setup>
 const { imageSrc } = getImageSrc()
-const { videoPath } = getVideoRoute()
 const { productPath } = getGoodStuffRoute()
 
 const { data: latestVideo } = await useFetch('/api/airtable/video', {
   method: 'post',
   body: {
     maxRecords: 5,
-    sort: [{ field: 'video_no', direction: 'desc' }],
-    fields: ['title', 'category', 'area', 'related_topic', 'cover_image', 'v_id']
+    sort: [{ field: 'video_no', direction: 'desc' }]
   }
 })
 
@@ -353,25 +336,25 @@ const destinationList = [
   {
     area: '北部',
     area_en: 'north',
-    route: '/video/all/north',
+    route: '/video/allTopic/north?page=1',
     name: AreaNorth
   },
   {
     area: '中部',
     area_en: 'middle',
-    route: '/video/all/middle',
+    route: '/video/allTopic/middle?page=1',
     name: AreaMiddle
   },
   {
     area: '南部',
     area_en: 'south',
-    route: '/video/all/south',
+    route: '/video/allTopic/south?page=1',
     name: AreaSouth
   },
   {
     area: '東部',
     area_en: 'east',
-    route: '/video/all/east',
+    route: '/video/allTopic/east?page=1',
     name: AreaEast
   }
 ]
@@ -380,19 +363,19 @@ const topicList = [
   {
     label: '台灣百岳',
     label_en: 'top_mountains_tw',
-    route: '/video/top_mountains_tw/all',
+    route: '/video/top_mountains_tw/north?page=1',
     imgurl: '/home/topic/1.png'
   },
   {
     label: '中級山/郊山步道/野營/野溪溫泉',
     label_en: 'outdoor_spot',
-    route: '/video/outdoor_spot/all',
+    route: '/video/outdoor_spot/north?page=1',
     imgurl: '/home/topic/2.png'
   },
   {
     label: '相關主題',
     label_en: 'related_topic',
-    route: '/video/related_topic/all',
+    route: '/video/related_topic/north?page=1',
     imgurl: '/home/topic/3.jpg'
   },
   {

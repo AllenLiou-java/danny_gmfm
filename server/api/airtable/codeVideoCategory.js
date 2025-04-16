@@ -1,5 +1,5 @@
 export default defineEventHandler((event) => {
-  const data = airtableApi('/code_video_category/listRecords', {
+  const data = airtableApi('/code_video_bigcategory/listRecords', {
     method: 'post',
     body: {
       sort: [{ field: 'id', direction: 'asc' }]

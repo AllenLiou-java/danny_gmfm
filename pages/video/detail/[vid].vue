@@ -2,7 +2,7 @@
   <div>
     <img
       class="max-h-[800px] w-full object-cover object-top"
-      :src="videoDetail.cover_image[0].url"
+      :src="videoDetail.cover_image"
       alt="cover_image"
     />
 
@@ -10,19 +10,22 @@
       class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:flex-row lg:gap-x-12"
     >
       <div class="max-w-[850px]">
-        <BreadCrumb
+        <!-- <BreadCrumb
           class="mb-6 text-[12px] sm:mb-8 sm:text-[16px]"
           type="video"
           :topic="videoDetail.category"
           :subclass="videoDetail.area"
           :related-topic="videoDetail.related_topic"
           :title="videoDetail.title"
-        />
+        /> -->
         <h2 class="mb-6 text-[16px] tracking-[4.67px] sm:mb-12 sm:text-[32px] sm:tracking-[9.33px]">
           {{ videoDetail.title }}
         </h2>
 
-        <YoutubeScreen class="mb-4 sm:mb-8" :video-url="videoDetail.link" />
+        <ClientOnly>
+          <YoutubeScreen class="mb-4 sm:mb-8" :video-url="videoDetail.link" />
+        </ClientOnly>
+
         <p
           class="mb-8 font-notoSansTC text-[14px] tracking-[4.08px] break-all whitespace-pre-wrap sm:text-[16px] sm:tracking-[4.67px]"
         >
@@ -42,28 +45,28 @@
         </p>
 
         <div class="relative">
-          <Swiper id="relatedPost" v-bind="relatedVideoSwiperConfig">
-            <SwiperSlide
-              v-for="{ id, fields } in relatedVideoList.records"
-              :key="id"
-              class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
-            >
-              <NuxtLink :to="`/video/detail/${id}`">
-                <div class="relative">
-                  <img
-                    class="max-h-[185px] w-full object-cover object-center sm:max-h-[214px]"
-                    :src="fields.cover_image[0].url"
-                    alt="cover_img"
-                  />
-                  <p
-                    class="absolute bottom-0 w-full overflow-hidden px-3 pb-3 text-ellipsis whitespace-nowrap backdrop-blur-md"
-                  >
-                    {{ fields.title }}
-                  </p>
-                </div>
-              </NuxtLink>
-            </SwiperSlide>
-          </Swiper>
+          <ClientOnly>
+            <Swiper id="relatedPost" v-bind="relatedVideoSwiperConfig">
+              <SwiperSlide
+                v-for="video in relatedVideoList"
+                :key="video.id"
+                class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+              >
+                <NuxtLink :to="`/video/detail/${video.id}`">
+                  <div class="relative">
+                    <img
+                      class="max-h-[185px] w-full object-cover object-center sm:max-h-[214px]"
+                      :src="video.cover_image"
+                      alt="cover_img"
+                    />
+                    <p class="text-shorten absolute bottom-0 w-full px-3 pb-3 backdrop-blur-md">
+                      {{ video.title }}
+                    </p>
+                  </div>
+                </NuxtLink>
+              </SwiperSlide>
+            </Swiper>
+          </ClientOnly>
 
           <div
             class="swiper-prev absolute top-[50%] -left-4 z-10 hidden -translate-y-[50%] cursor-pointer md:block"
@@ -117,21 +120,19 @@
                 class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
               >
                 <SwiperSlide
-                  v-for="{ id, fields } in relatedProductList.records"
-                  :key="id"
+                  v-for="product in relatedProductList"
+                  :key="product.id"
                   class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
                 >
-                  <NuxtLink :to="`${productPath(fields.category)}/${fields.product_no}`">
+                  <NuxtLink :to="`${productPath(product.category)}/${product.product_no}`">
                     <img
                       class="max-h-[266px] w-full object-cover object-center"
-                      :src="fields.cover_image[0].url"
+                      :src="product.cover_image"
                       alt="cover-img"
                     />
                     <div class="bg-primary tracking-[0]">
-                      <p
-                        class="mb-1 overflow-hidden px-4 pt-4 text-[14px] leading-8 tracking-[0] text-ellipsis whitespace-nowrap"
-                      >
-                        {{ fields.name }}
+                      <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">
+                        {{ product.name }}
                       </p>
 
                       <span class="block px-3 pb-1 text-right text-[16px] font-medium text-yellow"
@@ -160,11 +161,20 @@
 const route = useRoute()
 const { imageSrc } = getImageSrc()
 const { productPath } = getGoodStuffRoute()
+const { videos } = storeToRefs(useVideoStore())
 
-const { data: videoDetail } = await useFetch('/api/airtable/videoById', {
-  method: 'post',
-  body: {
-    id: route.params.vid
+const { data: videoDetail } = await useAsyncData('videoDetail', () => {
+  const vid = route.params.vid
+  const video = videos.value.filter((video) => video.id === vid)
+  if (video.length > 0) {
+    return video[0]
+  } else {
+    return $fetch('/api/airtable/videoById', {
+      method: 'post',
+      body: {
+        id: route.params.vid
+      }
+    })
   }
 })
 
@@ -212,7 +222,6 @@ const { data: relatedProductList } = await useAsyncData('productList', () => {
     method: 'post',
     body: {
       sort: [{ field: 'product_no', direction: 'desc' }],
-      fields: ['name', 'category', 'cover_image', 'product_no'],
       filterByFormula: formula
     }
   })
@@ -251,22 +260,6 @@ const { data: relatedVideoList } = await useAsyncData('videoList', () => {
     }
   })
 })
-
-// const relatedVideoApi = computed(() => {
-//   if (!videoDetail.value.related_video) return null
-
-//   const relatedVideoList = videoDetail.value.related_video.split(',')
-//   const formula = `OR(${relatedVideoList.map((num) => `{video_no}=${num}`).join(',')})`
-
-//   return {
-//     url: '/api/airtable/video',
-//     method: 'post',
-//     body: {
-//       sort: [{ field: 'video_no', direction: 'desc' }],
-//       filterByFormula: `${formula}`
-//     }
-//   }
-// })
 
 const relatedVideoSwiperConfig = {
   modules: [SwiperPagination, SwiperNavigation],

@@ -137,19 +137,19 @@ const routeList = ref([
     items: [
       {
         label: '北部',
-        route: '/video/top_mountains_tw/north'
+        route: '/video/top_mountains_tw/north?page=1'
       },
       {
         label: '中部',
-        route: '/video/top_mountains_tw/middle'
+        route: '/video/top_mountains_tw/middle?page=1'
       },
       {
         label: '南部',
-        route: '/video/top_mountains_tw/south'
+        route: '/video/top_mountains_tw/south?page=1'
       },
       {
         label: '東部',
-        route: '/video/top_mountains_tw/east'
+        route: '/video/top_mountains_tw/east?page=1'
       }
     ]
   },
@@ -161,19 +161,19 @@ const routeList = ref([
     items: [
       {
         label: '北部',
-        route: '/video/outdoor_spot/north'
+        route: '/video/outdoor_spot/north?page=1'
       },
       {
         label: '中部',
-        route: '/video/outdoor_spot/middle'
+        route: '/video/outdoor_spot/middle?page=1'
       },
       {
         label: '南部',
-        route: '/video/outdoor_spot/south'
+        route: '/video/outdoor_spot/south?page=1'
       },
       {
         label: '東部',
-        route: '/video/outdoor_spot/east'
+        route: '/video/outdoor_spot/east?page=1'
       }
     ]
   },
@@ -185,27 +185,27 @@ const routeList = ref([
     items: [
       {
         label: '裝備評測',
-        route: '/video/related_topic/device_evaluation'
+        route: '/video/related_topic/device_evaluation?page=1'
       },
       {
         label: '品牌介紹',
-        route: '/video/related_topic/brand_intro'
+        route: '/video/related_topic/brand_intro?page=1'
       },
       {
         label: '潛水、攀岩',
-        route: '/video/related_topic/diving_and_climbing'
+        route: '/video/related_topic/diving_and_climbing?page=1'
       },
       {
         label: '環保響應',
-        route: '/video/related_topic/going_green'
+        route: '/video/related_topic/going_green?page=1'
       },
       {
         label: '國外山岳',
-        route: '/video/related_topic/foreign_mountain'
+        route: '/video/related_topic/foreign_mountain?page=1'
       },
       {
         label: '其他',
-        route: '/video/related_topic/others'
+        route: '/video/related_topic/others?page=1'
       }
     ]
   },
@@ -217,11 +217,11 @@ const routeList = ref([
     items: [
       {
         label: '戶外裝備',
-        route: '/goodStuff/outdoor/all'
+        route: '/goodStuff/outdoor/all?page=1'
       },
       {
         label: '拍攝裝備',
-        route: '/goodStuff/photography/all'
+        route: '/goodStuff/photography/all?page=1'
       }
     ]
   },

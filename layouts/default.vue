@@ -8,6 +8,12 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const videoStore = useVideoStore()
+
+onMounted(() => {
+  videoStore.getCategoryList()
+})
+</script>
 
 <style lang="scss" scoped></style>

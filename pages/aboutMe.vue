@@ -4,21 +4,20 @@
     <div class="container mb-16 md:mb-30">
       <div class="relative top-7 mb-14">
         <div
-          class="pointer-events-none absolute top-[30%] left-[50%] z-20 w-full -translate-x-[50%] text-center font-paintinfChoco text-[40px] leading-[1] text-yellow sm:top-24 sm:pl-10 sm:text-start sm:text-[80px] lg:pl-44 lg:text-[100px]"
-        >
-          <p class="mb-4 sm:mb-9">YOUTUBER</p>
-          <p class="mb-4 sm:mb-11 sm:-ml-7">ADVENTURER</p>
-          <p class="sm:-ml-11">PHOTOGRAPHER</p>
-        </div>
-
-        <div
           class="group relative left-[50%] inline-block max-w-[686px] -translate-x-[50%] bg-[url(~/assets/images/aboutMe/aboutMe-bg.png)] bg-contain bg-left bg-no-repeat pt-[12%] pr-[12%] sm:pt-[73px] sm:pr-[76px]"
         >
           <img
-            class="invisible box-content w-full max-w-[588px] object-contain group-hover:visible"
+            class="invisible box-content w-full max-w-[588px] object-contain duration-300 group-hover:visible"
             :src="imageSrc('/aboutMe/aboutMe.png')"
             alt="aboutMe"
           />
+          <div
+            class="pointer-events-none absolute top-[30%] left-[50%] -z-20 w-full -translate-x-[50%] text-center font-paintinfChoco text-[40px] leading-[1] text-yellow sm:top-24 sm:pl-10 sm:text-start sm:text-[80px] lg:left-0 lg:pl-44 lg:text-[100px]"
+          >
+            <p class="mb-4 sm:mb-9">YOUTUBER</p>
+            <p class="mb-4 sm:mb-11 sm:-ml-7">ADVENTURER</p>
+            <p class="sm:-ml-11">PHOTOGRAPHER</p>
+          </div>
         </div>
       </div>
 

@@ -1,40 +1,69 @@
 <template>
-  <div class="flex gap-[23px]">
-    <NuxtLink to="/video/all">
-      <div
-        :class="topicSelected === 'all' ? 'border border-yellow' : ''"
-        class="flex flex-col items-center justify-center rounded-[5px] bg-[#1c2428] px-[6px] py-2 sm:px-4 sm:py-[22px]"
-      >
-        <span class="mb-1 inline-block text-[18px] tracking-[5.25px]">All</span>
-        <img class="ml-2 w-[22px]" :src="imageSrc('/video/icon_all.png')" alt="icon_all" />
-      </div>
+  <div class="flex h-[50px] gap-[23px] sm:h-20">
+    <NuxtLink
+      :to="allTopicItem.route"
+      :class="topicSelected === 'allTopic' ? 'border-2 border-yellow' : ''"
+      class="flex-center w-[50px] flex-col rounded-[8px] bg-[#1c2428] hover:border-2 hover:border-white sm:w-[70px]"
+    >
+      <span class="mb-1 inline-block text-[18px] tracking-[5.25px]">All</span>
+      <img class="ml-2 w-[22px]" :src="imageSrc('/video/icon_all.png')" alt="icon_all" />
     </NuxtLink>
-    <ul class="flex gap-[23px]">
-      <li
-        v-for="topic in topics"
-        :key="topic.label"
-        class="relative overflow-hidden rounded-[5px]"
-        :class="topicSelected === topic.label_en ? 'border border-yellow' : ''"
-      >
-        <NuxtLink :to="topic.route">
-          <img
-            class="h-20 object-cover object-center"
-            :src="imageSrc(topic.imgurl)"
-            alt="topic-bg"
-          />
-          <span
-            class="absolute top-[50%] left-[50%] -translate-[50%] overflow-hidden px-2 py-1 text-[16px] text-nowrap text-ellipsis backdrop-blur-sm sm:text-[18px]"
-            >{{ topic.label }}</span
+    <div class="h-full w-[calc(100%-93px)]">
+      <ul class="hidden h-[50px] sm:h-20 xl:flex xl:gap-[23px]">
+        <li
+          v-for="topic in mainTopicList"
+          :key="topic.label"
+          class="w-[353px] overflow-hidden rounded-[8px] hover:border-2 hover:border-white"
+          :class="topicSelected === topic.label_en ? 'border-2 border-yellow' : ''"
+        >
+          <NuxtLink class="relative" :to="topic.route">
+            <img
+              class="size-full object-cover object-center"
+              :src="imageSrc(topic.imgurl)"
+              alt="topic-bg"
+            />
+            <span
+              class="text-shorten absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+              >{{ topic.label }}</span
+            >
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <div class="-mr-[20px] h-[50px] sm:h-20 xl:hidden">
+        <Swiper
+          v-bind="topicMenuSwiperConfig"
+          ref="topicMenuSwiperRef"
+          class="h-[50px] sm:h-20"
+          @swiper="topicMenuSwiper"
+        >
+          <SwiperSlide
+            v-for="topic in mainTopicList"
+            :key="topic.label"
+            class="overflow-hidden rounded-[8px]"
+            :class="topicSelected === topic.label_en ? 'border-2 border-yellow' : ''"
           >
-        </NuxtLink>
-      </li>
-    </ul>
+            <NuxtLink class="relative" :to="topic.route">
+              <img
+                class="size-full w-full object-cover object-center"
+                :src="imageSrc(topic.imgurl)"
+                alt="topic-bg"
+              />
+              <span
+                class="text-shorten absolute top-[50%] left-[50%] min-w-[76px] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+                >{{ topic.label }}</span
+              >
+            </NuxtLink>
+          </SwiperSlide>
+        </Swiper>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 const { imageSrc } = getImageSrc()
-defineProps({
+const props = defineProps({
   topics: {
     type: Array,
     required: true
@@ -44,6 +73,42 @@ defineProps({
     required: true
   }
 })
+
+const allTopicItem = computed(() => {
+  return props.topics.filter((topic) => topic.label_en === 'allTopic')[0]
+})
+
+const mainTopicList = computed(() => {
+  return props.topics.filter((topic) => topic.label_en !== 'allTopic')
+})
+
+const topicMenuSwiperRef = ref(null)
+
+const topicMenuSwiperConfig = ref({
+  modules: [SwiperPagination, SwiperNavigation],
+  slidesPerView: 1.4,
+  spaceBetween: 12,
+  breakpoints: {
+    480: {
+      slidesPerView: 1.6
+    },
+    640: {
+      slidesPerView: 1.8,
+      spaceBetween: 24
+    },
+    1024: {
+      slidesPerView: 2.9
+    }
+  }
+})
+
+const topicMenuSwiper = (swiper) => {
+  const topicSelectedIndex = mainTopicList.value.findIndex(
+    (topic) => topic.label_en === props.topicSelected
+  )
+
+  swiper.slideTo(topicSelectedIndex)
+}
 </script>
 
 <style lang="scss" scoped></style>

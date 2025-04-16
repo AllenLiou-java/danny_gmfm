@@ -3,8 +3,23 @@ export default defineEventHandler(async (event) => {
   const url = `/video/${body.id}`
 
   const data = airtableApi(url)
-    .then((res) => {
-      return res.fields
+    .then((record) => {
+      const { id, fields } = record
+
+      return {
+        id,
+        title: fields.title,
+        link: fields.link,
+        cover_image: fields.cover_image[0].url,
+        content: fields.content,
+        related_video: fields.related_video,
+        area: fields.area,
+        category: fields.category,
+        smallcategory: fields.smallcategory,
+        related_product: fields.related_product,
+        video_no: fields.video_no,
+        related_topic: fields.related_topic
+      }
     })
     .catch((error) => {
       const statusCode = error.statusCode

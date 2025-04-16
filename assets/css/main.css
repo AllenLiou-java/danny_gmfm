@@ -130,3 +130,7 @@
 .flex-center {
   @apply flex justify-center items-center
 }
+
+.text-shorten {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap
+}

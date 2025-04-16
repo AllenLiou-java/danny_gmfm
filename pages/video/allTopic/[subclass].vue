@@ -27,7 +27,6 @@
       />
       <VideoListView :videos-per-page="videosPerPage[currentPage - 1]" />
     </div>
-
     <div class="flex-center container mb-15">
       <vue-awesome-paginate
         v-model="currentPage"
@@ -56,7 +55,7 @@ const {
 } = storeToRefs(useVideoStore())
 const route = useRoute()
 const router = useRouter()
-const topicSelected = ref(route.params.topic)
+const topicSelected = ref('allTopic')
 const subclassSelected = ref(route.params.subclass)
 const currentPage = ref(1)
 
@@ -80,9 +79,8 @@ const scrollTop = () => {
 
 const turnPage = (page) => {
   router.push({
-    name: 'video-topic-subclass',
+    name: 'video-allTopic-subclass',
     params: {
-      topic: topicSelected.value,
       subclass: subclassSelected.value
     },
     query: {
