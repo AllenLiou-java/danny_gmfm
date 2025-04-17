@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[50px] gap-[23px] sm:h-20">
+  <div class="flex h-[50px] gap-[23px] sm:h-15 md:h-20">
     <NuxtLink
       :to="allTopicItem.route"
       :class="topicSelected === 'allTopic' ? 'border-2 border-yellow' : ''"
@@ -9,7 +9,7 @@
       <img class="ml-2 w-[22px]" :src="imageSrc('/video/icon_all.png')" alt="icon_all" />
     </NuxtLink>
     <div class="h-full w-[calc(100%-93px)]">
-      <ul class="hidden h-[50px] sm:h-20 xl:flex xl:gap-[23px]">
+      <ul class="hidden h-[50px] sm:h-15 md:h-20 xl:flex xl:gap-[23px]">
         <li
           v-for="topic in mainTopicList"
           :key="topic.label"
@@ -23,38 +23,37 @@
               alt="topic-bg"
             />
             <span
-              class="text-shorten absolute right-[50%] bottom-[50%] translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+              class="text-shorten absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
               >{{ topic.label }}</span
             >
           </NuxtLink>
         </li>
       </ul>
 
-      <div class="-mr-[20px] h-[50px] sm:h-20 xl:hidden">
+      <div class="-mr-[20px] xl:hidden">
         <Swiper
           v-bind="topicMenuSwiperConfig"
           ref="topicMenuSwiperRef"
-          class="h-[50px] sm:h-20"
+          class="h-[50px] sm:h-15 md:h-20"
           @swiper="topicMenuSwiper"
         >
           <SwiperSlide
             v-for="topic in mainTopicList"
             :key="topic.label"
-            class="overflow-hidden rounded-[8px]"
+            class="relative overflow-hidden rounded-[8px]"
             :class="topicSelected === topic.label_en ? 'border-2 border-yellow' : ''"
           >
-            <NuxtLink class="relative" :to="topic.route">
+            <NuxtLink :to="topic.route">
               <img
-                class="size-full object-cover object-center"
+                class="size-full w-full object-cover object-center"
                 :src="imageSrc(topic.imgurl)"
                 alt="topic-bg"
               />
-              <p
-                :class="topic.label.length > 12 ? 'w-[90%]' : ''"
-                class="absolute right-[50%] bottom-[50%] translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+              <span
+                class="absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+                :class="topic.label.length > 12 ? 'w-[80%]' : ''"
+                >{{ topic.label }}</span
               >
-                {{ topic.label }}
-              </p>
             </NuxtLink>
           </SwiperSlide>
         </Swiper>
