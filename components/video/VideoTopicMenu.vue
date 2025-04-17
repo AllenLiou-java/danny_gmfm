@@ -23,7 +23,7 @@
               alt="topic-bg"
             />
             <span
-              class="text-shorten absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+              class="text-shorten absolute right-[50%] bottom-[50%] translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
               >{{ topic.label }}</span
             >
           </NuxtLink>
@@ -45,14 +45,16 @@
           >
             <NuxtLink class="relative" :to="topic.route">
               <img
-                class="size-full w-full object-cover object-center"
+                class="size-full object-cover object-center"
                 :src="imageSrc(topic.imgurl)"
                 alt="topic-bg"
               />
-              <span
-                class="text-shorten absolute top-[50%] left-[50%] min-w-[76px] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
-                >{{ topic.label }}</span
+              <p
+                :class="topic.label.length > 12 ? 'w-[90%]' : ''"
+                class="absolute right-[50%] bottom-[50%] translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
               >
+                {{ topic.label }}
+              </p>
             </NuxtLink>
           </SwiperSlide>
         </Swiper>
