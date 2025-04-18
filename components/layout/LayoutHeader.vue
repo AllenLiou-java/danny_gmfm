@@ -106,21 +106,21 @@
 </template>
 
 <script setup>
-// const { data } = useFetch('/api/airtable/codeVideoCategory')
 const { imageSrc } = getImageSrc()
 const route = useRoute()
 const headerActive = ref(false)
+const { codeVideoBigcategoryList, codeVideoSmallcategoryList } = storeToRefs(useVideoStore())
+const { codeProductBigcategoryList, codeProductSmallcategoryList } = storeToRefs(useProductStore())
 
 const currentPageName = computed(() => {
-  const pageNameList = [
-    'top_mountains_tw',
-    'outdoor_spot',
-    'related_topic',
-    'goodStuff',
-    'work',
-    'aboutMe',
-    'search'
-  ]
+  if (codeVideoBigcategoryList.value === null) return null
+  const videoCategoryNames = codeVideoBigcategoryList.value.map(
+    (bigcategory) => bigcategory.label_en
+  )
+  const otherNames = ['goodStuff', 'work', 'aboutMe', 'search']
+
+  const pageNameList = videoCategoryNames.concat(otherNames)
+
   const pathSplit = route.fullPath.split('/')
 
   return pageNameList.filter((pageName) => {
@@ -128,118 +128,185 @@ const currentPageName = computed(() => {
   })[0]
 })
 
-const routeList = ref([
-  {
-    label: '台灣百岳',
-    label_en: 'top_mountains_tw',
-    icon: 'mdi:menu-down',
-    route: '',
-    items: [
-      {
-        label: '北部',
-        route: '/video/top_mountains_tw/north?page=1'
-      },
-      {
-        label: '中部',
-        route: '/video/top_mountains_tw/middle?page=1'
-      },
-      {
-        label: '南部',
-        route: '/video/top_mountains_tw/south?page=1'
-      },
-      {
-        label: '東部',
-        route: '/video/top_mountains_tw/east?page=1'
-      }
-    ]
-  },
-  {
-    label: '中級山/郊山步道/野營/野溪溫泉',
-    label_en: 'outdoor_spot',
-    icon: 'mdi:menu-down',
-    route: '',
-    items: [
-      {
-        label: '北部',
-        route: '/video/outdoor_spot/north?page=1'
-      },
-      {
-        label: '中部',
-        route: '/video/outdoor_spot/middle?page=1'
-      },
-      {
-        label: '南部',
-        route: '/video/outdoor_spot/south?page=1'
-      },
-      {
-        label: '東部',
-        route: '/video/outdoor_spot/east?page=1'
-      }
-    ]
-  },
-  {
-    label: '相關主題',
-    label_en: 'related_topic',
-    icon: 'mdi:menu-down',
-    route: '',
-    items: [
-      {
-        label: '裝備評測',
-        route: '/video/related_topic/device_evaluation?page=1'
-      },
-      {
-        label: '品牌介紹',
-        route: '/video/related_topic/brand_intro?page=1'
-      },
-      {
-        label: '潛水、攀岩',
-        route: '/video/related_topic/diving_and_climbing?page=1'
-      },
-      {
-        label: '環保響應',
-        route: '/video/related_topic/going_green?page=1'
-      },
-      {
-        label: '國外山岳',
-        route: '/video/related_topic/foreign_mountain?page=1'
-      },
-      {
-        label: '其他',
-        route: '/video/related_topic/others?page=1'
-      }
-    ]
-  },
-  {
+const routeList = computed(() => {
+  // video相關的路由
+  if (codeVideoBigcategoryList.value === null || codeVideoSmallcategoryList.value === null)
+    return null
+  const videoBigcategory = codeVideoBigcategoryList.value.filter(
+    (bigcategory) => bigcategory.id !== '0'
+  )
+
+  const videoNavigatorInfo = videoBigcategory.map((big_c) => {
+    const small_c_list = codeVideoSmallcategoryList.value.filter((smallcategory) =>
+      smallcategory.supertype.split(',').includes(big_c.id)
+    )
+
+    const subItems = small_c_list.map((item) => ({
+      label: item.label,
+      route: `/video/${big_c.label_en}/${item.label_en}?page=1`
+    }))
+
+    return {
+      label: big_c.label,
+      label_en: big_c.label_en,
+      icon: subItems.length > 0 ? 'mdi:menu-down' : '',
+      route: '',
+      items: subItems
+    }
+  })
+
+  // goodStuff相關的路由
+  if (codeProductBigcategoryList.value === null || codeProductSmallcategoryList.value === null)
+    return null
+
+  const stuffNavigatorSubItems = codeProductBigcategoryList.value.map((big_c) => {
+    return {
+      label: big_c.label,
+      route: `/goodStuff/${big_c.label_en}/all?page=1`
+    }
+  })
+
+  const stuffNavigatorInfo = {
     label: '好物推薦',
     label_en: 'goodStuff',
-    icon: 'mdi:menu-down',
+    icon: stuffNavigatorSubItems.length > 0 ? 'mdi:menu-down' : '',
     route: '',
-    items: [
-      {
-        label: '戶外裝備',
-        route: '/goodStuff/outdoor/all?page=1'
-      },
-      {
-        label: '拍攝裝備',
-        route: '/goodStuff/photography/all?page=1'
-      }
-    ]
-  },
-  {
-    label: '作品',
-    label_en: 'work',
-    icon: '',
-    route: '/work',
-    items: []
-  },
-  {
-    label: '關於我',
-    label_en: 'aboutMe',
-    icon: '',
-    route: '/aboutMe',
-    items: []
+    items: stuffNavigatorSubItems
   }
-])
+
+  // 其他路由
+  const othersNavigatorInfo = [
+    {
+      label: '作品',
+      label_en: 'work',
+      icon: '',
+      route: '/work',
+      items: []
+    },
+    {
+      label: '關於我',
+      label_en: 'aboutMe',
+      icon: '',
+      route: '/aboutMe',
+      items: []
+    }
+  ]
+
+  return videoNavigatorInfo.concat(stuffNavigatorInfo).concat(othersNavigatorInfo)
+})
+
+// const routeList = ref([
+//   {
+//     label: '台灣百岳',
+//     label_en: 'top_mountains_tw',
+//     icon: 'mdi:menu-down',
+//     route: '',
+//     items: [
+//       {
+//         label: '北部',
+//         route: '/video/top_mountains_tw/north?page=1'
+//       },
+//       {
+//         label: '中部',
+//         route: '/video/top_mountains_tw/middle?page=1'
+//       },
+//       {
+//         label: '南部',
+//         route: '/video/top_mountains_tw/south?page=1'
+//       },
+//       {
+//         label: '東部',
+//         route: '/video/top_mountains_tw/east?page=1'
+//       }
+//     ]
+//   },
+//   {
+//     label: '中級山/郊山步道/野營/野溪溫泉',
+//     label_en: 'outdoor_spot',
+//     icon: 'mdi:menu-down',
+//     route: '',
+//     items: [
+//       {
+//         label: '北部',
+//         route: '/video/outdoor_spot/north?page=1'
+//       },
+//       {
+//         label: '中部',
+//         route: '/video/outdoor_spot/middle?page=1'
+//       },
+//       {
+//         label: '南部',
+//         route: '/video/outdoor_spot/south?page=1'
+//       },
+//       {
+//         label: '東部',
+//         route: '/video/outdoor_spot/east?page=1'
+//       }
+//     ]
+//   },
+//   {
+//     label: '相關主題',
+//     label_en: 'related_topic',
+//     icon: 'mdi:menu-down',
+//     route: '',
+//     items: [
+//       {
+//         label: '裝備評測',
+//         route: '/video/related_topic/device_evaluation?page=1'
+//       },
+//       {
+//         label: '品牌介紹',
+//         route: '/video/related_topic/brand_intro?page=1'
+//       },
+//       {
+//         label: '潛水、攀岩',
+//         route: '/video/related_topic/diving_and_climbing?page=1'
+//       },
+//       {
+//         label: '環保響應',
+//         route: '/video/related_topic/going_green?page=1'
+//       },
+//       {
+//         label: '國外山岳',
+//         route: '/video/related_topic/foreign_mountain?page=1'
+//       },
+//       {
+//         label: '其他',
+//         route: '/video/related_topic/others?page=1'
+//       }
+//     ]
+//   },
+//   {
+//     label: '好物推薦',
+//     label_en: 'goodStuff',
+//     icon: 'mdi:menu-down',
+//     route: '',
+//     items: [
+//       {
+//         label: '戶外裝備',
+//         route: '/goodStuff/outdoor/all?page=1'
+//       },
+//       {
+//         label: '拍攝裝備',
+//         route: '/goodStuff/photography/all?page=1'
+//       }
+//     ]
+//   },
+//   {
+//     label: '作品',
+//     label_en: 'work',
+//     icon: '',
+//     route: '/work',
+//     items: []
+//   },
+//   {
+//     label: '關於我',
+//     label_en: 'aboutMe',
+//     icon: '',
+//     route: '/aboutMe',
+//     items: []
+//   }
+// ])
 
 const toggleNavItemList = (item) => {
   const subclassEL = document.querySelector(`#${item}>.subclass`)

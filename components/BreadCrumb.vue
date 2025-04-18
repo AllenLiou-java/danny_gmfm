@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-// eslint-disable-next-line camelcase
 const { code_video_category, code_video_area, code_video_relatedTopic } = getVideoRoute()
 const props = defineProps({
   type: {
@@ -36,13 +35,11 @@ const path = computed(() => {
   const title = props.title
   const codeRelatedTopic = props.relatedTopic
 
-  // eslint-disable-next-line camelcase
   const topic = code_video_category.filter((item) => item.id === codeTopic)[0].value
-  // eslint-disable-next-line camelcase
+
   const subclass = code_video_area.filter((item) => item.id === codeSubclass)[0]?.value
 
   if (props.type === 'video' && codeTopic === '3') {
-    // eslint-disable-next-line camelcase
     const relatedTopic = code_video_relatedTopic.filter((item) => item.id === codeRelatedTopic)[0]
       ?.value
 

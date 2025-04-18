@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export default function (code_category) {
   const code_product_bigcategory = [
     {

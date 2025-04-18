@@ -1,12 +1,12 @@
 <template>
   <div>
     <template v-if="videosPerPage.length > 0">
-      <ul class="flex-center flex-col flex-wrap gap-5 sm:flex-row">
+      <ul class="flex flex-col flex-wrap gap-5 md:flex-row md:justify-between">
         <li
           v-for="(page, idx) in videosPerPage"
           :key="idx"
           :class="[0, 1, 5, 6].includes(idx) ? '2xl:max-w-[590px]' : '2xl:max-w-[386px]'"
-          class="relative w-full overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.04] md:max-w-[calc(50%-20px)]"
+          class="relative w-full overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.04] md:w-[calc(50%-10px)]"
         >
           <NuxtLink :to="`/video/detail/${page.id}`">
             <img :src="page.cover_image" alt="coverImg" />

@@ -10,9 +10,11 @@
 
 <script setup>
 const videoStore = useVideoStore()
+const productStore = useProductStore()
 
 onMounted(() => {
   videoStore.getCategoryList()
+  productStore.getProductCategoryList()
 })
 </script>
 
