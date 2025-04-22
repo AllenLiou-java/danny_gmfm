@@ -70,60 +70,6 @@ const { data: videoList } = await useAsyncData('videoList', () => {
 
 const topicSelected = ref('allTopic')
 
-// const topicList = ref([
-//   {
-//     label: '台灣百岳',
-//     label_en: 'top_mountains_tw',
-//     route: '/video/top_mountains_tw/north?page=1',
-//     imgurl: '/video/category1-btn-bg.png'
-//   },
-//   {
-//     label: '中級山/郊山步道/野營/野溪溫泉',
-//     label_en: 'outdoor_spot',
-//     route: '/video/outdoor_spot/north?page=1',
-//     imgurl: '/video/category2-btn-bg.png'
-//   },
-//   {
-//     label: '相關主題',
-//     label_en: 'related_topic',
-//     route: '/video/related_topic/device_evaluation?page=1',
-//     imgurl: '/video/category1-btn-bg.png'
-//   }
-// ])
-
-// const subclassList = ref([
-//   {
-//     label: '北部',
-//     label_en: 'north',
-//     route: '/video/allTopic/north?page=1',
-//     imgurl: '/video/north.svg'
-//   },
-//   {
-//     label: '中部',
-//     label_en: 'middle',
-//     route: '/video/allTopic/middle?page=1',
-//     imgurl: '/video/middle.svg'
-//   },
-//   {
-//     label: '南部',
-//     label_en: 'south',
-//     route: '/video/allTopic/south?page=1',
-//     imgurl: '/video/south.svg'
-//   },
-//   {
-//     label: '東部',
-//     label_en: 'east',
-//     route: '/video/allTopic/east?page=1',
-//     imgurl: '/video/east.svg'
-//   },
-//   {
-//     label: '其他主題',
-//     label_en: 'othersTopic',
-//     route: '/video/allTopic/othersTopic?page=1',
-//     imgurl: ''
-//   }
-// ])
-
 const currentPage = ref(1)
 
 const scrollTop = () => {

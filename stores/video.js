@@ -73,11 +73,11 @@ export const useVideoStore = defineStore('video', () => {
   })
 
   const bigcategoryNavigator = computed(() => {
-    const bigcategoryList = codeVideoBigcategoryList.value
-    const smallcategoryList = codeVideoSmallcategoryList.value
+    const bigcategoryList = JSON.parse(JSON.stringify(codeVideoBigcategoryList.value))
+    const smallcategoryList = JSON.parse(JSON.stringify(codeVideoSmallcategoryList.value))
     if (bigcategoryList === null || smallcategoryList === null) return null
 
-    return bigcategoryList.map((bigcategory, idx) => {
+    return bigcategoryList.map((bigcategory) => {
       if (bigcategory.id === '0') {
         return {
           label: bigcategory.label,
@@ -106,8 +106,8 @@ export const useVideoStore = defineStore('video', () => {
   })
 
   const smallcategoryNavigator = computed(() => {
-    const bigcategoryList = codeVideoBigcategoryList.value
-    const smallcategoryList = codeVideoSmallcategoryList.value
+    const bigcategoryList = JSON.parse(JSON.stringify(codeVideoBigcategoryList.value))
+    const smallcategoryList = JSON.parse(JSON.stringify(codeVideoSmallcategoryList.value))
     const currentCategoryName = currentCategory.value
     if (bigcategoryList === null || smallcategoryList === null || currentCategoryName === null)
       return null
@@ -146,7 +146,7 @@ export const useVideoStore = defineStore('video', () => {
     }
   })
 
-  const getCategoryList = async () => {
+  const getVideoCategoryList = async () => {
     if (codeVideoBigcategoryList.value === null) {
       const codeVideoCategory = await $fetch('/api/airtable/codeVideoCategory')
       codeVideoCategory.unshift({
@@ -177,6 +177,6 @@ export const useVideoStore = defineStore('video', () => {
     codeVideoSmallcategoryList,
     bigcategoryNavigator,
     smallcategoryNavigator,
-    getCategoryList
+    getVideoCategoryList
   }
 })

@@ -1,5 +1,10 @@
 <template>
-  <div>Search page</div>
+  <div class="pt-[66px] sm:pt-[154px] lg:pt-[100px]">
+    <div class="container min-h-[80vh]">
+      <h1>Search page</h1>
+    </div>
+    <Suscribe />
+  </div>
 </template>
 
 <script setup></script>

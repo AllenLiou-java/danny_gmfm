@@ -41,6 +41,7 @@
         @click="turnPage"
       />
     </div>
+    <Suscribe />
   </div>
 </template>
 

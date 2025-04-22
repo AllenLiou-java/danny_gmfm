@@ -165,25 +165,21 @@
         >
           GOOD STUFF
         </h2>
-
         <ul class="mb-6 hidden grid-cols-3 gap-15 lg:mb-8 lg:grid">
           <li
-            v-for="productItem in latestProduct.records"
+            v-for="productItem in latestProduct"
             :key="productItem.id"
             class="overflow-hidden rounded-xl shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] duration-300 hover:scale-109"
           >
-            <NuxtLink
-              :to="`${productPath(productItem.fields.category)}/${productItem.fields.product_no}`"
-              class="block"
-            >
+            <NuxtLink :to="`/goodStuff/detail/${productItem.id}`" class="block">
               <img
                 class="h-full w-full object-cover object-center md:max-h-[330px] md:max-w-[360px]"
-                :src="productItem.fields.cover_image[0].url"
+                :src="productItem.cover_image"
                 alt="cover-img"
               />
               <div class="bg-primary">
                 <p class="mb-2 h-[84px] px-5 pt-5 text-[14px] leading-8 md:text-[16px]">
-                  {{ productItem.fields.name }}
+                  {{ productItem.name }}
                 </p>
 
                 <span
@@ -202,21 +198,19 @@
             v-bind="goodstuffSwiperConfig"
           >
             <SwiperSlide
-              v-for="productItem in latestProduct.records"
+              v-for="productItem in latestProduct"
               :key="productItem.id"
               class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
             >
-              <NuxtLink
-                :to="`${productPath(productItem.fields.category)}/${productItem.fields.product_no}`"
-              >
+              <NuxtLink :to="`/goodStuff/detail/${productItem.id}`">
                 <img
                   class="min-h-[234px] w-full object-cover object-center"
-                  :src="productItem.fields.cover_image[0].url"
+                  :src="productItem.cover_image"
                   alt="cover-img"
                 />
                 <div class="bg-primary">
                   <p class="text-shorten mb-3 px-3 pt-3 text-[14px] leading-8">
-                    {{ productItem.fields.name }}
+                    {{ productItem.name }}
                   </p>
 
                   <span class="block px-3 pb-3 text-right text-[16px] font-medium text-yellow"
@@ -277,7 +271,6 @@
 
 <script setup>
 const { imageSrc } = getImageSrc()
-const { productPath } = getGoodStuffRoute()
 
 const { data: latestVideo } = await useFetch('/api/airtable/video', {
   method: 'post',

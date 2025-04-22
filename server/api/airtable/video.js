@@ -22,16 +22,14 @@ export default defineEventHandler(async (event) => {
     return {
       id,
       title: fields.title,
+      video_no: fields.video_no,
       link: fields.link,
       cover_image: fields.cover_image[0].url,
       content: fields.content,
-      related_video: fields.related_video,
-      area: fields.area,
       category: fields.category,
       smallcategory: fields.smallcategory,
-      related_product: fields.related_product,
-      video_no: fields.video_no,
-      related_topic: fields.related_topic
+      related_video: fields.related_video,
+      related_product: fields.related_product
     }
   })
 

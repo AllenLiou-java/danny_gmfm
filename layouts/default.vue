@@ -13,7 +13,7 @@ const videoStore = useVideoStore()
 const productStore = useProductStore()
 
 onMounted(() => {
-  videoStore.getCategoryList()
+  videoStore.getVideoCategoryList()
   productStore.getProductCategoryList()
 })
 </script>

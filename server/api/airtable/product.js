@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
           images: fields.images,
           discount: fields.discount,
           category: fields.category,
+          smallcategory: fields.smallcategory,
           product_no: fields.product_no,
           cover_image: fields.cover_image[0].url
         }

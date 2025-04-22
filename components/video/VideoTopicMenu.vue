@@ -33,7 +33,6 @@
       <div class="-mr-[20px] xl:hidden">
         <Swiper
           v-bind="topicMenuSwiperConfig"
-          ref="topicMenuSwiperRef"
           class="h-[50px] sm:h-15 md:h-20"
           @swiper="topicMenuSwiper"
         >
@@ -82,8 +81,6 @@ const allTopicItem = computed(() => {
 const mainTopicList = computed(() => {
   return props.topics.filter((topic) => topic.label_en !== 'allTopic')
 })
-
-const topicMenuSwiperRef = ref(null)
 
 const topicMenuSwiperConfig = ref({
   modules: [SwiperPagination, SwiperNavigation],
