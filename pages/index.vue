@@ -386,7 +386,7 @@ const topicList = [
 ]
 
 const topicSwiperConfig = {
-  modules: [SwiperNavigation, SwiperEffectCreative],
+  modules: [SwiperNavigation],
   slidesPerView: 2.3,
   spaceBetween: 0,
   breakpoints: {

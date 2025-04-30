@@ -104,6 +104,10 @@
   writing-mode: vertical-lr;
 } 
 
+@utility card-shadow {
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
 
 
 /* 使用 @variant 將tinlwind可用的variant 加入倒客製化的class*/
@@ -134,3 +138,4 @@
 .text-shorten {
   @apply overflow-hidden text-ellipsis whitespace-nowrap
 }
+

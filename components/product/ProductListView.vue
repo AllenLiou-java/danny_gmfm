@@ -4,11 +4,11 @@
       <div
         v-for="product in productsPerPage[currentPage - 1]"
         :key="product.id"
-        class="card-shadow max-w-[360px] overflow-hidden rounded-[8px] duration-300 hover:scale-[1.08]"
+        class="max-w-[360px] overflow-hidden rounded-[8px] card-shadow duration-300 hover:scale-[1.08]"
       >
         <NuxtLink :to="`/goodStuff/detail/${product.id}`">
           <img
-            class="img-shadow mb-5 aspect-[calc(360/330)] w-full object-cover object-center"
+            class="mb-5 aspect-[calc(360/330)] w-full object-cover object-center"
             :src="product.cover_image"
             alt="productCover"
           />
@@ -81,12 +81,4 @@ const turnPage = (page) => {
 }
 </script>
 
-<style scoped>
-.card-shadow {
-  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.5);
-}
-
-.img-shadow {
-  box-shadow: 2px 4px -20px 0 rgba(0, 0, 0, 0.5);
-}
-</style>
+<style scoped></style>

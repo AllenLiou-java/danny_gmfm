@@ -10,17 +10,19 @@
       class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:flex-row lg:gap-x-12"
     >
       <div class="max-w-[850px]">
-        <!-- <BreadCrumb
-          class="mb-6 text-[12px] sm:mb-8 sm:text-[16px]"
-          type="video"
-          :topic="videoDetail.category"
-          :subclass="videoDetail.area"
-          :related-topic="videoDetail.related_topic"
+        <BreadCrumb
+          :bigcategory="bigcategoryRoute"
+          :smallcategory="smallcategoryRoute"
           :title="videoDetail.title"
-        /> -->
-        <h2 class="mb-6 text-[16px] tracking-[4.67px] sm:mb-12 sm:text-[32px] sm:tracking-[9.33px]">
-          {{ videoDetail.title }}
-        </h2>
+          class="mb-6 md:mb-8"
+        />
+        <div class="relative mb-[25px] md:mb-12">
+          <h2 class="text-[16px] tracking-[4.67px] sm:text-[32px] sm:tracking-[9.33px]">
+            {{ videoDetail.title }}
+          </h2>
+
+          <div class="absolute top-[calc(100%+8px)] h-[1px] w-full bg-[#54595b] md:top-12"></div>
+        </div>
 
         <ClientOnly>
           <YoutubeScreen class="mb-4 sm:mb-8" :video-url="videoDetail.link" />
@@ -112,37 +114,38 @@
           </div>
           <div class="sm:max-w-[290px]">
             <p class="mb-4 border-b border-[#54595b] pb-2">好物推薦</p>
-            <ClientOnly>
-              <Swiper
-                v-if="relatedProductList !== null"
-                id="goodstuff"
-                v-bind="goodstuffSwiperConfig"
-                class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
-              >
-                <SwiperSlide
-                  v-for="product in relatedProductList"
-                  :key="product.id"
-                  class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+            <div v-if="relatedProductList !== null">
+              <ClientOnly>
+                <Swiper
+                  id="goodstuff"
+                  v-bind="goodstuffSwiperConfig"
+                  class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
                 >
-                  <NuxtLink :to="`${productPath(product.category)}/${product.product_no}`">
-                    <img
-                      class="max-h-[266px] w-full object-cover object-center"
-                      :src="product.cover_image"
-                      alt="cover-img"
-                    />
-                    <div class="bg-primary tracking-[0]">
-                      <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">
-                        {{ product.name }}
-                      </p>
+                  <SwiperSlide
+                    v-for="product in relatedProductList"
+                    :key="product.id"
+                    class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+                  >
+                    <NuxtLink :to="`/goodStuff/detail/${product.id}`">
+                      <img
+                        class="max-h-[266px] w-full object-cover object-center"
+                        :src="product.cover_image"
+                        alt="cover-img"
+                      />
+                      <div class="bg-primary tracking-[0]">
+                        <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">
+                          {{ product.name }}
+                        </p>
 
-                      <span class="block px-3 pb-1 text-right text-[16px] font-medium text-yellow"
-                        >查看更多>></span
-                      >
-                    </div>
-                  </NuxtLink>
-                </SwiperSlide>
-              </Swiper>
-            </ClientOnly>
+                        <span class="block px-3 pb-1 text-right text-[16px] font-medium text-yellow"
+                          >查看更多>></span
+                        >
+                      </div>
+                    </NuxtLink>
+                  </SwiperSlide>
+                </Swiper>
+              </ClientOnly>
+            </div>
           </div>
         </div>
 
@@ -160,8 +163,8 @@
 <script setup>
 const route = useRoute()
 const { imageSrc } = getImageSrc()
-const { productPath } = getGoodStuffRoute()
-const { videos } = storeToRefs(useVideoStore())
+const { videos, codeVideoBigcategoryList, codeVideoSmallcategoryList } =
+  storeToRefs(useVideoStore())
 
 const { data: videoDetail } = await useAsyncData('videoDetail', () => {
   const vid = route.params.vid
@@ -285,6 +288,47 @@ const relatedVideoSwiperConfig = {
     clickable: true
   }
 }
+
+const bigcategoryRoute = computed(() => {
+  if (codeVideoBigcategoryList.value === null)
+    return {
+      labelName: '',
+      route: ''
+    }
+
+  const currentBigcategory = codeVideoBigcategoryList.value.filter(
+    (code) => code.id === videoDetail.value.category
+  )[0]
+
+  const route = `/video/${currentBigcategory.label_en}/north?page=1`
+
+  return {
+    labelName: currentBigcategory.label,
+    route
+  }
+})
+
+const smallcategoryRoute = computed(() => {
+  if (codeVideoBigcategoryList.value === null || codeVideoSmallcategoryList.value === null)
+    return {
+      labelName: '',
+      route: ''
+    }
+
+  const currentBigcategory = codeVideoBigcategoryList.value.filter(
+    (code) => code.id === videoDetail.value.category
+  )[0]
+
+  const currentSmallcategory = codeVideoSmallcategoryList.value.filter((code) => {
+    return code.id === videoDetail.value.smallcategory
+  })[0]
+
+  const route = `/video/${currentBigcategory.label_en}/${currentSmallcategory.label_en}?page=1`
+  return {
+    labelName: currentSmallcategory.label,
+    route
+  }
+})
 </script>
 
 <style scoped>

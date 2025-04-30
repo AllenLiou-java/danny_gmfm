@@ -44,7 +44,8 @@ export default defineNuxtConfig({
   },
   modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper'],
   swiper: {
-    modules: ['navigation', 'pagination', 'effect-creative']
+    modules: ['navigation', 'pagination', 'thumbs'],
+    styleLang: 'css'
   },
   icon: {
     serverBundle: {
