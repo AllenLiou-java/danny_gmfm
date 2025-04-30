@@ -33,16 +33,12 @@
           <div class="w-full">
             <Swiper
               :modules="[SwiperThumbs]"
-              class="relative md:h-[904px] lg:max-w-[530px]"
+              class="w-full md:max-h-[904px] md:min-h-[700px] lg:max-w-[530px]"
               v-bind="productSwiperConfig"
               :thumbs="{ swiper: thumbsSwiper }"
             >
               <SwiperSlide v-for="image in productDetail.images" :key="image.id" class="bg-white">
-                <img
-                  class="h-full object-contain object-center"
-                  :src="image.url"
-                  alt="product_image"
-                />
+                <img class="object-contain object-center" :src="image.url" alt="product_image" />
               </SwiperSlide>
             </Swiper>
           </div>
