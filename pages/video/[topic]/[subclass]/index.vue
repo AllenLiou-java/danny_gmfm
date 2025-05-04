@@ -12,35 +12,38 @@
         </div>
       </div>
     </div>
-    <div class="container min-h-[100vh] pt-4 pb-10 sm:pt-8 sm:pb-15">
-      <VideoTopicMenu
-        v-if="bigcategoryNavigator !== null"
-        class="mb-4 sm:mb-6"
-        :topics="bigcategoryNavigator"
-        :topic-selected="topicSelected"
-      />
-      <VideoSubclassMenu
-        v-if="smallcategoryNavigator !== null"
-        class="mb-6 sm:mb-15"
-        :subclass-list="smallcategoryNavigator"
-        :subclass-selected="subclassSelected"
-      />
-      <VideoListView :videos-per-page="videosPerPage[currentPage - 1]" />
+    <div class="min-h-[100vh] bg-primary pt-4 pb-10 sm:pt-8 sm:pb-15">
+      <div class="container">
+        <VideoTopicMenu
+          v-if="bigcategoryNavigator !== null"
+          class="mb-4 sm:mb-6"
+          :topics="bigcategoryNavigator"
+          :topic-selected="topicSelected"
+        />
+        <VideoSubclassMenu
+          v-if="smallcategoryNavigator !== null"
+          class="mb-6 sm:mb-15"
+          :subclass-list="smallcategoryNavigator"
+          :subclass-selected="subclassSelected"
+        />
+        <VideoListView class="mb-10 md:mb-15" :videos-per-page="videosPerPage[currentPage - 1]" />
+
+        <div class="flex-center">
+          <vue-awesome-paginate
+            v-model="currentPage"
+            :total-items="totalVideos"
+            :items-per-page="pageSize"
+            :max-pages-shown="3"
+            paginate-buttons-class="size-10  hover:bg-secondary text-[18px]"
+            active-page-class="paginate-active"
+            back-button-class="back-btn"
+            next-button-class="next-btn"
+            @click="turnPage"
+          />
+        </div>
+      </div>
     </div>
 
-    <div class="flex-center container mb-15">
-      <vue-awesome-paginate
-        v-model="currentPage"
-        :total-items="totalVideos"
-        :items-per-page="pageSize"
-        :max-pages-shown="3"
-        paginate-buttons-class="size-10  hover:bg-secondary"
-        active-page-class="text-yellow"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-        @click="turnPage"
-      />
-    </div>
     <Suscribe />
   </div>
 </template>

@@ -108,6 +108,20 @@
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
+@utility paginate-active {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 2px;
+    background-color: #ffe145;
+  }
+}
+
 
 
 /* 使用 @variant 將tinlwind可用的variant 加入倒客製化的class*/
@@ -137,5 +151,9 @@
 
 .text-shorten {
   @apply overflow-hidden text-ellipsis whitespace-nowrap
+}
+
+.img-shadow {
+  @apply bg-gradient-to-b from-transparent from-60% to-primary to-100% 
 }
 

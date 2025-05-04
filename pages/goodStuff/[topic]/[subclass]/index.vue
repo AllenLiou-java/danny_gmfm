@@ -12,69 +12,83 @@
         </div>
       </div>
     </div>
-    <div class="container pt-8 pb-15">
-      <ul class="flex-center mb-6 gap-10 sm:mb-9">
-        <li v-for="bigcategory in productBigcategoryNavigator" :key="bigcategory.label_en" class="">
-          <NuxtLink class="relative" :to="bigcategory.route">
-            <span class="text-[18px] tracking-[7px] sm:text-[24px]">{{ bigcategory.label }}</span>
-            <div
-              :class="bigcategorySelected === bigcategory.label_en ? 'bg-yellow' : ''"
-              class="absolute -bottom-2 h-1 w-full rounded-sm"
-            ></div>
-          </NuxtLink>
-        </li>
-      </ul>
-      <div class="mb-15">
-        <ul class="hidden items-center justify-center gap-3 sm:gap-4 md:flex lg:gap-8">
+    <div class="bg-primary pt-8 pb-15">
+      <div class="container">
+        <ul class="flex-center mb-6 gap-10 sm:mb-9">
           <li
-            v-for="smallcategory in productSmallcategoryNavigator"
-            :key="smallcategory.label_en"
-            class="h-[130px] w-[110px] rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428] hover:border-white"
-            :class="smallcategorySelected === smallcategory.label_en ? 'border-yellow' : ''"
+            v-for="bigcategory in productBigcategoryNavigator"
+            :key="bigcategory.label_en"
+            class=""
           >
-            <NuxtLink class="flex-center px-[17px] py-[10px] sm:flex-col" :to="smallcategory.route">
-              <img
-                class="mb-2 size-[25px] object-contain object-center sm:size-19"
-                :src="imageSrc(smallcategory.imgurl)"
-                alt=""
-              />
-              <span
-                :class="smallcategory.label.length > 4 ? '-tracking-[0.05px]' : 'tracking-[4.67px]'"
-                class="text-[16px] text-nowrap lg:text-[18px]"
-                >{{ smallcategory.label }}</span
-              >
+            <NuxtLink class="relative" :to="bigcategory.route">
+              <span class="text-[18px] tracking-[7px] sm:text-[24px]">{{ bigcategory.label }}</span>
+              <div
+                :class="bigcategorySelected === bigcategory.label_en ? 'bg-yellow' : ''"
+                class="absolute -bottom-2 h-1 w-full rounded-sm"
+              ></div>
             </NuxtLink>
           </li>
         </ul>
-
-        <div class="md:hidden">
-          <Swiper v-bind="smallcategorySwiperConfig" @swiper="smallcategorySwiper">
-            <SwiperSlide
+        <div class="mb-15">
+          <ul class="hidden items-center justify-center gap-3 sm:gap-4 md:flex lg:gap-8">
+            <li
               v-for="smallcategory in productSmallcategoryNavigator"
               :key="smallcategory.label_en"
-              class="max-w-[160px] rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428] sm:max-w-[120px]"
+              class="h-[130px] w-[110px] rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428] hover:border-white"
               :class="smallcategorySelected === smallcategory.label_en ? 'border-yellow' : ''"
             >
-              <NuxtLink class="flex-center px-[7px] py-[8px] sm:flex-col" :to="smallcategory.route">
+              <NuxtLink
+                class="flex-center px-[17px] py-[10px] sm:flex-col"
+                :to="smallcategory.route"
+              >
                 <img
-                  class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
+                  class="mb-2 size-[25px] object-contain object-center sm:size-19"
                   :src="imageSrc(smallcategory.imgurl)"
                   alt=""
                 />
-                <span class="text-[16px] tracking-[4.67px] text-nowrap lg:text-[18px]">{{
-                  smallcategory.label
-                }}</span>
+                <span
+                  :class="
+                    smallcategory.label.length > 4 ? '-tracking-[0.05px]' : 'tracking-[4.67px]'
+                  "
+                  class="text-[16px] text-nowrap lg:text-[18px]"
+                  >{{ smallcategory.label }}</span
+                >
               </NuxtLink>
-            </SwiperSlide>
-          </Swiper>
+            </li>
+          </ul>
+
+          <div class="md:hidden">
+            <Swiper v-bind="smallcategorySwiperConfig" @swiper="smallcategorySwiper">
+              <SwiperSlide
+                v-for="smallcategory in productSmallcategoryNavigator"
+                :key="smallcategory.label_en"
+                class="max-w-[160px] rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428] sm:max-w-[120px]"
+                :class="smallcategorySelected === smallcategory.label_en ? 'border-yellow' : ''"
+              >
+                <NuxtLink
+                  class="flex-center px-[7px] py-[8px] sm:flex-col"
+                  :to="smallcategory.route"
+                >
+                  <img
+                    class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
+                    :src="imageSrc(smallcategory.imgurl)"
+                    alt=""
+                  />
+                  <span class="text-[16px] tracking-[4.67px] text-nowrap lg:text-[18px]">{{
+                    smallcategory.label
+                  }}</span>
+                </NuxtLink>
+              </SwiperSlide>
+            </Swiper>
+          </div>
         </div>
-      </div>
-      <div>
-        <ProductListView
-          :bigcategory-selected="bigcategorySelected"
-          :smallcategory-selected="smallcategorySelected"
-          :product-list="productList"
-        />
+        <div>
+          <ProductListView
+            :bigcategory-selected="bigcategorySelected"
+            :smallcategory-selected="smallcategorySelected"
+            :product-list="productList"
+          />
+        </div>
       </div>
     </div>
     <Suscribe />

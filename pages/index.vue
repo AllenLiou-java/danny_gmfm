@@ -88,11 +88,15 @@
           class="black_overlay overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.15]"
         >
           <NuxtLink class="relative" :to="topicItem.route">
-            <img
-              class="h-full max-h-[460px] object-cover"
-              :src="imageSrc(topicItem.imgurl)"
-              :alt="topicItem.label_en"
-            />
+            <div class="relative">
+              <img
+                class="h-full max-h-[460px] object-cover"
+                :src="imageSrc(topicItem.imgurl)"
+                :alt="topicItem.label_en"
+              />
+              <div class="img-shadow absolute bottom-0 size-full" />
+            </div>
+
             <span
               class="text-shorten absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] px-6"
               >{{ topicItem.label }}</span
@@ -106,15 +110,19 @@
           <SwiperSlide
             v-for="topicItem in topicList"
             :key="topicItem.label_en"
-            class="overflow-hidden rounded-[5px]"
+            class="overflow-hidden rounded-[8px]"
           >
             <NuxtLink :to="topicItem.route">
               <div class="relative">
-                <img
-                  class="h-full w-full object-cover"
-                  :src="imageSrc(topicItem.imgurl)"
-                  :alt="topicItem.label_en"
-                />
+                <div class="relative">
+                  <img
+                    class="h-full w-full object-cover"
+                    :src="imageSrc(topicItem.imgurl)"
+                    :alt="topicItem.label_en"
+                  />
+                  <div class="img-shadow absolute bottom-0 size-full" />
+                </div>
+
                 <p class="text-shorten absolute bottom-3 w-full px-2 text-center">
                   {{ topicItem.label }}
                 </p>
@@ -140,11 +148,17 @@
             class="group relative col-span-6 shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] md:col-span-3 lg:col-span-2 lg:nth-1:col-span-3 lg:nth-2:col-span-3"
           >
             <NuxtLink :to="`/video/detail/${videoItem.id}`">
-              <img
-                class="h-full w-full overflow-hidden rounded-[5px] object-cover duration-300 group-hover:scale-105"
-                :src="videoItem.cover_image"
-                alt="cover-img"
-              />
+              <div
+                class="relative overflow-hidden rounded-[8px] duration-300 group-hover:scale-105"
+              >
+                <img
+                  class="h-full w-full object-cover object-center"
+                  :src="videoItem.cover_image"
+                  alt="cover-img"
+                />
+                <div class="img-shadow absolute bottom-0 size-full" />
+              </div>
+
               <span class="text-shorten absolute bottom-0 w-full p-3">{{ videoItem.title }}</span>
             </NuxtLink>
           </li>
@@ -172,11 +186,15 @@
             class="overflow-hidden rounded-xl shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] duration-300 hover:scale-109"
           >
             <NuxtLink :to="`/goodStuff/detail/${productItem.id}`" class="block">
-              <img
-                class="h-full w-full object-cover object-center md:max-h-[330px] md:max-w-[360px]"
-                :src="productItem.cover_image"
-                alt="cover-img"
-              />
+              <div class="relative">
+                <img
+                  class="h-full w-full object-cover object-center md:max-h-[330px] md:max-w-[360px]"
+                  :src="productItem.cover_image"
+                  alt="cover-img"
+                />
+                <div class="img-shadow absolute bottom-0 size-full" />
+              </div>
+
               <div class="bg-primary">
                 <p class="mb-2 h-[84px] px-5 pt-5 text-[14px] leading-8 md:text-[16px]">
                   {{ productItem.name }}
@@ -368,7 +386,7 @@ const topicList = [
   {
     label: '相關主題',
     label_en: 'related_topic',
-    route: '/video/related_topic/north?page=1',
+    route: '/video/related_topic/device_evaluation?page=1',
     imgurl: '/home/topic/3.jpg'
   },
   {

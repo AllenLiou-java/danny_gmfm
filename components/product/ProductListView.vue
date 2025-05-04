@@ -7,11 +7,15 @@
         class="max-w-[360px] overflow-hidden rounded-[8px] card-shadow duration-300 hover:scale-[1.08]"
       >
         <NuxtLink :to="`/goodStuff/detail/${product.id}`">
-          <img
-            class="mb-5 aspect-[calc(360/330)] w-full object-cover object-center"
-            :src="product.cover_image"
-            alt="productCover"
-          />
+          <div class="relative">
+            <img
+              class="mb-5 aspect-[calc(360/330)] w-full object-cover object-center"
+              :src="product.cover_image"
+              alt="productCover"
+            />
+            <div class="img-shadow absolute bottom-0 size-full" />
+          </div>
+
           <div class="mx-5 mb-5 flex flex-col">
             <p class="mb-3">{{ product.name }}</p>
             <p class="self-end text-[#fff986]">查看更多 <span class="text-[14px]">》》</span></p>
@@ -20,14 +24,14 @@
       </div>
     </div>
 
-    <div class="flex-center container mb-15">
+    <div class="flex-center container">
       <vue-awesome-paginate
         v-model="currentPage"
         :total-items="totalProducts"
         :items-per-page="pageSize"
         :max-pages-shown="3"
-        paginate-buttons-class="size-10  hover:bg-secondary"
-        active-page-class="text-yellow"
+        paginate-buttons-class="size-10  hover:bg-secondary text-[18px]"
+        active-page-class="paginate-active"
         back-button-class="back-btn"
         next-button-class="next-btn"
         @click="turnPage"

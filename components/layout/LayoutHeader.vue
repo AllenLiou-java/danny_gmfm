@@ -180,7 +180,7 @@ const routeList = computed(() => {
       label: '作品',
       label_en: 'work',
       icon: '',
-      route: '/work',
+      route: '/work?page=1',
       items: []
     },
     {

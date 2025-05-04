@@ -9,7 +9,11 @@
           class="relative w-full overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.04] md:w-[calc(50%-10px)]"
         >
           <NuxtLink :to="`/video/detail/${page.id}`">
-            <img :src="page.cover_image" alt="coverImg" />
+            <div class="relative">
+              <img :src="page.cover_image" alt="coverImg" />
+              <div class="img-shadow absolute bottom-0 size-full" />
+            </div>
+
             <p class="text-shorten absolute bottom-0 w-full px-3 pb-3 backdrop-blur-xs">
               {{ page.title }}
             </p>
