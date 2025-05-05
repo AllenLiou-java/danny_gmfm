@@ -26,21 +26,7 @@
           :subclass-list="smallcategoryNavigator"
           :subclass-selected="subclassSelected"
         />
-        <VideoListView class="mb-10 md:mb-15" :videos-per-page="videosPerPage[currentPage - 1]" />
-
-        <div class="flex-center">
-          <vue-awesome-paginate
-            v-model="currentPage"
-            :total-items="totalVideos"
-            :items-per-page="pageSize"
-            :max-pages-shown="3"
-            paginate-buttons-class="size-10  hover:bg-secondary text-[18px]"
-            active-page-class="paginate-active"
-            back-button-class="back-btn"
-            next-button-class="next-btn"
-            @click="turnPage"
-          />
-        </div>
+        <VideoListView @turn-page="turnPage" />
       </div>
     </div>
 
@@ -50,39 +36,20 @@
 
 <script setup>
 const videoStore = useVideoStore()
-const {
-  videos,
-  videosPerPage,
-  pageSize,
-  totalVideos,
-  bigcategoryNavigator,
-  smallcategoryNavigator
-} = storeToRefs(useVideoStore())
-const route = useRoute()
+const { bigcategoryNavigator, smallcategoryNavigator } = storeToRefs(useVideoStore())
+const { topic, subclass } = useRoute().params
+const topicSelected = ref(topic)
+const subclassSelected = ref(subclass)
 const router = useRouter()
-const topicSelected = ref(route.params.topic)
-const subclassSelected = ref(route.params.subclass)
-const currentPage = ref(1)
 
-const { data: videoList } = await useAsyncData('videoList', () => {
-  if (videos.value.length > 0) {
-    return videos.value
-  } else {
-    return $fetch('/api/airtable/video', {
-      method: 'post',
-      body: {
-        sort: [{ field: 'video_no', direction: 'desc' }]
-      }
-    })
-  }
-})
+await callOnce(videoStore.getVideos)
 
 const scrollTop = () => {
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 }
 
-const turnPage = (page) => {
+const turnPage = (pageNo) => {
   router.push({
     name: 'video-topic-subclass',
     params: {
@@ -90,29 +57,18 @@ const turnPage = (page) => {
       subclass: subclassSelected.value
     },
     query: {
-      page
+      page: pageNo
     }
   })
 
   scrollTop()
 }
 
-watch(
-  () => route.query.page,
-  (newval) => {
-    currentPage.value = parseInt(newval)
-    scrollTop()
-  }
-)
-
 onMounted(() => {
   videoStore.$patch({
-    videos: videoList.value,
     currentCategory: topicSelected.value,
     currentSmallcategory: subclassSelected.value
   })
-
-  currentPage.value = parseInt(route.query.page)
 })
 </script>
 

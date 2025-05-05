@@ -1,13 +1,22 @@
 import { defineStore } from 'pinia'
 
 export const useVideoStore = defineStore('video', () => {
-  const codeVideoCategory = ref([])
+  const { topic, subclass } = useRoute().params
+
   const videos = ref([])
-  const pageSize = ref(10)
-  const currentCategory = ref(null)
-  const currentSmallcategory = ref(null)
   const codeVideoBigcategoryList = ref(null)
   const codeVideoSmallcategoryList = ref(null)
+
+  const currentCategory = computed(() => {
+    if (topic) {
+      return topic
+    } else {
+      return 'allTopic'
+    }
+  })
+  const currentSmallcategory = ref(subclass || null)
+
+  const pageSize = ref(10)
 
   const currentCategoryId = computed(() => {
     if (codeVideoBigcategoryList.value === null) {
@@ -39,14 +48,12 @@ export const useVideoStore = defineStore('video', () => {
 
     let result = []
 
-    if (categoryId === '0') {
-      if (smallcategoryId === null) {
-        result = videos.value
-      } else {
-        result = videos.value.filter((item) => {
-          return item.smallcategory === smallcategoryId
-        })
-      }
+    if (categoryId === '0' && smallcategoryId === null) {
+      result = videos.value
+    } else if (categoryId === '0') {
+      result = videos.value.filter((item) => {
+        return item.smallcategory === smallcategoryId
+      })
     } else {
       result = videos.value.filter((item) => {
         return item.category === categoryId && item.smallcategory === smallcategoryId
@@ -164,8 +171,19 @@ export const useVideoStore = defineStore('video', () => {
     }
   }
 
+  const getVideos = async () => {
+    if (videos.value.length > 0) return
+    const infos = await $fetch('/api/airtable/video', {
+      method: 'post',
+      body: {
+        sort: [{ field: 'video_no', direction: 'desc' }]
+      }
+    })
+
+    videos.value = infos
+  }
+
   return {
-    codeVideoCategory,
     videos,
     videosPerPage,
     pageSize,
@@ -177,6 +195,7 @@ export const useVideoStore = defineStore('video', () => {
     codeVideoSmallcategoryList,
     bigcategoryNavigator,
     smallcategoryNavigator,
-    getVideoCategoryList
+    getVideoCategoryList,
+    getVideos
   }
 })

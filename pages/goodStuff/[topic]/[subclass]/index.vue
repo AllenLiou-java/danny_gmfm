@@ -86,7 +86,6 @@
           <ProductListView
             :bigcategory-selected="bigcategorySelected"
             :smallcategory-selected="smallcategorySelected"
-            :product-list="productList"
           />
         </div>
       </div>
@@ -96,32 +95,16 @@
 </template>
 
 <script setup>
-const { topic, subclass } = useRoute().params
 const { imageSrc } = getImageSrc()
+
 const productStore = useProductStore()
-const { products, productBigcategoryNavigator, productSmallcategoryNavigator } =
+await callOnce(productStore.getProducts)
+const { productBigcategoryNavigator, productSmallcategoryNavigator } =
   storeToRefs(useProductStore())
 
+const { topic, subclass } = useRoute().params
 const bigcategorySelected = ref(topic)
 const smallcategorySelected = ref(subclass)
-
-const { data: productList } = await useAsyncData('productList', () => {
-  if (products.value.length > 0) {
-    return products.value
-  } else {
-    return $fetch('/api/airtable/product', {
-      method: 'post',
-      body: {
-        sort: [{ field: 'product_no', direction: 'desc' }]
-      }
-    }).then((res) => {
-      productStore.$patch({
-        products: res
-      })
-      return res
-    })
-  }
-})
 
 const smallcategorySwiperConfig = ref({
   slidesPerView: 'auto',
@@ -133,6 +116,7 @@ const smallcategorySwiper = (swiper) => {
   const selectedIndex = productSmallcategoryNavigator.value.findIndex(
     (category) => category.label_en === smallcategorySelected.value
   )
+
   swiper.slideTo(selectedIndex)
 }
 

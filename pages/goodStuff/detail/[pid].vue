@@ -12,7 +12,7 @@
           <div class="hidden md:block">
             <Swiper
               :modules="[SwiperThumbs]"
-              class="max-h-[420px] min-h-[84px] w-[64px]"
+              class="h-[420px] min-h-[84px] w-[64px]"
               v-bind="thumbsSwiperConfig"
               @swiper="setThumbsSwiper"
             >
@@ -38,7 +38,11 @@
               :thumbs="{ swiper: thumbsSwiper }"
             >
               <SwiperSlide v-for="image in productDetail.images" :key="image.id" class="bg-white">
-                <img class="object-contain object-center" :src="image.url" alt="product_image" />
+                <img
+                  class="w-full object-contain object-center"
+                  :src="image.url"
+                  alt="product_image"
+                />
               </SwiperSlide>
             </Swiper>
           </div>

@@ -1,11 +1,14 @@
 import { defineStore } from 'pinia'
 
 export const useProductStore = defineStore('product', () => {
+  const { topic, subclass } = useRoute().params
+
   const products = ref([])
   const codeProductBigcategoryList = ref(null)
   const codeProductSmallcategoryList = ref(null)
-  const currentProductBigcategory = ref(null)
-  const currentProductSmallcategory = ref(null)
+
+  const currentProductBigcategory = ref(topic)
+  const currentProductSmallcategory = ref(subclass)
   const pageSize = ref(9)
 
   const currentCategoryId = computed(() => {
@@ -66,6 +69,7 @@ export const useProductStore = defineStore('product', () => {
 
   const productBigcategoryNavigator = computed(() => {
     const bigcategoryList = JSON.parse(JSON.stringify(codeProductBigcategoryList.value))
+
     if (bigcategoryList === null) return null
 
     return bigcategoryList.map(({ label, label_en }) => ({
@@ -85,7 +89,7 @@ export const useProductStore = defineStore('product', () => {
 
     const currentCategoryId = bigcategoryList.filter(
       (category) => category.label_en === currentBigcategory
-    )[0].id
+    )[0]?.id
 
     const currentSmallcategoryList = smallcategoryList.filter(
       (category) => category.supertype === currentCategoryId || category.id === '0'
@@ -123,8 +127,18 @@ export const useProductStore = defineStore('product', () => {
 
       codeProductSmallcategoryList.value = codeSmallcategory
     }
+  }
 
-    return { codeBigcategory, codeSmallcategory }
+  const getProducts = async () => {
+    if (products.value.length > 0) return
+    const infos = await $fetch('/api/airtable/product', {
+      method: 'post',
+      body: {
+        sort: [{ field: 'product_no', direction: 'desc' }]
+      }
+    })
+
+    products.value = infos
   }
 
   return {
@@ -138,6 +152,7 @@ export const useProductStore = defineStore('product', () => {
     productsFiltered,
     productsPerPage,
     totalProducts,
-    getProductCategoryList
+    getProductCategoryList,
+    getProducts
   }
 })

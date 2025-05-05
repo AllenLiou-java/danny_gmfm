@@ -2,7 +2,7 @@
   <div class="bg-[#14171a] font-notoSansTC text-white">
     <LayoutHeader class="container" />
     <div>
-      <slot />
+      <NuxtPage />
     </div>
     <LayoutFooter />
   </div>
@@ -12,9 +12,9 @@
 const videoStore = useVideoStore()
 const productStore = useProductStore()
 
-onMounted(() => {
-  videoStore.getVideoCategoryList()
-  productStore.getProductCategoryList()
+await callOnce(async () => {
+  await videoStore.getVideoCategoryList()
+  await productStore.getProductCategoryList()
 })
 </script>
 

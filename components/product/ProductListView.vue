@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="flex-center container">
+    <div class="flex-center">
       <vue-awesome-paginate
         v-model="currentPage"
         :total-items="totalProducts"
@@ -42,12 +42,6 @@
 
 <script setup>
 const props = defineProps({
-  productList: {
-    type: Array,
-    default() {
-      return []
-    }
-  },
   bigcategorySelected: {
     type: String,
     required: true
@@ -57,12 +51,12 @@ const props = defineProps({
     required: true
   }
 })
-
+const { page } = useRoute().query
 const router = useRouter()
 
 const { productsPerPage, pageSize, totalProducts } = storeToRefs(useProductStore())
 
-const currentPage = ref(1)
+const currentPage = ref(parseInt(page))
 
 const scrollTop = () => {
   document.body.scrollTop = 0

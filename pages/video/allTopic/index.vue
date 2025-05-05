@@ -24,86 +24,40 @@
         class="mb-6 sm:mb-15"
         :subclass-list="smallcategoryNavigator"
       />
-      <VideoListView :videos-per-page="videosPerPage[currentPage - 1]" />
-    </div>
-    <div class="flex-center container mb-15">
-      <vue-awesome-paginate
-        v-model="currentPage"
-        :total-items="totalVideos"
-        :items-per-page="pageSize"
-        :max-pages-shown="3"
-        paginate-buttons-class="size-10  hover:bg-secondary text-[18px]"
-        active-page-class="paginate-active"
-        back-button-class="back-btn"
-        next-button-class="next-btn"
-        @click="turnPage"
-      />
+      <VideoListView @turn-page="turnPage" />
     </div>
   </div>
 </template>
 
 <script setup>
 const videoStore = useVideoStore()
-const {
-  videos,
-  videosPerPage,
-  pageSize,
-  totalVideos,
-  bigcategoryNavigator,
-  smallcategoryNavigator
-} = storeToRefs(useVideoStore())
-const route = useRoute()
+const { bigcategoryNavigator, smallcategoryNavigator } = storeToRefs(useVideoStore())
 const router = useRouter()
-
-const { data: videoList } = await useAsyncData('videoList', () => {
-  if (videos.value.length > 0) {
-    return videos.value
-  } else {
-    return $fetch('/api/airtable/video', {
-      method: 'post',
-      body: {
-        sort: [{ field: 'video_no', direction: 'desc' }]
-      }
-    })
-  }
-})
+await callOnce(videoStore.getVideos)
 
 const topicSelected = ref('allTopic')
-
-const currentPage = ref(1)
 
 const scrollTop = () => {
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 }
 
-const turnPage = (page) => {
+const turnPage = (pageNo) => {
   router.push({
     name: 'video-allTopic',
     query: {
-      page
+      page: pageNo
     }
   })
 
   scrollTop()
 }
 
-watch(
-  () => route.query.page,
-  (newval) => {
-    currentPage.value = parseInt(newval)
-    scrollTop()
-  }
-)
-
 onMounted(() => {
   videoStore.$patch({
-    videos: videoList.value,
     currentCategory: topicSelected.value,
     currentSmallcategory: null
   })
-
-  currentPage.value = parseInt(route.query.page)
 })
 </script>
 
