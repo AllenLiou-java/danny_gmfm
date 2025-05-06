@@ -7,7 +7,7 @@ export default defineEventHandler((event) => {
   })
     .then((res) => {
       return res.records.map((item) => {
-        return item.fields.keyword
+        return item.fields
       })
     })
     .catch((error) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#14171a] font-notoSansTC text-white">
+  <div class="bg-primary font-notoSansTC text-white">
     <LayoutHeader class="container" />
     <div>
       <NuxtPage />
