@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-primary pt-8 pb-15">
+    <div class="bg-primary pt-8 pb-10 md:pb-15">
       <div class="container">
         <ul class="flex-center mb-6 gap-10 sm:mb-9">
           <li

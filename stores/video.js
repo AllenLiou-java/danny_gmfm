@@ -7,13 +7,7 @@ export const useVideoStore = defineStore('video', () => {
   const codeVideoBigcategoryList = ref(null)
   const codeVideoSmallcategoryList = ref(null)
 
-  const currentCategory = computed(() => {
-    if (topic) {
-      return topic
-    } else {
-      return 'allTopic'
-    }
-  })
+  const currentCategory = ref(topic || 'allTopic')
   const currentSmallcategory = ref(subclass || null)
 
   const pageSize = ref(10)

@@ -29,42 +29,43 @@
               />
               <div class="img-shadow absolute bottom-0 size-full" />
             </div>
+            <div class="px-4 pb-5">
+              <p class="text-shorten mb-1 leading-8 font-bold">{{ work.title }}</p>
+              <div>
+                <p
+                  class="mr-2 mb-2 inline-block rounded-[5px] bg-yellow px-2 text-[12px] leading-6 font-bold text-primary"
+                >
+                  {{ work.subTitle }}
+                </p>
+                <p
+                  class="mb-2 inline-block rounded-[5px] bg-yellow px-2 text-[12px] leading-6 font-bold text-primary"
+                >
+                  {{ work.cooperate }}
+                </p>
+              </div>
 
-            <p class="text-shorten mb-1 leading-8 font-bold">{{ work.title }}</p>
-            <div>
-              <p
-                class="mr-2 mb-2 inline-block rounded-[5px] bg-yellow px-2 text-[12px] leading-6 font-bold text-primary"
-              >
-                {{ work.subTitle }}
+              <p class="mb-1 h-[96px] text-[14px] leading-6 md:leading-8">
+                {{ work.content.length > 70 ? `${work.content.slice(0, 70)} ...` : work.content }}
               </p>
-              <p
-                class="mb-2 inline-block rounded-[5px] bg-yellow px-2 text-[12px] leading-6 font-bold text-primary"
-              >
-                {{ work.cooperate }}
-              </p>
-            </div>
-
-            <p class="mb-1 h-[96px] text-[14px] leading-6 md:leading-8">
-              {{ work.content.length > 70 ? `${work.content.slice(0, 70)} ...` : work.content }}
-            </p>
-            <div class="mb-3">
-              <p class="mb-2 text-yellow sm:mb-3">作品連結:</p>
-              <div class="flex gap-x-4 sm:gap-x-8">
-                <a v-if="work.link_youtube !== null" :href="work.link_youtube" target="_blank"
-                  ><Icon name="my-icon:yt" class="align-middle text-[30px] md:text-[40px]"
-                /></a>
-                <a v-if="work.link_ig !== null" :href="work.link_ig" target="_blank"
-                  ><Icon name="my-icon:ig" class="align-middle text-[30px] md:text-[40px]"
-                /></a>
-                <a v-if="work.link_fb !== null" :href="work.link_fb" target="_blank"
-                  ><Icon name="my-icon:fb" class="align-middle text-[30px] md:text-[40px]"
-                /></a>
-                <a v-if="work.link_google !== null" :href="work.link_google" target="_blank"
-                  ><Icon name="my-icon:google" class="align-middle text-[30px] md:text-[40px]"
-                /></a>
-                <a v-if="work.link_other !== null" :href="work.link_other" target="_blank"
-                  ><Icon name="my-icon:jcnote" class="align-middle text-[30px] md:text-[40px]"
-                /></a>
+              <div>
+                <p class="mb-2 text-yellow sm:mb-3">作品連結:</p>
+                <div class="flex gap-x-4 sm:gap-x-8">
+                  <a v-if="work.link_youtube !== null" :href="work.link_youtube" target="_blank"
+                    ><Icon name="my-icon:yt" class="align-middle text-[30px] md:text-[40px]"
+                  /></a>
+                  <a v-if="work.link_ig !== null" :href="work.link_ig" target="_blank"
+                    ><Icon name="my-icon:ig" class="align-middle text-[30px] md:text-[40px]"
+                  /></a>
+                  <a v-if="work.link_fb !== null" :href="work.link_fb" target="_blank"
+                    ><Icon name="my-icon:fb" class="align-middle text-[30px] md:text-[40px]"
+                  /></a>
+                  <a v-if="work.link_google !== null" :href="work.link_google" target="_blank"
+                    ><Icon name="my-icon:google" class="align-middle text-[30px] md:text-[40px]"
+                  /></a>
+                  <a v-if="work.link_other !== null" :href="work.link_other" target="_blank"
+                    ><Icon name="my-icon:jcnote" class="align-middle text-[30px] md:text-[40px]"
+                  /></a>
+                </div>
               </div>
             </div>
           </li>

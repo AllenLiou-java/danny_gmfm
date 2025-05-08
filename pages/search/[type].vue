@@ -1,6 +1,6 @@
 <template>
   <div class="pt-[66px] sm:pt-[154px] lg:pt-[100px]">
-    <div class="container mx-auto min-h-[80vh] max-w-[840px]">
+    <div class="container mx-auto min-h-[80vh] max-w-[840px] pb-10 md:pb-15">
       <ul id="typeList" class="mb-6 flex gap-x-6 md:mb-8">
         <li v-for="type in typeList" :key="type.label_en" class="pb-2 text-[18px]">
           <NuxtLink :to="type.route">
