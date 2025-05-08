@@ -14,9 +14,6 @@
     </div>
     <div class="min-h-[100vh] bg-primary pt-4 pb-10 sm:pt-8 sm:pb-15">
       <div class="container">
-        {{ bigcategoryNavigator }}
-        <hr />
-        {{ smallcategoryNavigator }}
         <VideoTopicMenu
           v-if="bigcategoryNavigator !== null"
           class="mb-4 sm:mb-6"
