@@ -43,7 +43,7 @@
           </div>
         </li>
         <li class="group relative">
-          <NuxtLink to="/search/video?page=1">
+          <NuxtLink to="/search/video">
             <img
               class="relative size-[30px] object-cover sm:top-3"
               :src="imageSrc('/search.png')"

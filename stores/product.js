@@ -139,6 +139,7 @@ export const useProductStore = defineStore('product', () => {
     })
 
     products.value = infos
+    return infos
   }
 
   return {

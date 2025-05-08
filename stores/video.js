@@ -181,6 +181,7 @@ export const useVideoStore = defineStore('video', () => {
     })
 
     videos.value = infos
+    return infos
   }
 
   return {
