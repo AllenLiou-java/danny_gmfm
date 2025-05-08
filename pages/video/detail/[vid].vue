@@ -14,7 +14,7 @@
           :bigcategory="bigcategoryRoute"
           :smallcategory="smallcategoryRoute"
           :title="videoDetail.title"
-          class="mb-6 md:mb-8"
+          class="mb-6 text-[12px] md:mb-8 md:text-[16px]"
         />
         <div class="relative mb-[25px] md:mb-12">
           <h2 class="text-[16px] tracking-[4.67px] sm:text-[32px] sm:tracking-[9.33px]">
