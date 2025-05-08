@@ -51,8 +51,8 @@
             />
           </NuxtLink>
           <div
-            class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:block"
-            :class="currentPageName === 'search' ? 'block bg-yellow' : 'hidden'"
+            class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:sm:block"
+            :class="currentPageName === 'search' ? 'hidden bg-yellow sm:block' : 'hidden'"
           ></div>
         </li>
         <li>
