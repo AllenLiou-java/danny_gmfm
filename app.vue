@@ -1,5 +1,7 @@
 <template>
   <div class="bg-primary font-notoSansTC text-white">
+    <InitScreen />
+    <CustomLoading />
     <LayoutHeader class="container" />
     <div>
       <NuxtPage />

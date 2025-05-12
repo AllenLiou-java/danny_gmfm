@@ -42,7 +42,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper'],
+  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper', 'v-gsap-nuxt'],
   swiper: {
     modules: ['navigation', 'pagination', 'thumbs'],
     styleLang: 'css'
