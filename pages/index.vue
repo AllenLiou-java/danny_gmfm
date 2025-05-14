@@ -4,11 +4,10 @@
       class="nav-space bg-[url(~/assets/images/banner/banner-bg-mobile.jpg)] bg-cover bg-center bg-no-repeat pb-3 sm:bg-[url(~/assets/images/banner/banner-bg.jpg)] sm:pb-8"
     >
       <div
-        v-gsap.timeline
         class="relative container h-[calc(100vh-60px)] sm:h-[calc(100vh-130px)] lg:h-[calc(100vh-80px)]"
       >
         <h2
-          v-gsap.delay-6000.add.from.once="{ opacity: 0, y: 50 }"
+          v-gsap.delay-5000.from.once="{ opacity: 0, y: 50 }"
           class="relative top-[40%] text-center font-paintinfChoco text-8xl text-yellow sm:top-[50%] sm:text-9xl"
         >
           CTS TRAVEL
@@ -28,7 +27,7 @@
             >
               <li v-for="mediaItem in socialMediaList" :key="mediaItem.instagram">
                 <a
-                  v-gsap.delay-6000.timeline.add.from.once="{ opacity: 0, x: 50 }"
+                  v-gsap.delay-5000.timeline.from.once="{ opacity: 0, x: 50 }"
                   class=""
                   :href="mediaItem.src"
                   target="_blank"
@@ -42,7 +41,7 @@
             </ul>
           </div>
           <div
-            v-gsap.delay-6000.timeline.add.from.once="{ opacity: 0, y: 50 }"
+            v-gsap.delay-5000.timeline.from.once="{ opacity: 0, y: 50 }"
             class="relative mt-16 flex flex-col self-center sm:mt-0 md:flex-row-reverse"
           >
             <p class="mb-1 text-[12px] tracking-widest sm:text-[16px] md:writing-mode-vertical-lr">

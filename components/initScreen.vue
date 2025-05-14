@@ -18,13 +18,13 @@ const isReady = ref(false)
 onBeforeMount(() => {
   setTimeout(() => {
     isReady.value = true
-  }, 5000)
+  }, 4000)
 })
 </script>
 
 <style scoped>
 .initPage {
-  display: fixed;
+  position: fixed;
   width: 100%;
   height: 100vh;
   background-color: #0b1215;

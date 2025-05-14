@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary font-notoSansTC text-white">
-    <!-- <InitScreen /> -->
-    <!-- <CustomLoading /> -->
+    <InitScreen />
+    <CustomLoading />
     <LayoutHeader class="container" />
 
     <div>
