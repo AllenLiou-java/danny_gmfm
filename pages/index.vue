@@ -3,8 +3,12 @@
     <div
       class="nav-space bg-[url(~/assets/images/banner/banner-bg-mobile.jpg)] bg-cover bg-center bg-no-repeat pb-3 sm:bg-[url(~/assets/images/banner/banner-bg.jpg)] sm:pb-8"
     >
-      <div class="relative container h-screen">
+      <div
+        v-gsap.timeline
+        class="relative container h-[calc(100vh-60px)] sm:h-[calc(100vh-130px)] lg:h-[calc(100vh-80px)]"
+      >
         <h2
+          v-gsap.delay-6000.add.from.once="{ opacity: 0, y: 50 }"
           class="relative top-[40%] text-center font-paintinfChoco text-8xl text-yellow sm:top-[50%] sm:text-9xl"
         >
           CTS TRAVEL
@@ -23,7 +27,12 @@
               class="mb-4 flex flex-col gap-y-2 sm:mt-7 sm:mb-0 sm:flex-row sm:gap-x-4 md:gap-x-8"
             >
               <li v-for="mediaItem in socialMediaList" :key="mediaItem.instagram">
-                <a class="" :href="mediaItem.src" target="_blank">
+                <a
+                  v-gsap.delay-6000.timeline.add.from.once="{ opacity: 0, x: 50 }"
+                  class=""
+                  :href="mediaItem.src"
+                  target="_blank"
+                >
                   <Icon
                     :name="mediaItem.iconName"
                     class="text-[30px] duration-300 hover:scale-125 sm:text-[40px]"
@@ -32,7 +41,10 @@
               </li>
             </ul>
           </div>
-          <div class="relative mt-16 flex flex-col self-center sm:mt-0 md:flex-row-reverse">
+          <div
+            v-gsap.delay-6000.timeline.add.from.once="{ opacity: 0, y: 50 }"
+            class="relative mt-16 flex flex-col self-center sm:mt-0 md:flex-row-reverse"
+          >
             <p class="mb-1 text-[12px] tracking-widest sm:text-[16px] md:writing-mode-vertical-lr">
               <span class="mr-1 text-[8px] text-yellow md:mb-1">●</span>LATEST&ensp;VIDEO
             </p>
@@ -51,6 +63,7 @@
       class="h-full min-h-[506px] w-full bg-[url(~/assets/images/home/destination-bg.png)] bg-cover bg-center bg-no-repeat py-8 md:py-30"
     >
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 100 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         DESTINATION
@@ -66,9 +79,13 @@
           <NuxtLink :to="destinationItem.route">
             <component
               :is="destinationItem.name"
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50, scale: 0 }"
               class="h-[157px] w-[157px] cursor-pointer sm:h-[240px] sm:w-[240px]"
             ></component>
-            <p class="mt-2 text-center text-[16px] group-hover:text-yellow sm:text-[24px]">
+            <p
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+              class="mt-2 text-center text-[16px] group-hover:text-yellow sm:text-[24px]"
+            >
               {{ destinationItem.area }}
             </p>
           </NuxtLink>
@@ -77,11 +94,12 @@
     </div>
     <div class="container py-8 md:py-15">
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -100 }"
         class="mb-6 font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         TOPICS
       </h2>
-      <ul class="hidden lg:flex">
+      <ul v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }" class="hidden lg:flex">
         <li
           v-for="topicItem in topicList"
           :key="topicItem.label_en"
@@ -98,6 +116,7 @@
             </div>
 
             <span
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
               class="text-shorten absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] px-6"
               >{{ topicItem.label }}</span
             >
@@ -105,7 +124,7 @@
         </li>
       </ul>
 
-      <div class="lg:hidden">
+      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }" class="lg:hidden">
         <Swiper class="-mr-5 sm:-mr-6" v-bind="topicSwiperConfig">
           <SwiperSlide
             v-for="topicItem in topicList"
@@ -123,7 +142,10 @@
                   <div class="img-shadow absolute bottom-0 size-full" />
                 </div>
 
-                <p class="text-shorten absolute bottom-3 w-full px-2 text-center">
+                <p
+                  v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
+                  class="text-shorten absolute bottom-3 w-full px-2 text-center"
+                >
                   {{ topicItem.label }}
                 </p>
               </div>
@@ -136,6 +158,7 @@
       class="bg-cover bg-center bg-no-repeat py-8 md:bg-[url(~/assets/images/home/video-bg.png)] md:bg-center md:py-15"
     >
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         VIDEO
@@ -145,6 +168,7 @@
           <li
             v-for="videoItem in latestVideo"
             :key="videoItem.id"
+            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, scale: 0 }"
             class="group relative col-span-6 shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] md:col-span-3 lg:col-span-2 lg:nth-1:col-span-3 lg:nth-2:col-span-3"
           >
             <NuxtLink :to="`/video/detail/${videoItem.id}`">
@@ -175,11 +199,15 @@
     >
       <div id="goodstuff" class="container">
         <h2
+          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -100 }"
           class="mb-6 text-right font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
         >
           GOOD STUFF
         </h2>
-        <ul class="mb-6 hidden grid-cols-3 gap-15 lg:mb-8 lg:grid">
+        <ul
+          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+          class="mb-6 hidden grid-cols-3 gap-15 lg:mb-8 lg:grid"
+        >
           <li
             v-for="productItem in latestProduct"
             :key="productItem.id"
@@ -209,7 +237,10 @@
           </li>
         </ul>
 
-        <div class="-mr-5 lg:hidden">
+        <div
+          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+          class="-mr-5 lg:hidden"
+        >
           <Swiper
             class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
             :pagination="true"
@@ -248,11 +279,15 @@
     </div>
     <div class="container py-8 md:py-15">
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         FRIENDS
       </h2>
-      <ul class="mb-6 hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20">
+      <ul
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+        class="mb-6 hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
+      >
         <li
           v-for="cooperationItem in cooperationList"
           :key="cooperationItem.name"
@@ -266,7 +301,7 @@
         </li>
       </ul>
 
-      <div class="-mr-5 lg:hidden">
+      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
         <Swiper class="mb-4" v-bind="friendSwiperConfig">
           <SwiperSlide
             v-for="cooperationItem in cooperationList"

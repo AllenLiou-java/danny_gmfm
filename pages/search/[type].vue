@@ -29,6 +29,7 @@
           <li
             v-for="{ keyword } in keywordListbyType"
             :key="keyword"
+            v-gsap.from.once="{ opacity: 0, y: 50 }"
             class="inline-block cursor-pointer rounded-[20px] bg-[#3b4143] px-2 py-1 text-[14px] tracking-[4px] md:px-5 md:py-2 md:text-[16px]"
             @click="fillinKeyword(keyword)"
           >
@@ -41,7 +42,11 @@
       </div>
       <div class="mb-15">
         <ul>
-          <li v-for="result in resultPostsPerPage" :key="result.id">
+          <li
+            v-for="result in resultPostsPerPage"
+            :key="result.id"
+            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+          >
             <NuxtLink
               class="mb-3 flex flex-col gap-x-6 rounded-[5px] bg-secondary p-3 hover:bg-secondary md:mb-5 md:flex-row md:bg-transparent md:px-4 md:py-5"
               :to="result.route"

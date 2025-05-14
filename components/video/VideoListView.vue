@@ -8,7 +8,10 @@
           :class="[0, 1, 5, 6].includes(idx) ? '2xl:max-w-[590px]' : '2xl:max-w-[386px]'"
           class="relative w-full overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.04] md:w-[calc(50%-10px)]"
         >
-          <NuxtLink :to="`/video/detail/${video.id}`">
+          <NuxtLink
+            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+            :to="`/video/detail/${video.id}`"
+          >
             <div class="relative">
               <img :src="video.cover_image" alt="coverImg" />
               <div class="img-shadow absolute bottom-0 size-full" />

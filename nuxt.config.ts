@@ -36,7 +36,8 @@ export default defineNuxtConfig({
         { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
         { name: 'theme-color', content: '#ffffff' }
       ]
-    }
+    },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   css: ['~/assets/css/main.css'],
   vite: {

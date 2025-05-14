@@ -12,11 +12,12 @@
             alt="aboutMe"
           />
           <div
+            v-gsap.timeline
             class="pointer-events-none absolute top-[30%] left-[50%] -z-20 w-full -translate-x-[50%] text-center font-paintinfChoco text-[40px] leading-[1] text-yellow sm:top-24 sm:pl-10 sm:text-start sm:text-[80px] lg:left-0 lg:pl-44 lg:text-[100px]"
           >
-            <p class="mb-4 sm:mb-9">YOUTUBER</p>
-            <p class="mb-4 sm:mb-11 sm:-ml-7">ADVENTURER</p>
-            <p class="sm:-ml-11">PHOTOGRAPHER</p>
+            <p v-gsap.add.from="{ opacity: 0, y: 50 }" class="mb-4 sm:mb-9">YOUTUBER</p>
+            <p v-gsap.add.from="{ opacity: 0, y: 50 }" class="mb-4 sm:mb-11 sm:-ml-7">ADVENTURER</p>
+            <p v-gsap.add.from="{ opacity: 0, y: 50 }" class="sm:-ml-11">PHOTOGRAPHER</p>
           </div>
         </div>
       </div>
@@ -29,7 +30,10 @@
     <div
       class="container mb-16 flex max-w-[900px] flex-col items-center justify-center md:mb-30 lg:flex-row lg:justify-between"
     >
-      <div class="mb-16 text-center font-paintinfChoco text-[100px] lg:mb-0">
+      <div
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        class="mb-16 text-center font-paintinfChoco text-[100px] leading-[100px] lg:mb-0 lg:leading-[150px]"
+      >
         <p>Who</p>
         <p>is</p>
         <p>Danny?</p>
@@ -38,6 +42,7 @@
         <li
           v-for="(tag, idx) in tagList"
           :key="idx"
+          v-gsap.whenVisible.from.once.reversible.delay-500="{ opacity: 0, x: '-30%' }"
           class="rounded-full bg-yellow px-4 py-1 text-[16px] text-primary md:px-8 md:py-[7px] md:text-[24px]"
         >
           {{ tag }}
@@ -46,6 +51,7 @@
     </div>
     <div class="relative mb-16 md:mb-30">
       <img
+        v-gsap.whenVisible.from.reversible="{ opacity: 0, x: '-60%' }"
         class="absolute top-20 w-full max-w-[600px] pr-23 pl-5 md:top-14 md:max-w-[773px] md:pl-0"
         :src="imageSrc('/aboutMe/aboutMe-bg.png')"
         alt="aboutMe"
@@ -54,11 +60,14 @@
         <div
           class="relative left-[100%] w-full max-w-175 -translate-x-[100%] text-[14px] sm:text-[16px] md:text-[24px]"
         >
-          <span
-            >我是<span class="px-2 font-paintinfChoco text-[32px] text-yellow">Danny</span></span
-          >
-          <span v-html="introduction"></span>
-          <div class="relative">
+          <div v-gsap.whenVisible.from.reversible="{ opacity: 0, y: '50%' }">
+            <span
+              >我是<span class="px-2 font-paintinfChoco text-[32px] text-yellow">Danny</span></span
+            >
+            <span v-html="introduction"></span>
+          </div>
+
+          <div v-gsap.whenVisible.from.reversible="{ opacity: 0, y: '50%' }" class="relative">
             <span
               class="my-6 block text-center font-paintinfChoco text-[40px] leading-[1] text-yellow md:text-[60px]"
               >3E</span
@@ -88,6 +97,7 @@
     </div>
     <div class="container mb-16 md:mb-30">
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-8 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         RECORD
@@ -95,16 +105,32 @@
       <div>
         <ul class="mb-16 flex items-center justify-center gap-20 leading-[1.5] sm:gap-69 md:mb-20">
           <li class="text-center">
-            <p class="text-[32px] font-black text-yellow sm:text-[100px]">
+            <p
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '-100%' }"
+              class="text-[32px] font-black text-yellow sm:text-[100px]"
+            >
               {{ mountainCount.inTaiwan }}
             </p>
-            <p class="md:text-[24px]">台灣百岳</p>
+            <p
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '-100%' }"
+              class="md:text-[24px]"
+            >
+              台灣百岳
+            </p>
           </li>
           <li class="text-center">
-            <p class="text-[32px] font-black text-yellow sm:text-[100px]">
+            <p
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '100%' }"
+              class="text-[32px] font-black text-yellow sm:text-[100px]"
+            >
               {{ mountainCount.overseas }}
             </p>
-            <p>海外登山</p>
+            <p
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '100%' }"
+              class="md:text-[24px]"
+            >
+              海外登山
+            </p>
           </li>
         </ul>
         <RecordTree :mountain-list="mountainList" />
@@ -112,6 +138,7 @@
     </div>
     <div class="container mb-16 md:mb-30">
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-8 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         SOCIAL MEDIA
@@ -119,7 +146,11 @@
       <div
         class="mx-auto mb-10 grid max-w-[900px] grid-cols-1 gap-y-3 sm:mb-11 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-8"
       >
-        <div v-for="item in socialMediaList" :key="item.linkType">
+        <div
+          v-for="item in socialMediaList"
+          :key="item.linkType"
+          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        >
           <a class="whitespace-nowrap" :href="item.src" target="_blank">
             <Icon :name="item.iconName" class="mr-3 align-middle text-[30px] md:text-[40px]" />
             <span class="text-[14px] sm:text-[18px]">{{ item.name }}</span>
@@ -129,11 +160,15 @@
     </div>
     <div class="container mb-16 md:mb-15">
       <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         FRIENDS
       </h2>
-      <ul class="hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20">
+      <ul
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+        class="hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
+      >
         <li
           v-for="cooperationItem in cooperationList"
           :key="cooperationItem.name"
@@ -147,7 +182,7 @@
         </li>
       </ul>
 
-      <div class="-mr-5 lg:hidden">
+      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
         <Swiper class="mb-4" v-bind="friendSwiperConfig">
           <SwiperSlide
             v-for="cooperationItem in cooperationList"
@@ -163,41 +198,7 @@
         </Swiper>
       </div>
     </div>
-    <div
-      class="min-h-[410px] bg-[url(~/assets/images/home/subscribe/desktop.png)] bg-cover bg-bottom py-8 sm:min-h-[700px] sm:py-12 md:py-15"
-    >
-      <div class="container">
-        <h2
-          class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-white sm:mb-8 sm:text-[100px] md:text-[130px]"
-        >
-          SUSCRIBE
-        </h2>
-        <form
-          class="mb-6 flex flex-col items-center justify-center gap-3 md:flex-row"
-          action=""
-          @submit.prevent="onSubmit"
-        >
-          <input
-            class="w-full rounded-[5px] bg-white px-3 py-3 text-[16px] text-primary outline-primary placeholder:opacity-30 md:w-[168px] md:px-6 md:py-4 md:text-[18px]"
-            type="text"
-            name="userName"
-            placeholder="姓名"
-          />
-          <input
-            class="w-full rounded-[5px] bg-white px-3 py-3 text-[16px] text-primary outline-primary placeholder:opacity-30 md:w-[352px] md:px-6 md:py-4 md:text-[18px]"
-            type="email"
-            name="userEmail"
-            placeholder="E-mail"
-          />
-          <button
-            type="submit"
-            class="self-end rounded-[5px] bg-yellow px-6 py-4 text-[14px] text-primary hover:bg-[#ffe145] md:px-9 md:text-[18px]"
-          >
-            訂閱
-          </button>
-        </form>
-      </div>
-    </div>
+    <Suscribe />
   </div>
 </template>
 
@@ -245,10 +246,6 @@ const friendSwiperConfig = {
       slidesPerView: 4.7
     }
   }
-}
-
-const onSubmit = (event) => {
-  console.log('SUSCRIBE')
 }
 </script>
 

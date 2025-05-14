@@ -1,11 +1,13 @@
 <template>
   <div class="bg-primary font-notoSansTC text-white">
-    <InitScreen />
-    <CustomLoading />
+    <!-- <InitScreen /> -->
+    <!-- <CustomLoading /> -->
     <LayoutHeader class="container" />
+
     <div>
       <NuxtPage />
     </div>
+
     <LayoutFooter />
   </div>
 </template>
@@ -20,4 +22,14 @@ await callOnce(async () => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>

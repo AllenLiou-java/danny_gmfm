@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }">
     <div
       class="min-h-[410px] bg-[url(~/assets/images/home/subscribe/desktop.png)] bg-cover bg-bottom py-8 sm:min-h-[700px] sm:py-12 md:py-15"
     >
