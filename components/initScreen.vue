@@ -14,11 +14,15 @@
 <script setup>
 const { imageSrc } = getImageSrc()
 const isReady = ref(false)
-
-onBeforeMount(() => {
-  setTimeout(() => {
+const route = useRoute()
+onMounted(() => {
+  if (route.name === 'index') {
+    setTimeout(() => {
+      isReady.value = true
+    }, 4000)
+  } else {
     isReady.value = true
-  }, 4000)
+  }
 })
 </script>
 

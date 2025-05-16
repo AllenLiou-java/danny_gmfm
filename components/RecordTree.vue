@@ -1,60 +1,63 @@
 <template>
-  <div class="relative inline-block sm:left-[50%] sm:-translate-x-[100%]">
-    <p
-      v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: '-100%' }"
-      class="relative md:-left-6 md:translate-x-[100%]"
-    >
-      百岳經歷
-    </p>
+  <div class="relative sm:flex sm:flex-col sm:items-center">
+    <!-- sm:flex sm:flex-col sm:items-center -->
+    <p class="mb-3">百岳經歷</p>
 
-    <ul class="mt-3 ml-6 inline-block pt-10 sm:ml-0 sm:pt-12">
+    <ul class="ml-6 inline-block sm:mx-auto sm:translate-x-[calc(50%)]">
       <li
         v-for="(record, idx) in records"
         :key="record.year"
-        class="relative flex flex-col items-end"
-        :class="(idx + 1) % 2 === 1 ? 'sm:left-5 sm:rotate-y-[180deg]' : 'sm:translate-x-[100%]'"
+        class="relative -mt-4 flex flex-col pt-4 first:mt-0 first:pt-[38px]"
+        :class="(idx + 1) % 2 === 1 ? 'sm:-translate-x-[calc(100%-10px)]' : ''"
       >
         <div
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, start: 'top 70%', height: 0 }"
-          class="absolute top-0 left-[7px] h-[calc(100%+42px)] w-[6px] self-start rounded-full bg-white"
+          id="line"
+          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, height: 0 }"
+          class="absolute top-0 left-[2px] h-full w-[6px] rounded-full bg-white"
+          :class="(idx + 1) % 2 === 1 ? 'sm:left-[calc(100%-8px)]' : ''"
         ></div>
+        <div
+          class="relative flex items-center gap-x-6"
+          :class="(idx + 1) % 2 === 1 ? 'sm:flex-row-reverse' : ''"
+        >
+          <div class="flex items-center" :class="(idx + 1) % 2 === 1 ? 'sm:flex-row-reverse' : ''">
+            <div
+              id="circle"
+              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, scale: 0 }"
+              class="z-10 size-[10px] rounded-full bg-yellow shadow-[0px_0px_0px_5px_rgba(251,255,158,0.4)]"
+            ></div>
+            <div
+              id="branch"
+              v-gsap.whenVisible.from.once.reversible.delay-300="{
+                opacity: 0,
 
-        <div class="flex items-center self-start">
-          <div
-            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, start: 'top 70%', scale: 0 }"
-            class="z-10 m-[5px] size-[10px] rounded-full bg-yellow shadow-[0px_0px_0px_5px_rgba(251,255,158,0.4)]"
-          ></div>
-          <div
-            v-gsap.whenVisible.from.once.reversible.delay-300="{
-              opacity: 0,
-              start: 'top 70%',
-              width: 0
-            }"
-            class="h-[1px] w-[100px] bg-yellow sm:w-[150px]"
-          ></div>
+                width: 0
+              }"
+              class="h-[1px] w-[150px] bg-yellow"
+            ></div>
+          </div>
+
           <p
             v-gsap.whenVisible.from.once.reversible.delay-600="{
               opacity: 0,
-              start: 'top 70%',
+
               y: '50%'
             }"
-            class="mx-3 mt-[3px] font-paintinfChoco text-[24px] leading-[1] text-yellow sm:mx-6"
-            :class="(idx + 1) % 2 === 1 ? 'sm:rotate-y-[180deg]' : ''"
+            class="mt-1 font-paintinfChoco text-[24px] leading-[1] text-yellow"
           >
             {{ record.year }}
           </p>
         </div>
-
         <ul
           v-gsap.whenVisible.from.once.reversible="{
             opacity: 0,
-            start: 'top 70%',
+
             x: '-50%'
           }"
-          class="mx-3 inline-block pt-4 pb-10 text-[14px] sm:mx-6 sm:pt-[22px] sm:text-[16px]"
-          :class="(idx + 1) % 2 === 1 ? 'sm:rotate-y-[180deg]' : ''"
+          class="max-w-[228px] self-end pt-[22px] pb-[38px]"
+          :class="(idx + 1) % 2 === 1 ? 'sm:self-start' : ''"
         >
-          <li v-for="content in record.contents" :key="content" class="max-w-40 sm:max-w-50">
+          <li v-for="content in record.contents" :key="content" class="text-wrap">
             {{ content }}
           </li>
         </ul>

@@ -18,10 +18,10 @@
           @keyup.enter="searchResult"
         />
         <div
-          class="flex-center cursor-pointer rounded-[5px] bg-yellow p-[7px] duration-300 hover:bg-[#ffe145] md:p-[10px]"
+          class="flex-center size-10 cursor-pointer rounded-[5px] bg-yellow p-2 duration-300 hover:bg-[#ffe145] md:size-15 md:p-[14px]"
           @click="searchResult"
         >
-          <Icon name="mdi:magnify" class="text-[26px] text-[#000000] md:text-[40px]" />
+          <Icon name="my-icon:search-black" class="text-[24px] sm:text-[32px]" />
         </div>
       </div>
       <div class="relative">

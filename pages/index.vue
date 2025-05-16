@@ -7,7 +7,7 @@
         class="relative container h-[calc(100vh-60px)] sm:h-[calc(100vh-130px)] lg:h-[calc(100vh-80px)]"
       >
         <h2
-          v-gsap.delay-5000.from.once="{ opacity: 0, y: 50 }"
+          v-gsap.from.once="{ opacity: 0, y: 50 }"
           class="relative top-[40%] text-center font-paintinfChoco text-8xl text-yellow sm:top-[50%] sm:text-9xl"
         >
           CTS TRAVEL
@@ -25,13 +25,12 @@
             <ul
               class="mb-4 flex flex-col gap-y-2 sm:mt-7 sm:mb-0 sm:flex-row sm:gap-x-4 md:gap-x-8"
             >
-              <li v-for="mediaItem in socialMediaList" :key="mediaItem.instagram">
-                <a
-                  v-gsap.delay-5000.timeline.from.once="{ opacity: 0, x: 50 }"
-                  class=""
-                  :href="mediaItem.src"
-                  target="_blank"
-                >
+              <li
+                v-for="mediaItem in socialMediaList"
+                :key="mediaItem.instagram"
+                v-gsap.from.once="{ opacity: 0, x: 50 }"
+              >
+                <a class="" :href="mediaItem.src" target="_blank">
                   <Icon
                     :name="mediaItem.iconName"
                     class="text-[30px] duration-300 hover:scale-125 sm:text-[40px]"
@@ -41,7 +40,7 @@
             </ul>
           </div>
           <div
-            v-gsap.delay-5000.timeline.from.once="{ opacity: 0, y: 50 }"
+            v-gsap.from.once="{ opacity: 0, y: 50 }"
             class="relative mt-16 flex flex-col self-center sm:mt-0 md:flex-row-reverse"
           >
             <p class="mb-1 text-[12px] tracking-widest sm:text-[16px] md:writing-mode-vertical-lr">
