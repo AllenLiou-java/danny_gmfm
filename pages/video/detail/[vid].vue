@@ -5,7 +5,6 @@
       :src="videoDetail.cover_image"
       alt="cover_image"
     />
-
     <div
       class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:flex-row lg:gap-x-12"
     >
@@ -101,7 +100,7 @@
                 alt="aboutMe_img"
               />
               <ul class="flex-center mb-8 gap-x-5 sm:flex-row md:gap-x-[22px]">
-                <li v-for="mediaItem in socialMediaList" :key="mediaItem.instagram">
+                <li v-for="mediaItem in filteredSocialMediaList" :key="mediaItem.instagram">
                   <a class="" :href="mediaItem.src" target="_blank">
                     <Icon
                       :name="mediaItem.iconName"
@@ -161,6 +160,8 @@
 </template>
 
 <script setup>
+import { socialMediaList } from '@/assets/js/common'
+
 const route = useRoute()
 const { imageSrc } = getImageSrc()
 const { videos, codeVideoBigcategoryList, codeVideoSmallcategoryList } =
@@ -180,39 +181,10 @@ const { data: videoDetail } = await useAsyncData('videoDetail', () => {
     })
   }
 })
-
-const socialMediaList = ref([
-  {
-    linkType: 'facebook',
-    name: '秋天剩旅行【cts.travel】',
-    iconName: 'my-icon:fb',
-    src: 'https://www.facebook.com/DannyGMFM/'
-  },
-  {
-    linkType: 'instagram',
-    name: 'cts.travel',
-    iconName: 'my-icon:ig',
-    src: 'https://www.instagram.com/danny_gmfm/'
-  },
-  {
-    linkType: 'youtube',
-    name: '秋天剩旅行【cts.travel】',
-    iconName: 'my-icon:yt',
-    src: 'https://www.youtube.com/channel/UCO5Jf1xYlqpLA341Zkr2Zwg/videos'
-  },
-  {
-    linkType: 'jcnote',
-    name: '健行筆記-秋天剩旅行',
-    iconName: 'my-icon:jcnote',
-    src: 'https://hiking.biji.co/index.php?q=member&act=review&member=1430494'
-  },
-  {
-    linkType: 'spotify',
-    name: 'Mountain Vlogging with Danny',
-    iconName: 'my-icon:spotify',
-    src: 'https://open.spotify.com/playlist/2SoggYFTOblpi4WlMNSnXm?si=Ei6_PWQBTN-H03K3QhMwzA&nd=1'
-  }
-])
+const filteredSocialMediaList = computed(() => {
+  const target = ['facebook', 'instagram', 'youtube', 'jcnote', 'spotify']
+  return socialMediaList.filter((item) => target.includes(item.linkType))
+})
 
 const { data: relatedProductList } = await useAsyncData('productList', () => {
   if (!videoDetail.value.related_product) return null

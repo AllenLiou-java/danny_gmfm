@@ -46,10 +46,10 @@
             <p class="mb-1 text-[12px] tracking-widest sm:text-[16px] md:writing-mode-vertical-lr">
               <span class="mr-1 text-[8px] text-yellow md:mb-1">●</span>LATEST&ensp;VIDEO
             </p>
-            <NuxtLink :to="`/video/detail/${latestVideo[0].id}`">
+            <NuxtLink :to="`/video/detail/${latest5Video[0].id}`">
               <img
                 class="relative h-[65px] w-[120px] rounded-[10px] object-cover duration-300 sm:h-[116px] sm:w-[214px] md:-left-3 md:h-[140px] md:w-[257px] md:hover:scale-109"
-                :src="latestVideo[0].cover_image"
+                :src="latest5Video[0].cover_image"
                 alt="latestVideoImg"
               />
             </NuxtLink>
@@ -164,7 +164,7 @@
       <div class="relative container">
         <ul class="mb-6 grid grid-cols-6 gap-5 lg:mb-8">
           <li
-            v-for="videoItem in latestVideo"
+            v-for="videoItem in latest5Video"
             :key="videoItem.id"
             v-gsap.whenVisible.from.once.reversible="{ opacity: 0, scale: 0 }"
             class="group relative col-span-6 shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] md:col-span-3 lg:col-span-2 lg:nth-1:col-span-3 lg:nth-2:col-span-3"
@@ -207,7 +207,7 @@
           class="mb-6 hidden grid-cols-3 gap-15 lg:mb-8 lg:grid"
         >
           <li
-            v-for="productItem in latestProduct"
+            v-for="productItem in latest3Product"
             :key="productItem.id"
             class="overflow-hidden rounded-xl shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] duration-300 hover:scale-109"
           >
@@ -245,7 +245,7 @@
             v-bind="goodstuffSwiperConfig"
           >
             <SwiperSlide
-              v-for="productItem in latestProduct"
+              v-for="productItem in latest3Product"
               :key="productItem.id"
               class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
             >
@@ -323,24 +323,20 @@
 <script setup>
 const { imageSrc } = getImageSrc()
 
-const { data: latestVideo } = await useFetch('/api/airtable/video', {
-  method: 'post',
-  body: {
-    maxRecords: 5,
-    sort: [{ field: 'video_no', direction: 'desc' }]
-  }
-})
+const videoStore = useVideoStore()
+const { latest5Video } = storeToRefs(videoStore)
 
-const { data: latestProduct } = await useFetch('/api/airtable/product', {
-  method: 'post',
-  body: {
-    maxRecords: 3,
-    sort: [{ field: 'product_no', direction: 'desc' }],
-    fields: ['name', 'category', 'cover_image', 'product_no']
-  }
-})
+const productStore = useProductStore()
+const { latest3Product } = storeToRefs(productStore)
 
-const { data: cooperationList } = await useFetch('/api/airtable/cooperation')
+const commonStore = useCommonStore()
+const { cooperationList } = storeToRefs(commonStore)
+
+await callOnce(async () => {
+  await videoStore.getLatest5Video()
+  await productStore.getLatest3Product()
+  await commonStore.getCooperationList()
+})
 
 const socialMediaList = ref([
   {

@@ -31,7 +31,7 @@
       class="container mb-16 flex max-w-[900px] flex-col items-center justify-center md:mb-30 lg:flex-row lg:justify-between"
     >
       <div
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-16 text-center font-paintinfChoco text-[100px] leading-[100px] lg:mb-0 lg:leading-[150px]"
       >
         <p>Who</p>
@@ -42,16 +42,16 @@
         <li
           v-for="(tag, idx) in tagList"
           :key="idx"
-          v-gsap.whenVisible.from.once.reversible.delay-500="{ opacity: 0, x: '-30%' }"
+          v-gsap.whenVisible.from.once.delay-500="{ opacity: 0, x: '-30%' }"
           class="rounded-full bg-yellow px-4 py-1 text-[16px] text-primary md:px-8 md:py-[7px] md:text-[24px]"
         >
-          {{ tag }}
+          <span>{{ tag }}</span>
         </li>
       </ul>
     </div>
     <div class="relative mb-16 md:mb-30">
       <img
-        v-gsap.whenVisible.from.reversible="{ opacity: 0, x: '-60%' }"
+        v-gsap.whenVisible.from="{ opacity: 0, x: '-60%' }"
         class="absolute top-20 w-full max-w-[600px] pr-23 pl-5 md:top-14 md:max-w-[773px] md:pl-0"
         :src="imageSrc('/aboutMe/aboutMe-bg.png')"
         alt="aboutMe"
@@ -60,14 +60,14 @@
         <div
           class="relative left-[100%] w-full max-w-175 -translate-x-[100%] text-[14px] sm:text-[16px] md:text-[24px]"
         >
-          <div v-gsap.whenVisible.from.reversible="{ opacity: 0, y: '50%' }">
+          <div v-gsap.whenVisible.from="{ opacity: 0, y: '50%' }">
             <span
               >我是<span class="px-2 font-paintinfChoco text-[32px] text-yellow">Danny</span></span
             >
             <span v-html="introduction"></span>
           </div>
 
-          <div v-gsap.whenVisible.from.reversible="{ opacity: 0, y: '50%' }" class="relative">
+          <div v-gsap.whenVisible.from="{ opacity: 0, y: '50%' }" class="relative">
             <span
               class="my-6 block text-center font-paintinfChoco text-[40px] leading-[1] text-yellow md:text-[60px]"
               >3E</span
@@ -97,7 +97,7 @@
     </div>
     <div class="container mb-16 md:mb-30">
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-8 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         RECORD
@@ -106,29 +106,23 @@
         <ul class="mb-16 flex items-center justify-center gap-20 leading-[1.5] sm:gap-69 md:mb-20">
           <li class="text-center">
             <p
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '-100%' }"
+              v-gsap.whenVisible.from.once="{ opacity: 0, x: '-100%' }"
               class="text-[32px] font-black text-yellow sm:text-[100px]"
             >
               {{ mountainCount.inTaiwan }}
             </p>
-            <p
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '-100%' }"
-              class="md:text-[24px]"
-            >
+            <p v-gsap.whenVisible.from.once="{ opacity: 0, x: '-100%' }" class="md:text-[24px]">
               台灣百岳
             </p>
           </li>
           <li class="text-center">
             <p
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '100%' }"
+              v-gsap.whenVisible.from.once="{ opacity: 0, x: '100%' }"
               class="text-[32px] font-black text-yellow sm:text-[100px]"
             >
               {{ mountainCount.overseas }}
             </p>
-            <p
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: '100%' }"
-              class="md:text-[24px]"
-            >
+            <p v-gsap.whenVisible.from.once="{ opacity: 0, x: '100%' }" class="md:text-[24px]">
               海外登山
             </p>
           </li>
@@ -138,7 +132,7 @@
     </div>
     <div class="container mb-16 md:mb-30">
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-8 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         SOCIAL MEDIA
@@ -149,7 +143,7 @@
         <div
           v-for="item in socialMediaList"
           :key="item.linkType"
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+          v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         >
           <a class="whitespace-nowrap" :href="item.src" target="_blank">
             <Icon :name="item.iconName" class="mr-3 align-middle text-[30px] md:text-[40px]" />
@@ -160,13 +154,13 @@
     </div>
     <div class="container mb-16 md:mb-15">
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         FRIENDS
       </h2>
       <ul
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }"
         class="hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
       >
         <li
@@ -182,7 +176,7 @@
         </li>
       </ul>
 
-      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
+      <div v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
         <Swiper class="mb-4" v-bind="friendSwiperConfig">
           <SwiperSlide
             v-for="cooperationItem in cooperationList"
@@ -205,34 +199,17 @@
 <script setup>
 import { socialMediaList } from '@/assets/js/common'
 const { imageSrc } = getImageSrc()
-const { data: aboutMeInfo } = await useFetch('/api/airtable/aboutMe')
-const { data: mountainList } = await useFetch('/api/airtable/mountainHistory')
-const { data: cooperationList } = await useFetch('/api/airtable/cooperation')
 
-const mountainCount = computed(() => {
-  return mountainList.value.reduce(
-    (acc, item) => {
-      const rankNo = Number(item.topMountain_rank_no)
-      if (rankNo > 0) {
-        acc.inTaiwan++
-      } else {
-        acc.overseas++
-      }
-      return acc
-    },
-    { inTaiwan: 0, overseas: 0 }
-  )
+const aboutMeStore = useAboutMeStore()
+const commonStore = useCommonStore()
+
+await callOnce(async () => {
+  await aboutMeStore.getInitInfo()
+  await commonStore.getCooperationList()
 })
 
-const introduction = computed(() => {
-  return aboutMeInfo.value
-    .filter((item) => item.type === 'introduction')[0]
-    ?.content.replace(/\n/g, '</br>')
-})
-
-const tagList = computed(() => {
-  return aboutMeInfo.value.filter((item) => item.type === 'tag')[0]?.content.split('；')
-})
+const { mountainList, mountainCount, introduction, tagList } = storeToRefs(useAboutMeStore())
+const { cooperationList } = storeToRefs(useCommonStore())
 
 const friendSwiperConfig = {
   modules: [SwiperPagination],

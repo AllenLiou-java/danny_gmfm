@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useProductStore = defineStore('product', () => {
   const { topic, subclass } = useRoute().params
 
+  const latest3Product = ref([])
   const products = ref([])
   const codeProductBigcategoryList = ref(null)
   const codeProductSmallcategoryList = ref(null)
@@ -129,6 +130,19 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
+  const getLatest3Product = async () => {
+    if (latest3Product.value > 0) return
+
+    latest3Product.value = await $fetch('/api/airtable/product', {
+      method: 'post',
+      body: {
+        maxRecords: 3,
+        sort: [{ field: 'product_no', direction: 'desc' }],
+        fields: ['name', 'category', 'cover_image', 'product_no']
+      }
+    })
+  }
+
   const getProducts = async () => {
     if (products.value.length > 0) return
     const infos = await $fetch('/api/airtable/product', {
@@ -143,6 +157,7 @@ export const useProductStore = defineStore('product', () => {
   }
 
   return {
+    latest3Product,
     products,
     codeProductBigcategoryList,
     codeProductSmallcategoryList,
@@ -153,6 +168,7 @@ export const useProductStore = defineStore('product', () => {
     productsFiltered,
     productsPerPage,
     totalProducts,
+    getLatest3Product,
     getProductCategoryList,
     getProducts
   }

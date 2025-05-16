@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useVideoStore = defineStore('video', () => {
   const { topic, subclass } = useRoute().params
-
+  const latest5Video = ref([])
   const videos = ref([])
   const codeVideoBigcategoryList = ref(null)
   const codeVideoSmallcategoryList = ref(null)
@@ -165,6 +165,18 @@ export const useVideoStore = defineStore('video', () => {
     }
   }
 
+  const getLatest5Video = async () => {
+    if (latest5Video.value.length > 0) return
+
+    latest5Video.value = await $fetch('/api/airtable/video', {
+      method: 'post',
+      body: {
+        maxRecords: 5,
+        sort: [{ field: 'video_no', direction: 'desc' }]
+      }
+    })
+  }
+
   const getVideos = async () => {
     if (videos.value.length > 0) return
     const infos = await $fetch('/api/airtable/video', {
@@ -179,6 +191,7 @@ export const useVideoStore = defineStore('video', () => {
   }
 
   return {
+    latest5Video,
     videos,
     videosPerPage,
     pageSize,
@@ -191,6 +204,7 @@ export const useVideoStore = defineStore('video', () => {
     bigcategoryNavigator,
     smallcategoryNavigator,
     getVideoCategoryList,
+    getLatest5Video,
     getVideos
   }
 })
