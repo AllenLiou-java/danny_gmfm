@@ -191,7 +191,7 @@ const { data: relatedProductList } = await useAsyncData('productList', () => {
 
   const productList = videoDetail.value.related_product.split(',')
 
-  const formula = `OR(${productList.map((num) => `{product_no}=${num}`).join(',')})`
+  const formula = `OR(${productList.map((num) => `AND({product_no}=${num}, {launched}='true')`).join(',')})`
 
   return $fetch('/api/airtable/product', {
     method: 'post',
@@ -225,7 +225,8 @@ const { data: relatedVideoList } = await useAsyncData('videoList', () => {
   if (!videoDetail.value.related_video) return null
 
   const relatedVideoList = videoDetail.value.related_video.split(',')
-  const formula = `OR(${relatedVideoList.map((num) => `{video_no}=${num}`).join(',')})`
+  // video資料篩選條件：指定的video_no & launched=true
+  const formula = `OR(${relatedVideoList.map((num) => `AND({video_no}=${num},{launched}='true')`).join(',')})`
 
   return $fetch('/api/airtable/video', {
     method: 'post',

@@ -9,7 +9,8 @@ export default defineEventHandler(async (event) => {
     const data = await airtableApi('/work/listRecords', {
       method: 'post',
       body: {
-        sort: [{ field: 'title', direction: 'asc' }]
+        sort: [{ field: 'work_id', direction: 'desc' }],
+        filterByFormula: "{launched}='true'"
       }
     })
       .then((res) => {
@@ -50,27 +51,4 @@ export default defineEventHandler(async (event) => {
   })
 
   return result
-
-  // const data = airtableApi('/work/listRecords', {
-  //   method: 'post',
-  //   body: {
-  //     sort: [{ field: 'title', direction: 'asc' }]
-  //   }
-  // })
-  //   .then((res) => {
-  //     return res
-  //   })
-  //   .catch((error) => {
-  //     const statusCode = error.statusCode
-  //     const message = error.data.error
-  //     const statusMessage = error.statusMessage
-
-  //     throw createError({
-  //       statusCode,
-  //       message,
-  //       statusMessage
-  //     })
-  //   })
-
-  // return data
 })

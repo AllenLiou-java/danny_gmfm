@@ -172,7 +172,8 @@ export const useVideoStore = defineStore('video', () => {
       method: 'post',
       body: {
         maxRecords: 5,
-        sort: [{ field: 'video_no', direction: 'desc' }]
+        sort: [{ field: 'video_no', direction: 'desc' }],
+        filterByFormula: "{launched}='true'"
       }
     })
   }
@@ -182,7 +183,8 @@ export const useVideoStore = defineStore('video', () => {
     const infos = await $fetch('/api/airtable/video', {
       method: 'post',
       body: {
-        sort: [{ field: 'video_no', direction: 'desc' }]
+        sort: [{ field: 'video_no', direction: 'desc' }],
+        filterByFormula: "{launched}='true'"
       }
     })
 

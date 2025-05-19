@@ -138,7 +138,8 @@ export const useProductStore = defineStore('product', () => {
       body: {
         maxRecords: 3,
         sort: [{ field: 'product_no', direction: 'desc' }],
-        fields: ['name', 'category', 'cover_image', 'product_no']
+        fields: ['name', 'category', 'cover_image', 'product_no'],
+        filterByFormula: "{launched}='true'"
       }
     })
   }
@@ -148,7 +149,8 @@ export const useProductStore = defineStore('product', () => {
     const infos = await $fetch('/api/airtable/product', {
       method: 'post',
       body: {
-        sort: [{ field: 'product_no', direction: 'desc' }]
+        sort: [{ field: 'product_no', direction: 'desc' }],
+        filterByFormula: "{launched}='true'"
       }
     })
 
