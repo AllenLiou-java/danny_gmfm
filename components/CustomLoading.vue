@@ -21,7 +21,9 @@ const props = defineProps({
   }
 })
 
-const isLoading = ref(false)
+// const isLoading = ref(false)
+const commonStore = useCommonStore()
+const { isLoading } = storeToRefs(commonStore)
 
 let _throttleTimer = null
 
@@ -35,10 +37,12 @@ function show() {
   if (import.meta.client) {
     if (props.throttle > 0) {
       _throttleTimer = setTimeout(() => {
-        isLoading.value = true
+        commonStore.setLoadingStatus(true)
+        // isLoading.value = true
       }, props.throttle)
     } else {
-      isLoading.value = true
+      commonStore.setLoadingStatus(true)
+      // isLoading.value = true
     }
   }
 }
@@ -47,7 +51,8 @@ function hide() {
   clear()
   if (import.meta.client) {
     setTimeout(() => {
-      isLoading.value = false
+      commonStore.setLoadingStatus(false)
+      // isLoading.value = false
     }, props.hold)
   }
 }

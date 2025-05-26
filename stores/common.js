@@ -8,8 +8,16 @@ export const useCommonStore = defineStore('common', () => {
 
     cooperationList.value = await $fetch('/api/airtable/cooperation')
   }
+
+  // 統一管理 CustomLoading.vue的顯示
+  const isLoading = ref(false)
+  const setLoadingStatus = (status) => {
+    isLoading.value = status
+  }
   return {
     cooperationList,
-    getCooperationList
+    getCooperationList,
+    isLoading,
+    setLoadingStatus
   }
 })

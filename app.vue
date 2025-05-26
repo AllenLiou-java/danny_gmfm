@@ -6,6 +6,9 @@
 
     <div>
       <NuxtPage />
+      <ClientOnly>
+        <ModalsContainer />
+      </ClientOnly>
     </div>
 
     <LayoutFooter />
@@ -13,6 +16,8 @@
 </template>
 
 <script setup>
+import { ModalsContainer } from 'vue-final-modal'
+
 const videoStore = useVideoStore()
 const productStore = useProductStore()
 

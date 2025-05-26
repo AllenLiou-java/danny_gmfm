@@ -58,6 +58,7 @@
       </div>
     </div>
     <div
+      id="destination"
       class="h-full min-h-[506px] w-full bg-[url(~/assets/images/home/destination-bg.png)] bg-cover bg-center bg-no-repeat py-8 md:py-30"
     >
       <h2
@@ -316,11 +317,14 @@
       </div>
     </div>
 
-    <Suscribe />
+    <Subscribe />
   </div>
 </template>
 
 <script setup>
+import { useModal } from 'vue-final-modal'
+import SubscribeModal from '@/components/SubscribeModal.vue'
+
 const { imageSrc } = getImageSrc()
 
 const videoStore = useVideoStore()
@@ -474,8 +478,37 @@ const friendSwiperConfig = {
   }
 }
 
+const { open, close } = useModal({
+  component: SubscribeModal,
+  attrs: {
+    title: 'SUBSCRIBE',
+    clickToClose: false,
+    contentTransition: 'vfm-slide-up',
+    onCloseModal() {
+      close()
+    }
+  }
+})
+
+const triggerSubscribeModal = () => {
+  const destination = document.getElementById('destination')
+  const options = {
+    threshold: [0.8]
+  }
+  const onIntersection = (entries) => {
+    if (entries[0].isIntersecting) {
+      if (!sessionStorage.getItem('subscribeModalShowed')) {
+        open()
+        sessionStorage.setItem('subscribeModalShowed', true)
+      }
+    }
+  }
+  const observer = new IntersectionObserver(onIntersection, options)
+  observer.observe(destination)
+}
+
 onMounted(() => {
-  console.log('mounted')
+  triggerSubscribeModal()
 })
 </script>
 

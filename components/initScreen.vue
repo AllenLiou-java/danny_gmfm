@@ -19,7 +19,7 @@ onMounted(() => {
   if (route.name === 'index') {
     setTimeout(() => {
       isReady.value = true
-    }, 4000)
+    }, 3000)
   } else {
     isReady.value = true
   }

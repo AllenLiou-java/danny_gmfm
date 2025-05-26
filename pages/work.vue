@@ -84,7 +84,7 @@
         />
       </div>
     </div>
-    <Suscribe />
+    <Subscribe />
   </div>
 </template>
 

@@ -39,11 +39,11 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', 'vue-final-modal/style.css'],
   vite: {
     plugins: [tailwindcss()]
   },
-  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper', 'v-gsap-nuxt'],
+  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper', 'v-gsap-nuxt', '@vee-validate/nuxt'],
   swiper: {
     modules: ['navigation', 'pagination', 'thumbs'],
     styleLang: 'css'
@@ -62,6 +62,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     airtableApiKey: '',
     airtableBaseKey: '',
-    airtableUrl: ''
+    airtableUrl: '',
+    googleServiceAccountEmail: '',
+    googlePrivateKey: '',
+    googleSpreadsheetId: ''
   }
 })
