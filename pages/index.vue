@@ -1,5 +1,7 @@
 <template>
   <div>
+    <InitScreen :is-closed="isInitScreenClosed" @update-ready-status="onUpdateReadyStatus" />
+
     <div
       class="nav-space bg-[url(~/assets/images/banner/banner-bg-mobile.jpg)] bg-cover bg-center bg-no-repeat pb-3 sm:bg-[url(~/assets/images/banner/banner-bg.jpg)] sm:pb-8"
     >
@@ -507,6 +509,16 @@ const triggerSubscribeModal = () => {
   observer.observe(destination)
 }
 
+const isInitScreenClosed = ref(false)
+const { lockScroll } = scrollTool()
+
+const onUpdateReadyStatus = (status) => {
+  isInitScreenClosed.value = status
+}
+
+onBeforeMount(() => {
+  lockScroll()
+})
 onMounted(() => {
   triggerSubscribeModal()
 })

@@ -65,7 +65,7 @@
         </li>
       </ul>
     </div>
-    <div id="mobileNav" class="absolute top-0 left-0 hidden w-full bg-primary p-4">
+    <div id="mobileNav" class="absolute top-0 left-0 hidden h-[100vh] w-full bg-primary p-4">
       <img
         class="float-end size-6 cursor-pointer"
         :src="imageSrc('/close.png')"
@@ -195,119 +195,6 @@ const routeList = computed(() => {
   return videoNavigatorInfo.concat(stuffNavigatorInfo).concat(othersNavigatorInfo)
 })
 
-// const routeList = ref([
-//   {
-//     label: '台灣百岳',
-//     label_en: 'top_mountains_tw',
-//     icon: 'mdi:menu-down',
-//     route: '',
-//     items: [
-//       {
-//         label: '北部',
-//         route: '/video/top_mountains_tw/north?page=1'
-//       },
-//       {
-//         label: '中部',
-//         route: '/video/top_mountains_tw/middle?page=1'
-//       },
-//       {
-//         label: '南部',
-//         route: '/video/top_mountains_tw/south?page=1'
-//       },
-//       {
-//         label: '東部',
-//         route: '/video/top_mountains_tw/east?page=1'
-//       }
-//     ]
-//   },
-//   {
-//     label: '中級山/郊山步道/野營/野溪溫泉',
-//     label_en: 'outdoor_spot',
-//     icon: 'mdi:menu-down',
-//     route: '',
-//     items: [
-//       {
-//         label: '北部',
-//         route: '/video/outdoor_spot/north?page=1'
-//       },
-//       {
-//         label: '中部',
-//         route: '/video/outdoor_spot/middle?page=1'
-//       },
-//       {
-//         label: '南部',
-//         route: '/video/outdoor_spot/south?page=1'
-//       },
-//       {
-//         label: '東部',
-//         route: '/video/outdoor_spot/east?page=1'
-//       }
-//     ]
-//   },
-//   {
-//     label: '相關主題',
-//     label_en: 'related_topic',
-//     icon: 'mdi:menu-down',
-//     route: '',
-//     items: [
-//       {
-//         label: '裝備評測',
-//         route: '/video/related_topic/device_evaluation?page=1'
-//       },
-//       {
-//         label: '品牌介紹',
-//         route: '/video/related_topic/brand_intro?page=1'
-//       },
-//       {
-//         label: '潛水、攀岩',
-//         route: '/video/related_topic/diving_and_climbing?page=1'
-//       },
-//       {
-//         label: '環保響應',
-//         route: '/video/related_topic/going_green?page=1'
-//       },
-//       {
-//         label: '國外山岳',
-//         route: '/video/related_topic/foreign_mountain?page=1'
-//       },
-//       {
-//         label: '其他',
-//         route: '/video/related_topic/others?page=1'
-//       }
-//     ]
-//   },
-//   {
-//     label: '好物推薦',
-//     label_en: 'goodStuff',
-//     icon: 'mdi:menu-down',
-//     route: '',
-//     items: [
-//       {
-//         label: '戶外裝備',
-//         route: '/goodStuff/outdoor/all?page=1'
-//       },
-//       {
-//         label: '拍攝裝備',
-//         route: '/goodStuff/photography/all?page=1'
-//       }
-//     ]
-//   },
-//   {
-//     label: '作品',
-//     label_en: 'work',
-//     icon: '',
-//     route: '/work',
-//     items: []
-//   },
-//   {
-//     label: '關於我',
-//     label_en: 'aboutMe',
-//     icon: '',
-//     route: '/aboutMe',
-//     items: []
-//   }
-// ])
-
 const toggleNavItemList = (item) => {
   const subclassEL = document.querySelector(`#${item}>.subclass`)
   if (subclassEL) {
@@ -339,9 +226,12 @@ watch(route, () => {
   headerActive.value = false
 })
 
+const { lockScroll, unlockScroll } = scrollTool()
+
 const mobileNavOpen = () => {
   const mobileNavEL = document.querySelector('#mobileNav')
   mobileNavEL.classList.remove('hidden')
+  lockScroll()
 }
 
 const mobileNavClose = () => {
@@ -349,6 +239,7 @@ const mobileNavClose = () => {
   mobileNavEL.classList.add('hidden')
 
   closeNavItemList()
+  unlockScroll()
 }
 
 onMounted(() => {

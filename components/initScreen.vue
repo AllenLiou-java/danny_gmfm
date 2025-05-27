@@ -1,6 +1,6 @@
 <template>
-  <GSAPTransition :hidden="{ scale: 0, rotate: -25 }">
-    <div v-if="!isReady" class="initPage">
+  <GSAPTransition :hidden="{ y: -100 }">
+    <div v-if="!isClosed" class="initPage">
       <div class="flex size-full flex-col items-center justify-center">
         <img class="mb-6 size-[80px] md:size-[120px]" :src="imageSrc('/logo.svg')" alt="brandImg" />
         <ul class="wave-menu h-[35px] w-[200px]">
@@ -12,17 +12,26 @@
 </template>
 
 <script setup>
-const { imageSrc } = getImageSrc()
-const isReady = ref(false)
-const route = useRoute()
-onMounted(() => {
-  if (route.name === 'index') {
-    setTimeout(() => {
-      isReady.value = true
-    }, 3000)
-  } else {
-    isReady.value = true
+defineProps({
+  isClosed: {
+    type: Boolean,
+    default: false
   }
+})
+
+const emit = defineEmits(['updateReadyStatus'])
+
+const { imageSrc } = getImageSrc()
+const { unlockScroll } = scrollTool()
+
+onBeforeMount(() => {
+  setTimeout(() => {
+    emit('updateReadyStatus', true)
+    unlockScroll()
+    window.scrollTo({
+      top: 0
+    })
+  }, 2000)
 })
 </script>
 
