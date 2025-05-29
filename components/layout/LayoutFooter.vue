@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center bg-[#1d2327] pt-10 pb-5">
+  <footer class="flex flex-col items-center justify-center bg-[#1d2327] pt-10 pb-5">
     <img class="mb-8 size-20 md:size-25" :src="imageSrc('/logo.svg')" alt="logo" />
     <div class="mb-10 grid grid-cols-1 gap-y-3 sm:mb-11 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-8">
       <div v-for="item in socialMediaList" :key="item.linkType">
@@ -12,7 +12,7 @@
     <span class="text-[10px] sm:text-[14px]"
       >秋天剩旅行 CTS.TRAVEL 版權所有 © CTS.TRAVEL All Rights Reserved.</span
     >
-  </div>
+  </footer>
 </template>
 
 <script setup>

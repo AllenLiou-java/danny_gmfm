@@ -4,12 +4,7 @@
       class="nav-space h-90 bg-[url(~/assets/images/banner/banner-video-bg.png)] bg-cover bg-center bg-no-repeat"
     >
       <div class="relative container h-full">
-        <div
-          class="absolute bottom-0 left-0 container mb-6 text-[12px] tracking-[5px] sm:mt-4 sm:text-[16px]"
-        >
-          <p>本日人氣：1000</p>
-          <p>累積人氣：5367801</p>
-        </div>
+        <VisitCountBoard class="absolute bottom-0 left-0 container mb-6 sm:mt-4" />
       </div>
     </div>
     <div class="container min-h-[100vh] pt-4 pb-10 sm:pt-8 sm:pb-15">

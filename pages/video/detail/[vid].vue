@@ -150,8 +150,7 @@
 
         <div class="mb-8 tracking-[4.67px]">
           <p class="mb-4 border-b border-[#54595b] pb-2">人氣</p>
-          <p>本日人氣：1000</p>
-          <p>累積人氣：5367801</p>
+          <VisitCountBoard />
         </div>
       </div>
     </div>

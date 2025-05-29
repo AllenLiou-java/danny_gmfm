@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76" height="76" viewBox="0 0 76 76">
+    <defs>
+        <filter id="9mzttll8ta" width="146.7%" height="146.7%" x="-20%" y="-16.7%" filterUnits="objectBoundingBox">
+            <feOffset dx="2" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <filter id="bfmm745l7c" width="153%" height="168.1%" x="-26.5%" y="-24.5%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" operator="dilate" radius=".15" result="shadowSpreadOuter1"/>
+            <feOffset dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+        </filter>
+        <rect id="jm8039rojb" width="60" height="60" x="0" y="0" rx="30"/>
+        <path id="6fv8py4t6d" d="M24.75 0H2.25C1.01 0 0 1.046 0 2.333v16.334C0 19.954 1.01 21 2.25 21h22.5c1.24 0 2.25-1.046 2.25-2.333V2.333C27 1.046 25.99 0 24.75 0zM2.192 1.212h22.617c.083 0 .156.03.234.049-1.958 1.848-8.45 7.976-10.722 10.088-.178.165-.465.363-.82.363-.357 0-.644-.198-.822-.363C10.407 9.237 3.914 3.109 1.957 1.26c.078-.018.151-.05.235-.05zM1.174 18.677V2.342c0-.115.033-.218.063-.323 1.494 1.415 6.01 5.692 8.937 8.448-2.918 2.595-7.435 7.028-8.94 8.514-.027-.1-.06-.196-.06-.304zm23.615 1.111H2.21c-.09 0-.17-.032-.254-.052 1.558-1.517 6.11-5.92 8.982-8.428l.986.91c.465.43 1.01.655 1.575.655.566 0 1.11-.226 1.575-.654.27-.248.612-.564.986-.911 2.872 2.507 7.424 6.91 8.982 8.428-.084.02-.164.052-.254.052zm1.037-1.111c0 .107-.033.205-.06.304-1.506-1.487-6.022-5.92-8.94-8.514 2.928-2.756 7.443-7.032 8.937-8.448.03.105.063.208.063.323v16.335z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-1354.000000, -1396.000000) translate(1360.000000, 1316.000000) translate(0.000000, 84.000000)">
+                        <use fill="#000" filter="url(#9mzttll8ta)" xlink:href="#jm8039rojb"/>
+                        <use fill="#FFF" fill-opacity=".15" xlink:href="#jm8039rojb"/>
+                    </g>
+                    <g fill-rule="nonzero">
+                        <g transform="translate(-1354.000000, -1396.000000) translate(1360.000000, 1316.000000) translate(0.000000, 84.000000) translate(16.500000, 19.500000)">
+                            <use fill="#000" filter="url(#bfmm745l7c)" xlink:href="#6fv8py4t6d"/>
+                            <use fill="#FFF" stroke="#FFF" stroke-width=".3" xlink:href="#6fv8py4t6d"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

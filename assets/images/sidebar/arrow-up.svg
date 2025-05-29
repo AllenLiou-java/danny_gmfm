@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="76" height="76" viewBox="0 0 76 76">
+    <defs>
+        <filter id="jst4hcrisa" width="146.7%" height="146.7%" x="-20%" y="-16.7%" filterUnits="objectBoundingBox">
+            <feOffset dx="2" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="4"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <filter id="4qmybx0xhc" width="224.4%" height="169.1%" x="-62.2%" y="-24.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+        </filter>
+        <circle id="65ubven3sb" cx="30" cy="30" r="30"/>
+        <path id="v1bgs833qd" d="M35.758 30.873l-9.776 9.451c-.242.235-.727.235-.97 0-.242-.234-.242-.703 0-.937l8.726-8.436c.323-.312.323-.781 0-1.093l-8.806-8.436c-.243-.313-.243-.703 0-.938.161-.156.323-.234.485-.234.161 0 .323.078.484.234l9.857 9.53c.161.156.242.312.242.468-.08.078-.162.313-.242.39z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-1354.000000, -1312.000000) translate(1360.000000, 1316.000000)">
+                        <use fill="#000" filter="url(#jst4hcrisa)" xlink:href="#65ubven3sb"/>
+                        <use fill="#FFF" fill-opacity=".15" xlink:href="#65ubven3sb"/>
+                    </g>
+                    <g fill-rule="nonzero" transform="translate(-1354.000000, -1312.000000) translate(1360.000000, 1316.000000) translate(30.375000, 30.375000) rotate(-90.000000) translate(-30.375000, -30.375000)">
+                        <use fill="#000" filter="url(#4qmybx0xhc)" xlink:href="#v1bgs833qd"/>
+                        <use fill="#FFF" xlink:href="#v1bgs833qd"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -19,11 +19,7 @@
           class="absolute bottom-0 flex w-[calc(100%-40px)] justify-between sm:w-[calc(100%-48px)] lg:w-[calc(100%-40px)] xl:w-[calc(100%-80px)]"
         >
           <div class="flex flex-col-reverse tracking-[5px] sm:flex-col">
-            <div class="text-[12px] sm:mt-4 sm:text-[16px]">
-              <p>本日人氣：1000</p>
-              <p>累積人氣：5367801</p>
-            </div>
-
+            <VisitCountBoard class="sm:mt-4" />
             <ul
               class="mb-4 flex flex-col gap-y-2 sm:mt-7 sm:mb-0 sm:flex-row sm:gap-x-4 md:gap-x-8"
             >
@@ -190,7 +186,7 @@
         </ul>
         <NuxtLink
           class="relative left-[100%] inline-block -translate-x-[100%] rounded-[5px] border border-solid px-5 py-1 hover:border-yellow hover:text-yellow md:px-7 md:py-2"
-          to="/video/all"
+          to="/video/allTopic?page=1"
           >更多影片</NuxtLink
         >
       </div>
@@ -273,7 +269,7 @@
         </div>
         <NuxtLink
           class="relative left-[100%] inline-block -translate-x-[100%] rounded-[5px] border border-solid px-5 py-1 hover:border-yellow hover:text-yellow md:px-7 md:py-2"
-          to="/goodStuff/outdoor/all"
+          to="/goodStuff/outdoor/all?page=1"
           >更多好物</NuxtLink
         >
       </div>
@@ -336,7 +332,7 @@ const productStore = useProductStore()
 const { latest3Product } = storeToRefs(productStore)
 
 const commonStore = useCommonStore()
-const { cooperationList } = storeToRefs(commonStore)
+const { cooperationList, isInitScreenClosed } = storeToRefs(commonStore)
 
 await callOnce(async () => {
   await videoStore.getLatest5Video()
@@ -509,11 +505,12 @@ const triggerSubscribeModal = () => {
   observer.observe(destination)
 }
 
-const isInitScreenClosed = ref(false)
 const { lockScroll } = scrollTool()
 
 const onUpdateReadyStatus = (status) => {
-  isInitScreenClosed.value = status
+  commonStore.$patch({
+    isInitScreenClosed: status
+  })
 }
 
 onBeforeMount(() => {

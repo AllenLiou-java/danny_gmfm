@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   isClosed: {
     type: Boolean,
     default: false
@@ -25,13 +25,15 @@ const { imageSrc } = getImageSrc()
 const { unlockScroll } = scrollTool()
 
 onBeforeMount(() => {
-  setTimeout(() => {
-    emit('updateReadyStatus', true)
-    unlockScroll()
-    window.scrollTo({
-      top: 0
-    })
-  }, 2000)
+  if (!props.isClosed) {
+    setTimeout(() => {
+      emit('updateReadyStatus', true)
+      unlockScroll()
+      window.scrollTo({
+        top: 0
+      })
+    }, 2000)
+  }
 })
 </script>
 

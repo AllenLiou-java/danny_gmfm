@@ -2,25 +2,21 @@
   <div class="bg-primary font-notoSansTC text-white">
     <CustomLoading />
 
-    <LayoutHeader class="container" />
-    <NuxtPage />
+    <div>
+      <LayoutHeader class="container" />
+      <NuxtPage />
+      <LayoutFooter />
+    </div>
+
     <ClientOnly>
       <ModalsContainer />
     </ClientOnly>
-    <LayoutFooter />
+    <Sidebar />
   </div>
 </template>
 
 <script setup>
 import { ModalsContainer } from 'vue-final-modal'
-
-const videoStore = useVideoStore()
-const productStore = useProductStore()
-
-await callOnce(async () => {
-  await videoStore.getVideoCategoryList()
-  await productStore.getProductCategoryList()
-})
 </script>
 
 <style scoped>

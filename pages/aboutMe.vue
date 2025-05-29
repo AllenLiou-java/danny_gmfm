@@ -22,10 +22,7 @@
         </div>
       </div>
 
-      <div class="text-[12px] tracking-[5px] sm:mt-4 sm:text-[16px]">
-        <p>本日人氣：1000</p>
-        <p>累積人氣：5367801</p>
-      </div>
+      <VisitCountBoard class="sm:mt-4" />
     </div>
     <div
       class="container mb-16 flex max-w-[900px] flex-col items-center justify-center md:mb-30 lg:flex-row lg:justify-between"

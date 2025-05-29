@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-x-0 z-100">
+  <header class="fixed inset-x-0 z-100">
     <div
       class="flex items-center justify-between gap-x-20 py-2.5 lg:gap-x-6"
       :class="
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div v-else class="relative cursor-pointer py-3">
-            <NuxtLink :to="routeItem.route">{{ routeItem.label }}</NuxtLink>
+            <NuxtLink class="text-[18px]" :to="routeItem.route">{{ routeItem.label }}</NuxtLink>
             <div
               class="absolute bottom-0 h-1 w-full rounded-[3px] bg-white group-hover:block"
               :class="currentPageName === routeItem.label_en ? 'block bg-yellow' : 'hidden'"
@@ -102,7 +102,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup>
@@ -111,6 +111,9 @@ const route = useRoute()
 const headerActive = ref(false)
 const { codeVideoBigcategoryList, codeVideoSmallcategoryList } = storeToRefs(useVideoStore())
 const { codeProductBigcategoryList, codeProductSmallcategoryList } = storeToRefs(useProductStore())
+
+const videoStore = useVideoStore()
+const productStore = useProductStore()
 
 const currentPageName = computed(() => {
   if (codeVideoBigcategoryList.value === null) return null
@@ -149,7 +152,7 @@ const routeList = computed(() => {
     return {
       label: big_c.label,
       label_en: big_c.label_en,
-      icon: subItems.length > 0 ? 'mdi:menu-down' : '',
+      icon: subItems.length > 0 ? 'my-icon:menu-down' : '',
       route: '',
       items: subItems
     }
@@ -169,7 +172,7 @@ const routeList = computed(() => {
   const stuffNavigatorInfo = {
     label: '好物推薦',
     label_en: 'goodStuff',
-    icon: stuffNavigatorSubItems.length > 0 ? 'mdi:menu-down' : '',
+    icon: stuffNavigatorSubItems.length > 0 ? 'my-icon:menu-down' : '',
     route: '',
     items: stuffNavigatorSubItems
   }
@@ -241,6 +244,11 @@ const mobileNavClose = () => {
   closeNavItemList()
   unlockScroll()
 }
+
+onBeforeMount(() => {
+  videoStore.getVideoCategoryList()
+  productStore.getProductCategoryList()
+})
 
 onMounted(() => {
   window.addEventListener('scroll', () => {
