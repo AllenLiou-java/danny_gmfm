@@ -323,6 +323,10 @@
 import { useModal } from 'vue-final-modal'
 import SubscribeModal from '@/components/SubscribeModal.vue'
 
+useHead({
+  title: '首頁'
+})
+
 const { imageSrc } = getImageSrc()
 
 const videoStore = useVideoStore()

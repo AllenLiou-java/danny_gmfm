@@ -1,9 +1,11 @@
 <template>
-  <header class="fixed inset-x-0 z-100">
+  <header class="fixed inset-x-0 z-100" :class="headerActive ? '' : 'bg-secondary opacity-94'">
     <div
-      class="flex items-center justify-between gap-x-20 py-2.5 lg:gap-x-6"
+      class="container flex items-center justify-between gap-x-20 py-2.5 lg:gap-x-6"
       :class="
-        headerActive ? 'mt-4 rounded-xl bg-secondary px-3 opacity-94 duration-300 ease-linear' : ''
+        headerActive
+          ? 'bg-secondary opacity-94 ease-linear sm:mt-4 sm:rounded-xl sm:px-3 sm:duration-300'
+          : ''
       "
     >
       <NuxtLink
