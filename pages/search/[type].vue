@@ -98,6 +98,11 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: '影片｜好物推薦 搜尋',
+  ogTitle: '影片｜好物推薦 搜尋'
+})
+
 const typeList = ref([
   {
     label: '影片',
@@ -123,6 +128,7 @@ const keywordListbyType = computed(() => {
     return keywordItem.type === useRoute().params.type
   })
 })
+
 const getKeywordList = async () => {
   const keywordListInStorage = JSON.parse(sessionStorage.getItem('keywordList'))
 

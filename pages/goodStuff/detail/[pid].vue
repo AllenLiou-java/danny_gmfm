@@ -197,6 +197,13 @@ const productSwiperConfig = {
   }
 }
 
+useSeoMeta({
+  title: () => `${productDetail.value.name}`,
+  ogTitle: () => `${productDetail.value.name}`,
+  description: `${detailContent.value}`,
+  ogDescription: `${detailContent.value}`
+})
+
 onMounted(() => {
   if (productDetail.value.content.length <= 100) {
     detailContentExpanded.value = true

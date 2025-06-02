@@ -22,23 +22,19 @@ useHead({
     return titleChunk ? `${titleChunk} %separator %siteName` : '%siteName'
   },
   templateParams: {
-    siteName: 'Danny_GMFM',
+    siteName: '秋天剩旅行｜Danny_GMFM 山岳影像創作者',
     separator: '-'
   }
 })
 
 useSeoMeta({
-  title: '秋天剩旅行｜Danny_GMFM 山岳影像創作者',
+  title: '',
   ogTitle: '秋天剩旅行｜Danny_GMFM 山岳影像創作者',
   keywords:
     '秋天剩旅行,Danny_GMFM,山岳影像創作者,台灣百岳,戶外露營,潛水,hikingboydannygmfm,健行筆記-攝影特派員,山野玩家,山友戶外,動態攝影師',
   ogSiteName: '秋天剩旅行｜Danny_GMFM 山岳影像創作者',
   ogType: 'website',
   ogLocale: 'zh_TW',
-  description:
-    '跟隨Danny一起透過影音記錄登山健行、台灣百岳、戶外露營、潛水、旅遊等珍貴影像。合作及邀約歡迎來信hikingboydannygmfm@gmail.com',
-  ogDescription:
-    '跟隨Danny一起透過影音記錄登山健行、台灣百岳、戶外露營、潛水、旅遊等珍貴影像。合作及邀約歡迎來信hikingboydannygmfm@gmail.com',
   ogImage: '/apple-icon.png'
 })
 </script>

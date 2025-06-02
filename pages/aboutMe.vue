@@ -197,6 +197,15 @@
 import { socialMediaList } from '@/assets/js/common'
 const { imageSrc } = getImageSrc()
 
+useSeoMeta({
+  title: '關於我',
+  ogTitle: '關於我 - 秋天剩旅行｜Danny_GMFM 山岳影像創作者',
+  description:
+    '我是Danny，喜愛登山健行的大男孩。一個來自高山密度最高的島嶼之一台灣，也是登山最佳的練習場。在過去的幾年中，我持續地登山、潛水、旅遊並將這些珍貴的紀錄利用影音的方式記錄下來。',
+  ogDescription:
+    '我是Danny，喜愛登山健行的大男孩。一個來自高山密度最高的島嶼之一台灣，也是登山最佳的練習場。在過去的幾年中，我持續地登山、潛水、旅遊並將這些珍貴的紀錄利用影音的方式記錄下來。'
+})
+
 const aboutMeStore = useAboutMeStore()
 const commonStore = useCommonStore()
 

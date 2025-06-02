@@ -30,6 +30,13 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: 'video',
+  ogTitle: 'video - 秋天剩旅行｜Danny_GMFM 山岳影像創作者',
+  description: '利用影音的方式記錄下登山、潛水、攀岩、旅遊等珍貴的紀錄。',
+  ogDescription: '利用影音的方式記錄下登山、潛水、攀岩、旅遊等珍貴的紀錄。'
+})
+
 const videoStore = useVideoStore()
 const { bigcategoryNavigator, smallcategoryNavigator } = storeToRefs(useVideoStore())
 const { topic, subclass } = useRoute().params

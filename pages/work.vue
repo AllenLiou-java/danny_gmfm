@@ -89,6 +89,15 @@ const router = useRouter()
 const workStore = useWorkStore()
 const { worksPerPage, pageSize, totalWorks } = storeToRefs(useWorkStore())
 
+useSeoMeta({
+  title: '作品',
+  ogTitle: '作品 - 秋天剩旅行｜Danny_GMFM 山岳影像創作者',
+  description:
+    '品牌合作、裝備/設備推薦、能量補給食品推薦、線上課程合作。合作及邀約歡迎來信hikingboydannygmfm@gmail.com',
+  ogDescription:
+    '品牌合作、裝備/設備推薦、能量補給食品推薦、線上課程合作。合作及邀約歡迎來信hikingboydannygmfm@gmail.com'
+})
+
 await callOnce(workStore.getWorkList)
 
 const currentPage = ref(parseInt(page))

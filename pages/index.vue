@@ -323,8 +323,13 @@
 import { useModal } from 'vue-final-modal'
 import SubscribeModal from '@/components/SubscribeModal.vue'
 
-useHead({
-  title: '首頁'
+useSeoMeta({
+  title: '首頁',
+  ogTitle: '首頁 - 秋天剩旅行｜Danny_GMFM 山岳影像創作者',
+  description:
+    '跟隨Danny一起透過影音記錄登山健行、台灣百岳、戶外露營、潛水、旅遊等珍貴影像。合作及邀約歡迎來信hikingboydannygmfm@gmail.com',
+  ogDescription:
+    '跟隨Danny一起透過影音記錄登山健行、台灣百岳、戶外露營、潛水、旅遊等珍貴影像。合作及邀約歡迎來信hikingboydannygmfm@gmail.com'
 })
 
 const { imageSrc } = getImageSrc()

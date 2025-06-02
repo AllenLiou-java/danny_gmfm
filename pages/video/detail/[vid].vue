@@ -180,6 +180,14 @@ const { data: videoDetail } = await useAsyncData('videoDetail', () => {
     })
   }
 })
+
+useSeoMeta({
+  title: () => `${videoDetail.value.title}`,
+  ogTitle: () => `${videoDetail.value.title}`,
+  description: `${videoDetail.value.content}`,
+  ogDescription: `${videoDetail.value.content}`
+})
+
 const filteredSocialMediaList = computed(() => {
   const target = ['facebook', 'instagram', 'youtube', 'jcnote', 'spotify']
   return socialMediaList.filter((item) => target.includes(item.linkType))

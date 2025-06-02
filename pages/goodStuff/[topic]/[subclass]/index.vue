@@ -101,6 +101,13 @@ const { topic, subclass } = useRoute().params
 const bigcategorySelected = ref(topic)
 const smallcategorySelected = ref(subclass)
 
+useSeoMeta({
+  title: () => `${topic === 'outdoor' ? '戶外裝備' : '拍攝裝備'}`,
+  ogTitle: () => `${topic === 'outdoor' ? '戶外裝備' : '拍攝裝備'}`,
+  description: '由Danny推薦登山相關的戶外裝備、服飾及配件，也有推薦的拍攝裝備喔。',
+  ogDescription: '由Danny推薦登山相關的戶外裝備、服飾及配件，也有推薦的拍攝裝備喔。'
+})
+
 const smallcategorySwiperConfig = ref({
   slidesPerView: 'auto',
   spaceBetween: 12
