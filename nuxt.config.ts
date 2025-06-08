@@ -65,6 +65,8 @@ export default defineNuxtConfig({
     airtableUrl: '',
     googleServiceAccountEmail: '',
     googlePrivateKey: '',
-    googleSpreadsheetId: ''
+    googleSpreadsheetId: '',
+    instagramAccessToken: '',
+    instagramUserid: ''
   }
 })

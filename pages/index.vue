@@ -279,6 +279,34 @@
         v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
+        SOCIAL MEDIA
+      </h2>
+      <div
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        class="flex flex-col gap-8 xl:flex-row"
+      >
+        <div id="instagram" class="w-full xl:max-w-[766px]">
+          <div class="mb-3 sm:mb-4">
+            <Icon name="my-icon:ig" class="mr-3 align-middle text-[40px]" />
+            <span class="text-[14px] sm:text-[18px]">Instagram</span>
+          </div>
+
+          <ul class="grid grid-cols-2 gap-1 sm:grid-cols-3 sm:gap-2">
+            <li v-for="igInfo in instagramMediaObj" :key="igInfo.id">
+              <a :href="igInfo.permalink" target="_blank">
+                <img :src="igInfo.media_url" alt="img_cover" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <FacebookPagePlugin />
+      </div>
+    </div>
+    <div class="container py-8 md:py-15">
+      <h2
+        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
+      >
         FRIENDS
       </h2>
       <ul
@@ -341,12 +369,13 @@ const productStore = useProductStore()
 const { latest3Product } = storeToRefs(productStore)
 
 const commonStore = useCommonStore()
-const { cooperationList, isInitScreenClosed } = storeToRefs(commonStore)
+const { cooperationList, isInitScreenClosed, instagramMediaObj } = storeToRefs(commonStore)
 
 await callOnce(async () => {
   await videoStore.getLatest5Video()
   await productStore.getLatest3Product()
   await commonStore.getCooperationList()
+  await commonStore.getInstagramMediaObj()
 })
 
 const socialMediaList = ref([

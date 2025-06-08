@@ -29,6 +29,12 @@ export const useCommonStore = defineStore('common', () => {
     visitNumToday.value = data.visitNumToday
   }
 
+  const instagramMediaObj = ref([])
+  const getInstagramMediaObj = async () => {
+    const data = await $fetch('/api/instagram/mediaObjects')
+    instagramMediaObj.value = data
+  }
+
   return {
     cooperationList,
     getCooperationList,
@@ -37,6 +43,8 @@ export const useCommonStore = defineStore('common', () => {
     isInitScreenClosed,
     visitNumTotal,
     visitNumToday,
-    updateVisitCount
+    updateVisitCount,
+    instagramMediaObj,
+    getInstagramMediaObj
   }
 })
