@@ -9,7 +9,7 @@
       <div
         class="fb-page"
         :data-href="pageUrl"
-        data-tabs="timeline"
+        data-tabs=""
         data-width=""
         data-height="508"
         data-small-header="false"

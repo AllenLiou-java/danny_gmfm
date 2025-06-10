@@ -31,8 +31,17 @@ export const useCommonStore = defineStore('common', () => {
 
   const instagramMediaObj = ref([])
   const getInstagramMediaObj = async () => {
-    const data = await $fetch('/api/instagram/mediaObjects')
-    instagramMediaObj.value = data
+    try {
+      const data = await $fetch('/api/instagram/mediaObjects')
+      instagramMediaObj.value = data
+    } catch (err) {
+      const { statusCode, statusMessage } = err
+
+      showError({
+        statusCode,
+        statusMessage
+      })
+    }
   }
 
   return {
