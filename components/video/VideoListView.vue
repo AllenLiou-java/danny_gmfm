@@ -4,7 +4,7 @@
       <ul class="mb-15 flex flex-col flex-wrap gap-5 md:flex-row">
         <li
           v-for="(video, idx) in videosPerPage[currentPage - 1]"
-          :key="idx"
+          :key="video.id"
           v-gsap.whenVisible.stagger.from.once.reversible="{ opacity: 0, y: 50 }"
           :class="[0, 1, 5, 6].includes(idx) ? '2xl:max-w-[590px]' : '2xl:max-w-[386px]'"
           class="relative w-full overflow-hidden rounded-[5px] duration-300 hover:z-10 hover:scale-[1.04] md:w-[calc(50%-10px)]"

@@ -37,6 +37,14 @@ useSeoMeta({
   ogLocale: 'zh_TW',
   ogImage: '/apple-icon.png'
 })
+
+const videoStore = useVideoStore()
+const productStore = useProductStore()
+
+await callOnce(async () => {
+  await videoStore.getVideoCategoryList()
+  await productStore.getProductCategoryList()
+})
 </script>
 
 <style scoped>

@@ -114,8 +114,8 @@ const headerActive = ref(false)
 const { codeVideoBigcategoryList, codeVideoSmallcategoryList } = storeToRefs(useVideoStore())
 const { codeProductBigcategoryList, codeProductSmallcategoryList } = storeToRefs(useProductStore())
 
-const videoStore = useVideoStore()
-const productStore = useProductStore()
+// const videoStore = useVideoStore()
+// const productStore = useProductStore()
 
 const currentPageName = computed(() => {
   if (codeVideoBigcategoryList.value === null) return null
@@ -137,6 +137,7 @@ const routeList = computed(() => {
   // video相關的路由
   if (codeVideoBigcategoryList.value === null || codeVideoSmallcategoryList.value === null)
     return null
+
   const videoBigcategory = codeVideoBigcategoryList.value.filter(
     (bigcategory) => bigcategory.id !== '0'
   )
@@ -247,10 +248,10 @@ const mobileNavClose = () => {
   unlockScroll()
 }
 
-onBeforeMount(() => {
-  videoStore.getVideoCategoryList()
-  productStore.getProductCategoryList()
-})
+// onBeforeMount(() => {
+//   videoStore.getVideoCategoryList()
+//   productStore.getProductCategoryList()
+// })
 
 onMounted(() => {
   window.addEventListener('scroll', () => {
