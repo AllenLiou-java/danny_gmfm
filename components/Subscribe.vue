@@ -86,6 +86,12 @@ const onSubmit = handleSubmit(async (values) => {
   commonStore.setLoadingStatus(false)
   alert('訂閱成功')
   resetForm()
+  $fetch('/api/gmail/subscribeMail', {
+    method: 'post',
+    body: {
+      email
+    }
+  })
 })
 
 const [email, emailAttrs] = defineField('email')

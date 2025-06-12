@@ -107,6 +107,12 @@ const onSubmit = handleSubmit(async (values) => {
 
   resetForm()
   emit('closeModal')
+  $fetch('/api/gmail/subscribeMail', {
+    method: 'post',
+    body: {
+      email
+    }
+  })
 })
 
 const [email, emailAttrs] = defineField('email')

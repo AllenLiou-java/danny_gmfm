@@ -43,7 +43,14 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  modules: ['@nuxt/icon', '@pinia/nuxt', 'nuxt-swiper', 'v-gsap-nuxt', '@vee-validate/nuxt'],
+  modules: [
+    '@nuxt/icon',
+    '@pinia/nuxt',
+    'nuxt-swiper',
+    'v-gsap-nuxt',
+    '@vee-validate/nuxt',
+    'nuxt-nodemailer'
+  ],
   swiper: {
     modules: ['navigation', 'pagination', 'thumbs'],
     styleLang: 'css'
@@ -67,6 +74,7 @@ export default defineNuxtConfig({
     googlePrivateKey: '',
     googleSpreadsheetId: '',
     instagramAccessToken: '',
-    instagramUserid: ''
+    instagramUserid: '',
+    gmailAppPassword: ''
   }
 })
