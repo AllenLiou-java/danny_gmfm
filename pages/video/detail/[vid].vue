@@ -22,9 +22,11 @@
 
           <div class="absolute top-[calc(100%+8px)] h-[1px] w-full bg-[#54595b] md:top-12"></div>
         </div>
-
         <ClientOnly>
-          <YoutubeScreen class="mb-4 sm:mb-8" :video-url="videoDetail.link" />
+          <YoutubeScreen
+            class="mb-4 sm:mb-8"
+            :video-url="`https://www.youtube.com/watch?v=${videoDetail.v_id}`"
+          />
         </ClientOnly>
 
         <p

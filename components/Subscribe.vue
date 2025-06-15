@@ -55,6 +55,7 @@
 <script setup>
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
+const toast = useToast()
 
 const commonStore = useCommonStore()
 
@@ -84,7 +85,8 @@ const onSubmit = handleSubmit(async (values) => {
   })
 
   commonStore.setLoadingStatus(false)
-  alert('訂閱成功')
+  toast.success({ title: 'Success!', message: '訂閱成功', timeout: 3000 })
+
   resetForm()
   $fetch('/api/gmail/subscribeMail', {
     method: 'post',

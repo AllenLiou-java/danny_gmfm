@@ -290,11 +290,23 @@
             <Icon name="my-icon:ig" class="mr-3 align-middle text-[40px]" />
             <span class="text-[14px] sm:text-[18px]">Instagram</span>
           </div>
-
           <ul class="grid grid-cols-2 gap-1 sm:grid-cols-3 sm:gap-2">
             <li v-for="igInfo in instagramMediaObj" :key="igInfo.id">
               <a :href="igInfo.permalink" target="_blank">
-                <img :src="igInfo.media_url" alt="img_cover" />
+                <div v-if="igInfo.media_type === 'VIDEO'">
+                  <img
+                    class="aspect-square size-full object-cover object-center"
+                    :src="igInfo.thumbnail_url"
+                    alt="img_cover"
+                  />
+                </div>
+                <div v-else>
+                  <img
+                    class="aspect-square size-full object-cover object-center"
+                    :src="igInfo.media_url"
+                    alt="img_cover"
+                  />
+                </div>
               </a>
             </li>
           </ul>

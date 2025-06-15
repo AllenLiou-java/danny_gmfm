@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       return {
         id,
         title: fields.title,
-        link: fields.link,
+        v_id: fields.v_id,
         cover_image: fields.cover_image[0].url,
         content: fields.content,
         related_video: fields.related_video,

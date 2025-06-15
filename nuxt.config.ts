@@ -49,7 +49,8 @@ export default defineNuxtConfig({
     'nuxt-swiper',
     'v-gsap-nuxt',
     '@vee-validate/nuxt',
-    'nuxt-nodemailer'
+    'nuxt-nodemailer',
+    'nuxt-toast'
   ],
   swiper: {
     modules: ['navigation', 'pagination', 'thumbs'],
@@ -75,6 +76,7 @@ export default defineNuxtConfig({
     googleSpreadsheetId: '',
     instagramAccessToken: '',
     instagramUserid: '',
-    gmailAppPassword: ''
+    gmailAppPassword: '',
+    youtubeApikey: ''
   }
 })

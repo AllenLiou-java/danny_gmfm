@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
       id,
       title: fields.title,
       video_no: fields.video_no,
-      link: fields.link,
+      v_id: fields.v_id,
       cover_image: fields.cover_image[0].url,
       content: fields.content,
       category: fields.category,

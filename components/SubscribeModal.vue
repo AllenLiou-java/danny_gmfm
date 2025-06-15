@@ -67,6 +67,7 @@ import { VueFinalModal } from 'vue-final-modal'
 
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
+const toast = useToast()
 
 defineProps({
   title: {
@@ -104,6 +105,7 @@ const onSubmit = handleSubmit(async (values) => {
   })
 
   commonStore.setLoadingStatus(false)
+  toast.success({ title: 'Success!', message: '訂閱成功', timeout: 3000 })
 
   resetForm()
   emit('closeModal')
