@@ -3,10 +3,11 @@ export default defineEventHandler(async (event) => {
     const { instagramUserid } = useRuntimeConfig()
     const postList = await instagramApi(`/${instagramUserid}/media`, {
       query: {
-        fields: 'id,media_type,media_url,permalink,thumbnail_url'
+        fields: 'id,media_type,media_url,permalink,thumbnail_url,caption',
+        limit: 6
       }
     }).then((res) => {
-      return res.data.slice(0, 6)
+      return res.data
     })
 
     return postList

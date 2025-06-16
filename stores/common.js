@@ -29,11 +29,11 @@ export const useCommonStore = defineStore('common', () => {
     visitNumToday.value = data.visitNumToday
   }
 
-  const instagramMediaObj = ref([])
-  const getInstagramMediaObj = async () => {
+  const latest6InstagramMediaObj = ref([])
+  const getLatest6InstagramMediaObj = async () => {
     try {
-      const data = await $fetch('/api/instagram/mediaObjects')
-      instagramMediaObj.value = data
+      const data = await $fetch('/api/instagram/latest6Media')
+      latest6InstagramMediaObj.value = data
     } catch (err) {
       const { statusCode, statusMessage } = err
 
@@ -53,7 +53,7 @@ export const useCommonStore = defineStore('common', () => {
     visitNumTotal,
     visitNumToday,
     updateVisitCount,
-    instagramMediaObj,
-    getInstagramMediaObj
+    latest6InstagramMediaObj,
+    getLatest6InstagramMediaObj
   }
 })

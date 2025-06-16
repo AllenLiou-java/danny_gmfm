@@ -291,7 +291,7 @@
             <span class="text-[14px] sm:text-[18px]">Instagram</span>
           </div>
           <ul class="grid grid-cols-2 gap-1 sm:grid-cols-3 sm:gap-2">
-            <li v-for="igInfo in instagramMediaObj" :key="igInfo.id">
+            <li v-for="igInfo in latest6InstagramMediaObj" :key="igInfo.id">
               <a :href="igInfo.permalink" target="_blank">
                 <div v-if="igInfo.media_type === 'VIDEO'">
                   <img
@@ -381,13 +381,13 @@ const productStore = useProductStore()
 const { latest3Product } = storeToRefs(productStore)
 
 const commonStore = useCommonStore()
-const { cooperationList, isInitScreenClosed, instagramMediaObj } = storeToRefs(commonStore)
+const { cooperationList, isInitScreenClosed, latest6InstagramMediaObj } = storeToRefs(commonStore)
 
 await callOnce(async () => {
   await videoStore.getLatest5Video()
   await productStore.getLatest3Product()
   await commonStore.getCooperationList()
-  await commonStore.getInstagramMediaObj()
+  await commonStore.getLatest6InstagramMediaObj()
 })
 
 const socialMediaList = ref([
