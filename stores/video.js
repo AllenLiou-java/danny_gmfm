@@ -116,7 +116,7 @@ export const useVideoStore = defineStore('video', () => {
     // 從 bigcategoryList 比對 currentCategory對應的id
     const currentCategoryId = bigcategoryList.filter(
       (bigcategory) => bigcategory.label_en === currentCategoryName
-    )[0].id
+    )[0]?.id
 
     if (currentCategoryId === '0') {
       return smallcategoryList.map((smallcategory) => {

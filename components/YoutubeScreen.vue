@@ -1,32 +1,42 @@
 <template>
-  <div>
-    <template v-if="youtubeVerification(videoUrl)">
-      <div class="aspect-video w-full overflow-hidden">
-        <iframe
-          class="h-full w-full"
-          :src="setVide(videoUrl)"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-          allowfullscreen
-        ></iframe>
-      </div>
-    </template>
-    <template v-else>
-      <p style="color: brown">影片格式網址錯誤，詳情請洽相關人員！</p>
-    </template>
-  </div>
+  <div
+    ref="playerEl"
+    class="plyr__video-embed"
+    :data-plyr-provider="'youtube'"
+    :data-plyr-embed-id="videoId"
+  ></div>
 </template>
 
 <script setup>
+import 'plyr/dist/plyr.css'
+import Plyr from 'plyr'
+
 defineProps({
-  videoUrl: {
+  videoId: {
     type: String,
     required: true
   }
 })
 
-const { youtubeVerification, setVide } = useYoutubeVerification()
+const playerEl = ref(null)
+let plyrInstance = null
+
+onMounted(() => {
+  plyrInstance = new Plyr(playerEl.value, {
+    type: 'video',
+    controls: ['play-large', 'play', 'progress', 'mute', 'volume', 'fullscreen', 'settings'],
+    youtube: {
+      noCookie: true, // 使用 youtube-nocookie.com
+      rel: 0 // 不顯示相關影片
+    }
+  })
+})
+
+onBeforeUnmount(() => {
+  if (plyrInstance) {
+    plyrInstance.destroy()
+  }
+})
 </script>
 
 <style scoped></style>

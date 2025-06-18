@@ -6,9 +6,9 @@
       alt="cover_image"
     />
     <div
-      class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:flex-row lg:gap-x-12"
+      class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:gap-x-12 xl:flex-row"
     >
-      <div class="max-w-[850px]">
+      <div class="xl:max-w-[850px]">
         <BreadCrumb
           :bigcategory="bigcategoryRoute"
           :smallcategory="smallcategoryRoute"
@@ -22,12 +22,13 @@
 
           <div class="absolute top-[calc(100%+8px)] h-[1px] w-full bg-[#54595b] md:top-12"></div>
         </div>
-        <ClientOnly>
+        <!-- <ClientOnly>
           <YoutubeScreen
             class="mb-4 sm:mb-8"
             :video-url="`https://www.youtube.com/watch?v=${videoDetail.v_id}`"
           />
-        </ClientOnly>
+        </ClientOnly> -->
+        <YoutubeScreen :video-id="videoDetail.v_id" />
 
         <p
           class="mb-8 font-notoSansTC text-[14px] tracking-[4.08px] break-all whitespace-pre-wrap sm:text-[16px] sm:tracking-[4.67px]"

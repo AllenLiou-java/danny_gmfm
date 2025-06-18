@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
       link_youtube: fields.link_youtube || null,
       link_ig: fields.link_ig || null,
       link_fb: fields.link_fb || null,
-      link_google: fields.google || null,
+      link_google: fields.link_google || null,
       link_other: fields.link_other || null
     }
   })
