@@ -45,7 +45,7 @@
           </div>
         </li>
         <li class="group relative">
-          <NuxtLink to="/search/video">
+          <NuxtLink to="/search/videos">
             <img
               class="relative size-[30px] object-cover sm:top-3"
               :src="imageSrc('/search.png')"
@@ -125,8 +125,7 @@ const currentPageName = computed(() => {
   const otherNames = ['goodStuff', 'work', 'aboutMe', 'search']
 
   const pageNameList = videoCategoryNames.concat(otherNames)
-
-  const pathSplit = route.fullPath.split('/')
+  const pathSplit = route.path.split('/')
 
   return pageNameList.filter((pageName) => {
     return pathSplit.includes(pageName)

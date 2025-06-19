@@ -1,7 +1,8 @@
 <template>
-  <div class="nav-space px-20">
-    <h1 class="py-10 text-[44px]">Youtube 貼文列表</h1>
-    <table class="w-full table-fixed rounded shadow">
+  <div>
+    <table
+      class="w-full table-fixed text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400"
+    >
       <colgroup>
         <col class="w-[200px]" />
         <col class="w-[100px]" />
@@ -9,17 +10,21 @@
         <col class="w-[100px]" />
         <col class="w-[500px]" />
       </colgroup>
-      <thead>
-        <tr class="text-left">
-          <th class="px-4 py-3">貼文圖片</th>
-          <th class="px-4 py-3">Title</th>
-          <th class="px-4 py-3">v_id</th>
-          <th class="px-4 py-3">Cover Image</th>
-          <th class="px-4 py-3">Content</th>
+      <thead class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">貼文圖片</th>
+          <th scope="col" class="px-6 py-3">Title</th>
+          <th scope="col" class="px-6 py-3">v_id</th>
+          <th scope="col" class="px-6 py-3">Cover Image</th>
+          <th scope="col" class="px-6 py-3">Content</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(video, idx) in ytVideos" :key="video.id" class="border-t hover:bg-secondary">
+        <tr
+          v-for="(video, idx) in ytVideos"
+          :key="video.id"
+          class="border-b border-gray-200 bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+        >
           <td class="px-4 py-3 align-top">
             <img :src="video.snippet.thumbnails.maxres.url" alt="cover_image" />
           </td>

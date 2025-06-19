@@ -107,12 +107,12 @@ const typeList = ref([
   {
     label: '影片',
     label_en: 'video',
-    route: '/search/video'
+    route: '/search/videos'
   },
   {
     label: '好物推薦',
     label_en: 'goodStuff',
-    route: '/search/goodStuff'
+    route: '/search/goodStuffs'
   }
 ])
 

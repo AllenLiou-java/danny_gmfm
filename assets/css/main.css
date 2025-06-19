@@ -17,7 +17,7 @@
 
 @theme {
   /* 設定主色 */
-  --color-*: initial;
+  /* --color-*: initial; */
   --color-white: #ffffff;
   --color-primary: #0b1215;
   --color-secondary: #141a1d;
