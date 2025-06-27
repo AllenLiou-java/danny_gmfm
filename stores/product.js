@@ -73,10 +73,11 @@ export const useProductStore = defineStore('product', () => {
 
     if (bigcategoryList === null) return null
 
-    return bigcategoryList.map(({ label, label_en }) => ({
+    return bigcategoryList.map(({ label, label_en, imgurl }) => ({
       label,
       label_en,
-      route: `/goodStuff/${label_en}/all?page=1`
+      route: `/goodStuff/${label_en}/all?page=1`,
+      imgurl
     }))
   })
 
@@ -96,14 +97,15 @@ export const useProductStore = defineStore('product', () => {
       (category) => category.supertype === currentCategoryId || category.id === '0'
     )
 
-    return currentSmallcategoryList.map(({ label, label_en }) => ({
+    return currentSmallcategoryList.map(({ label, label_en, imgurl }) => ({
       label,
       label_en,
       route: `/goodStuff/${currentBigcategory}/${label_en}?page=1`,
-      imgurl:
-        label_en === 'all'
-          ? `/goodStuff/all.png`
-          : `/goodStuff/${currentBigcategory}/${label_en}.png`
+      imgurl: label_en === 'all' ? `/goodStuff/all.png` : `${imgurl}`
+      // imgurl:
+      //   label_en === 'all'
+      //     ? `/goodStuff/all.png`
+      //     : `/goodStuff/${currentBigcategory}/${label_en}.png`
     }))
   })
 

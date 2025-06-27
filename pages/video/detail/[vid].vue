@@ -3,7 +3,7 @@
     <img
       class="max-h-[800px] w-full object-cover object-top"
       :src="videoDetail.cover_image"
-      alt="cover_image"
+      alt="coverImage"
     />
     <div
       class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:gap-x-12 xl:flex-row"
@@ -36,12 +36,12 @@
             <img
               class="hidden w-[257px] sm:block"
               :src="imageSrc('/video/font-related-post.png')"
-              alt="font_img"
+              alt="fontImg"
             />
             <img
               class="w-[206px] sm:hidden"
               :src="imageSrc('/video/font-related-post-mobile.png')"
-              alt="font_img"
+              alt="fontImg"
             />
           </p>
 
@@ -62,7 +62,7 @@
                         <img
                           class="max-h-[185px] w-full object-cover object-center sm:max-h-[214px]"
                           :src="item.cover_image"
-                          alt="cover_img"
+                          alt="coverImg"
                         />
                         <p class="text-shorten absolute bottom-0 w-full px-3 pb-3 backdrop-blur-md">
                           {{ item.title }}
@@ -100,7 +100,7 @@
             <img
               class="mx-auto mb-4 h-[290px] w-[290px] object-cover object-center"
               :src="imageSrc('/aboutMe/aboutMe.png')"
-              alt="aboutMe_img"
+              alt="aboutMeImg"
             />
             <ul class="flex-center mb-8 gap-x-5 sm:flex-row md:gap-x-[22px]">
               <li v-for="mediaItem in filteredSocialMediaList" :key="mediaItem.instagram">
@@ -131,7 +131,7 @@
                         <img
                           class="max-h-[266px] w-full object-cover object-center"
                           :src="item.cover_image"
-                          alt="cover-img"
+                          alt="coverImg"
                         />
                         <div class="bg-primary tracking-[0]">
                           <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">

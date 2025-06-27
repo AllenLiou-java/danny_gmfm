@@ -7,11 +7,12 @@
         class="max-w-[360px] overflow-hidden rounded-[8px] card-shadow duration-300 hover:scale-[1.08]"
       >
         <NuxtLink
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+          v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
           :to="`/goodStuff/detail/${product.id}`"
         >
           <div class="relative">
             <img
+              loading="lazy"
               class="mb-5 aspect-[calc(360/330)] w-full object-cover object-center"
               :src="product.cover_image"
               alt="productCover"

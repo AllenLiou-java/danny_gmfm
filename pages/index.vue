@@ -60,7 +60,7 @@
       class="h-full min-h-[506px] w-full bg-[url(~/assets/images/home/destination-bg.png)] bg-cover bg-center bg-no-repeat py-8 md:py-30"
     >
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 100 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 100 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         DESTINATION
@@ -76,11 +76,11 @@
           <NuxtLink :to="destinationItem.route">
             <component
               :is="destinationItem.name"
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50, scale: 0 }"
+              v-gsap.whenVisible.from.once="{ opacity: 0, y: 50, scale: 0 }"
               class="h-[157px] w-[157px] cursor-pointer sm:h-[240px] sm:w-[240px]"
             ></component>
             <p
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+              v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
               class="mt-2 text-center text-[16px] group-hover:text-yellow sm:text-[24px]"
             >
               {{ destinationItem.area }}
@@ -91,12 +91,12 @@
     </div>
     <div class="container py-8 md:py-15">
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -100 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, x: -100 }"
         class="mb-6 font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         TOPICS
       </h2>
-      <ul v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }" class="hidden lg:flex">
+      <ul v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }" class="hidden lg:flex">
         <li
           v-for="topicItem in topicList"
           :key="topicItem.label_en"
@@ -106,14 +106,14 @@
             <div class="relative">
               <img
                 class="h-full max-h-[460px] object-cover"
-                :src="imageSrc(topicItem.imgurl)"
+                :src="topicItem.imgurl"
                 :alt="topicItem.label_en"
               />
               <div class="img-shadow absolute bottom-0 size-full" />
             </div>
 
             <span
-              v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
+              v-gsap.whenVisible.from.once="{ opacity: 0, y: -20 }"
               class="text-shorten absolute bottom-8 left-[50%] max-w-60 -translate-x-[50%] px-6"
               >{{ topicItem.label }}</span
             >
@@ -121,7 +121,7 @@
         </li>
       </ul>
 
-      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }" class="lg:hidden">
+      <div v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }" class="lg:hidden">
         <ClientOnly>
           <BaseSwiper class="-mr-5 sm:-mr-6" :items="topicList" v-bind="topicSwiperConfig">
             <template #slide="{ item }">
@@ -131,14 +131,14 @@
                     <div class="relative">
                       <img
                         class="h-full w-full object-cover"
-                        :src="imageSrc(item.imgurl)"
+                        :src="item.imgurl"
                         :alt="item.label_en"
                       />
                       <div class="img-shadow absolute bottom-0 size-full" />
                     </div>
 
                     <p
-                      v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
+                      v-gsap.whenVisible.from.once="{ opacity: 0, y: -20 }"
                       class="text-shorten absolute bottom-3 w-full px-2 text-center"
                     >
                       {{ item.label }}
@@ -155,7 +155,7 @@
       class="bg-cover bg-center bg-no-repeat py-8 md:bg-[url(~/assets/images/home/video-bg.png)] md:bg-center md:py-15"
     >
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         VIDEO
@@ -165,7 +165,7 @@
           <li
             v-for="videoItem in latest5Video"
             :key="videoItem.id"
-            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, scale: 0 }"
+            v-gsap.whenVisible.from.once="{ opacity: 0, scale: 0 }"
             class="group relative col-span-6 shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)] md:col-span-3 lg:col-span-2 lg:nth-1:col-span-3 lg:nth-2:col-span-3"
           >
             <NuxtLink :to="`/video/detail/${videoItem.id}`">
@@ -175,7 +175,7 @@
                 <img
                   class="h-full w-full object-cover object-center"
                   :src="videoItem.cover_image"
-                  alt="cover-img"
+                  alt="coverImg"
                 />
                 <div class="img-shadow absolute bottom-0 size-full" />
               </div>
@@ -196,13 +196,13 @@
     >
       <div id="goodstuff" class="container">
         <h2
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -100 }"
+          v-gsap.whenVisible.from.once="{ opacity: 0, x: -100 }"
           class="mb-6 text-right font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
         >
           GOOD STUFF
         </h2>
         <ul
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+          v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
           class="mb-6 hidden grid-cols-3 gap-15 lg:mb-8 lg:grid"
         >
           <li
@@ -215,7 +215,7 @@
                 <img
                   class="h-full w-full object-cover object-center md:max-h-[330px] md:max-w-[360px]"
                   :src="productItem.cover_image"
-                  alt="cover-img"
+                  alt="coverImg"
                 />
                 <div class="img-shadow absolute bottom-0 size-full" />
               </div>
@@ -234,10 +234,7 @@
           </li>
         </ul>
 
-        <div
-          v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
-          class="-mr-5 lg:hidden"
-        >
+        <div v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }" class="-mr-5 lg:hidden">
           <ClientOnly>
             <BaseSwiper
               class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
@@ -250,7 +247,7 @@
                     <img
                       class="min-h-[234px] w-full object-cover object-center"
                       :src="item.cover_image"
-                      alt="cover-img"
+                      alt="coverImg"
                     />
                     <div class="bg-primary">
                       <p class="text-shorten mb-3 px-3 pt-3 text-[14px] leading-8">
@@ -276,13 +273,13 @@
     </div>
     <div class="container py-8 md:py-15">
       <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
       >
         SOCIAL MEDIA
       </h2>
       <div
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="flex flex-col gap-8 xl:flex-row"
       >
         <div id="instagram" class="w-full xl:max-w-[766px]">
@@ -297,14 +294,14 @@
                   <img
                     class="aspect-square size-full object-cover object-center"
                     :src="igInfo.thumbnail_url"
-                    alt="img_cover"
+                    alt="coverImg"
                   />
                 </div>
                 <div v-else>
                   <img
                     class="aspect-square size-full object-cover object-center"
                     :src="igInfo.media_url"
-                    alt="img_cover"
+                    alt="coverImg"
                   />
                 </div>
               </a>
@@ -333,13 +330,13 @@ useSeoMeta({
     '跟隨Danny一起透過影音記錄登山健行、台灣百岳、戶外露營、潛水、旅遊等珍貴影像。合作及邀約歡迎來信hikingboydannygmfm@gmail.com'
 })
 
-const { imageSrc } = getImageSrc()
+// const { imageSrc } = getImageSrc()
 
 const videoStore = useVideoStore()
-const { latest5Video } = storeToRefs(videoStore)
+const { latest5Video, bigcategoryNavigator } = storeToRefs(videoStore)
 
 const productStore = useProductStore()
-const { latest3Product } = storeToRefs(productStore)
+const { latest3Product, productBigcategoryNavigator } = storeToRefs(productStore)
 
 const commonStore = useCommonStore()
 const { cooperationList, isInitScreenClosed, latest6InstagramMediaObj } = storeToRefs(commonStore)
@@ -412,38 +409,13 @@ const destinationList = [
   }
 ]
 
-const topicList = [
-  {
-    label: '台灣百岳',
-    label_en: 'top_mountains_tw',
-    route: '/video/top_mountains_tw/north?page=1',
-    imgurl: '/home/topic/1.png'
-  },
-  {
-    label: '中級山/郊山步道/野營/野溪溫泉',
-    label_en: 'outdoor_spot',
-    route: '/video/outdoor_spot/north?page=1',
-    imgurl: '/home/topic/2.png'
-  },
-  {
-    label: '相關主題',
-    label_en: 'related_topic',
-    route: '/video/related_topic/device_evaluation?page=1',
-    imgurl: '/home/topic/3.jpg'
-  },
-  {
-    label: '戶外裝備',
-    label_en: 'goodStuff_outdoor',
-    route: '/goodStuff/outdoor/all?page=1',
-    imgurl: '/home/topic/4.jpg'
-  },
-  {
-    label: '拍攝裝備',
-    label_en: 'goodStuff_photography',
-    route: '/goodStuff/photography/all?page=1',
-    imgurl: '/home/topic/5.jpg'
-  }
-]
+const topicList = computed(() => {
+  const videoCategory = bigcategoryNavigator.value.filter((item) => item.label_en !== 'allTopic')
+  const productCatrgory = productBigcategoryNavigator.value
+  const list = [...videoCategory, ...productCatrgory]
+
+  return list
+})
 
 const topicSwiperConfig = {
   slidesPerView: 2.3,

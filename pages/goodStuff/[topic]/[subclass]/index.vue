@@ -37,9 +37,16 @@
                 :to="smallcategory.route"
               >
                 <img
+                  v-if="smallcategory.label_en === 'all'"
                   class="mb-2 size-[25px] object-contain object-center sm:size-19"
                   :src="imageSrc(smallcategory.imgurl)"
-                  alt=""
+                  alt="allImage"
+                />
+                <img
+                  v-else
+                  class="mb-2 size-[25px] object-contain object-center sm:size-19"
+                  :src="smallcategory.imgurl"
+                  alt="typeImage"
                 />
                 <span
                   :class="
@@ -66,9 +73,16 @@
                   >
                     <NuxtLink class="flex-center px-[7px] py-[8px] sm:flex-col" :to="item.route">
                       <img
+                        v-if="item.label_en === 'all'"
                         class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
                         :src="imageSrc(item.imgurl)"
-                        alt=""
+                        alt="allImage"
+                      />
+                      <img
+                        v-else
+                        class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
+                        :src="item.imgurl"
+                        alt="typeImage"
                       />
                       <span class="text-[16px] tracking-[4.67px] text-nowrap lg:text-[18px]">{{
                         item.label

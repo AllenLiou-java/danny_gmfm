@@ -33,10 +33,10 @@
             </td>
             <td class="px-4 py-3 align-top">
               <div v-if="post.media_type === 'VIDEO'">
-                <img :src="post.thumbnail_url" alt="post_image" />
+                <img :src="post.thumbnail_url" alt="postImage" />
               </div>
               <div v-else>
-                <img :src="post.media_url" alt="post_image" />
+                <img :src="post.media_url" alt="postImage" />
               </div>
             </td>
             <td class="px-4 py-3 align-top">

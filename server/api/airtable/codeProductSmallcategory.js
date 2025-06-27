@@ -7,7 +7,15 @@ export default defineEventHandler((event) => {
   })
     .then((res) => {
       return res.records.map((item) => {
-        return item.fields
+        const { id, label, label_en, supertype, cover_image } = item.fields
+
+        return {
+          id,
+          label,
+          label_en,
+          supertype,
+          imgurl: cover_image ? cover_image[0].url : ''
+        }
       })
     })
     .catch((error) => {

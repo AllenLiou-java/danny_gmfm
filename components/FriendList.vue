@@ -1,13 +1,13 @@
 <template>
   <div v-if="Object.keys(cooperationList).length > 0">
     <h2
-      v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
+      v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
       class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
     >
       FRIENDS
     </h2>
     <ul
-      v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+      v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }"
       class="hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
     >
       <li

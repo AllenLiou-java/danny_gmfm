@@ -26,7 +26,7 @@
           class="border-b border-gray-200 bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
         >
           <td class="px-4 py-3 align-top">
-            <img :src="video.snippet.thumbnails.maxres.url" alt="cover_image" />
+            <img :src="video.snippet.thumbnails.maxres.url" alt="coverImage" />
           </td>
           <td class="px-4 py-3 align-top">
             <button

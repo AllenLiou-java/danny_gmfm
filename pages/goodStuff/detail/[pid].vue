@@ -100,7 +100,7 @@
                   <img
                     class="mb-3 aspect-square w-full object-cover object-center"
                     :src="product.cover_image"
-                    alt="cover_image"
+                    alt="coverImage"
                   />
                   <p class="mx-3 mb-3 text-[14px]">{{ product.name }}</p>
                   <button

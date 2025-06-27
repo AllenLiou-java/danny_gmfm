@@ -14,14 +14,15 @@
           <li
             v-for="work in worksPerPage[currentPage - 1]"
             :key="work.id"
-            v-gsap.whenVisible.stagger.from.once.reversible="{ opacity: 0, y: 50 }"
+            v-gsap.whenVisible.stagger.from.once="{ opacity: 0, y: 50 }"
             class="overflow-hidden rounded-[8px] duration-300 hover:-translate-y-1.5 hover:card-shadow"
           >
             <div class="relative">
               <img
+                loading="lazy"
                 class="mb-2 aspect-video object-cover object-center sm:mb-3"
                 :src="work.cover_image"
-                alt="cover_img"
+                alt="coverImg"
               />
               <div class="img-shadow absolute bottom-0 size-full" />
             </div>

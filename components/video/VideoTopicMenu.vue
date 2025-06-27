@@ -6,7 +6,7 @@
       class="flex-center w-[50px] flex-col rounded-[8px] bg-[#1c2428] hover:border-2 hover:border-white sm:w-[70px]"
     >
       <span class="mb-1 inline-block text-[18px] tracking-[5.25px]">All</span>
-      <img class="ml-2 w-[22px]" :src="imageSrc('/video/icon_all.png')" alt="icon_all" />
+      <img class="ml-2 w-[22px]" :src="imageSrc('/video/icon_all.png')" alt="iconAll" />
     </NuxtLink>
     <div class="h-full w-[calc(100%-93px)]">
       <ul class="hidden h-[50px] sm:h-15 md:h-20 xl:flex xl:gap-[23px]">
@@ -19,8 +19,8 @@
           <NuxtLink class="relative" :to="topic.route">
             <img
               class="size-full object-cover object-center"
-              :src="imageSrc(topic.imgurl)"
-              alt="topic-bg"
+              :src="topic.navImgurl"
+              alt="topicBg"
             />
             <span
               class="text-shorten absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
@@ -45,8 +45,8 @@
               <NuxtLink :to="item.route">
                 <img
                   class="size-full object-cover object-center"
-                  :src="imageSrc(item.imgurl)"
-                  alt="topic-bg"
+                  :src="item.navImgurl"
+                  alt="topicBg"
                 />
                 <span
                   class="absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"

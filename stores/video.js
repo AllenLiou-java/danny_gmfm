@@ -100,7 +100,9 @@ export const useVideoStore = defineStore('video', () => {
           label: bigcategory.label,
           label_en: bigcategory.label_en,
           route: `/video/${bigcategory.label_en}/${firstSmallcategoryLabel}?page=1`,
-          imgurl: `/video/category-bg/${bigcategory.id}.png`
+          imgurl: bigcategory.imgurl,
+          navImgurl: bigcategory.nav_imgurl
+          // imgurl: `/video/category-bg/${bigcategory.id}.png`
         }
       }
     })
@@ -124,7 +126,8 @@ export const useVideoStore = defineStore('video', () => {
           label: smallcategory.label,
           label_en: smallcategory.label_en,
           route: `/video/${currentCategoryName}/${smallcategory.label_en}?page=1`,
-          imgurl: `/video/${smallcategory.label_en}.svg`
+          imgurl: smallcategory.imgurl
+          // imgurl: `/video/${smallcategory.label_en}.svg`
         }
       })
     } else {
@@ -141,7 +144,8 @@ export const useVideoStore = defineStore('video', () => {
           label: smallcategory.label,
           label_en: smallcategory.label_en,
           route: `/video/${currentCategoryName}/${smallcategory.label_en}?page=1`,
-          imgurl: `/video/${smallcategory.label_en}.svg`
+          imgurl: smallcategory.imgurl
+          // imgurl: `/video/${smallcategory.label_en}.svg`
         }
       })
     }
@@ -150,6 +154,7 @@ export const useVideoStore = defineStore('video', () => {
   const getVideoCategoryList = async () => {
     if (codeVideoBigcategoryList.value === null) {
       const codeVideoCategory = await $fetch('/api/airtable/codeVideoCategory')
+
       codeVideoCategory.unshift({
         id: '0',
         label: '全部',
@@ -161,6 +166,7 @@ export const useVideoStore = defineStore('video', () => {
 
     if (codeVideoSmallcategoryList.value === null) {
       const codeVideoSmallcategory = await $fetch('/api/airtable/codeVideoSmallcategory')
+
       codeVideoSmallcategoryList.value = codeVideoSmallcategory
     }
   }
@@ -199,6 +205,7 @@ export const useVideoStore = defineStore('video', () => {
     pageSize,
     totalVideos,
     currentCategory,
+    currentCategoryId,
     currentSmallcategory,
     videoFiltered,
     codeVideoBigcategoryList,

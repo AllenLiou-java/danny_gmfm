@@ -13,9 +13,10 @@
           @click="updateCurrentSubclass(subclass.label_en)"
         >
           <img
-            v-if="imageSrc(subclass.imgurl)"
-            :src="imageSrc(subclass.imgurl)"
-            alt="subclass_icon"
+            v-if="subclass.imgurl"
+            class="size-[20px] object-cover object-center sm:size-[26px]"
+            :src="subclass.imgurl"
+            alt="subclassIcon"
           />
 
           <span class="tracking-[5px]">{{ subclass.label }}</span>
@@ -38,10 +39,10 @@
               >
                 <div class="flex-center gap-2 px-3 py-[5px] sm:gap-3 sm:px-5 sm:py-[7px]">
                   <img
-                    v-if="imageSrc(item.imgurl)"
+                    v-if="item.imgurl"
                     class="size-[20px] object-cover object-center sm:size-[26px]"
-                    :src="imageSrc(item.imgurl)"
-                    alt="subclass_icon"
+                    :src="item.imgurl"
+                    alt="subclassIcon"
                   />
 
                   <span class="text-shorten text-[14px] tracking-[5px] sm:text-[16px]">{{
@@ -59,7 +60,6 @@
 
 <script setup>
 const videoStore = useVideoStore()
-const { imageSrc } = getImageSrc()
 const props = defineProps({
   subclassSelected: {
     type: String,
