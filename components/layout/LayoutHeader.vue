@@ -9,7 +9,7 @@
       "
     >
       <NuxtLink
-        class="block size-[30px] shrink-0 overflow-hidden bg-[url('~/assets/images/logo.svg')] bg-cover indent-[101%] whitespace-nowrap sm:size-[50px]"
+        class="block size-[30px] shrink-0 overflow-hidden bg-[url(~/assets/images/logo.svg)] bg-cover indent-[101%] whitespace-nowrap sm:size-[50px]"
         to="/"
         >秋天剩旅行</NuxtLink
       >

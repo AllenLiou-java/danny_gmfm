@@ -30,24 +30,35 @@ const props = defineProps({
 })
 
 const routeList = computed(() => {
-  return [
+  const route = [
     {
       labelName: '首頁',
       route: '/'
-    },
-    {
-      labelName: props.bigcategory.labelName,
-      route: props.bigcategory.route
-    },
-    {
-      labelName: props.smallcategory.labelName,
-      route: props.smallcategory.route
-    },
-    {
-      labelName: props.title,
-      route: ''
     }
   ]
+
+  if (props.bigcategory.labelName) {
+    route.push({
+      labelName: props.bigcategory.labelName,
+      route: props.bigcategory.route
+    })
+  }
+
+  if (props.smallcategory.labelName) {
+    route.push({
+      labelName: props.smallcategory.labelName,
+      route: props.smallcategory.route
+    })
+  }
+
+  if (props.title) {
+    route.push({
+      labelName: props.title,
+      route: ''
+    })
+  }
+
+  return route
 })
 </script>
 

@@ -149,46 +149,8 @@
         </div>
       </div>
     </div>
-    <div class="container mb-16 md:mb-15">
-      <h2
-        v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
-        class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
-      >
-        FRIENDS
-      </h2>
-      <ul
-        v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }"
-        class="hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
-      >
-        <li
-          v-for="cooperationItem in cooperationList"
-          :key="cooperationItem.name"
-          class="group relative overflow-hidden rounded-xl"
-        >
-          <img
-            class="max-w-[150px] rounded-full object-cover"
-            :src="cooperationItem.logo[0].url"
-            alt="cooperationLogo"
-          />
-        </li>
-      </ul>
 
-      <div v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
-        <Swiper class="mb-4" v-bind="friendSwiperConfig">
-          <SwiperSlide
-            v-for="cooperationItem in cooperationList"
-            :key="cooperationItem.name"
-            class="group relative overflow-hidden rounded-xl"
-          >
-            <img
-              class="h-full w-full rounded-full object-cover"
-              :src="cooperationItem.logo[0].url"
-              alt="cooperationLogo"
-            />
-          </SwiperSlide>
-        </Swiper>
-      </div>
-    </div>
+    <FriendList class="container" :cooperation-list="cooperationList" />
     <Subscribe />
   </div>
 </template>
@@ -216,20 +178,6 @@ await callOnce(async () => {
 
 const { mountainList, mountainCount, introduction, tagList } = storeToRefs(useAboutMeStore())
 const { cooperationList } = storeToRefs(useCommonStore())
-
-const friendSwiperConfig = {
-  modules: [SwiperPagination],
-  slidesPerView: 2.8,
-  spaceBetween: 42,
-  breakpoints: {
-    545: {
-      slidesPerView: 3.7
-    },
-    768: {
-      slidesPerView: 4.7
-    }
-  }
-}
 </script>
 
 <style lang="scss" scoped></style>

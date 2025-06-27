@@ -122,33 +122,33 @@
       </ul>
 
       <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }" class="lg:hidden">
-        <Swiper class="-mr-5 sm:-mr-6" v-bind="topicSwiperConfig">
-          <SwiperSlide
-            v-for="topicItem in topicList"
-            :key="topicItem.label_en"
-            class="overflow-hidden rounded-[8px]"
-          >
-            <NuxtLink :to="topicItem.route">
-              <div class="relative">
-                <div class="relative">
-                  <img
-                    class="h-full w-full object-cover"
-                    :src="imageSrc(topicItem.imgurl)"
-                    :alt="topicItem.label_en"
-                  />
-                  <div class="img-shadow absolute bottom-0 size-full" />
-                </div>
+        <ClientOnly>
+          <BaseSwiper class="-mr-5 sm:-mr-6" :items="topicList" v-bind="topicSwiperConfig">
+            <template #slide="{ item }">
+              <div class="overflow-hidden rounded-[8px]">
+                <NuxtLink :to="item.route">
+                  <div class="relative">
+                    <div class="relative">
+                      <img
+                        class="h-full w-full object-cover"
+                        :src="imageSrc(item.imgurl)"
+                        :alt="item.label_en"
+                      />
+                      <div class="img-shadow absolute bottom-0 size-full" />
+                    </div>
 
-                <p
-                  v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
-                  class="text-shorten absolute bottom-3 w-full px-2 text-center"
-                >
-                  {{ topicItem.label }}
-                </p>
+                    <p
+                      v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: -20 }"
+                      class="text-shorten absolute bottom-3 w-full px-2 text-center"
+                    >
+                      {{ item.label }}
+                    </p>
+                  </div>
+                </NuxtLink>
               </div>
-            </NuxtLink>
-          </SwiperSlide>
-        </Swiper>
+            </template>
+          </BaseSwiper>
+        </ClientOnly>
       </div>
     </div>
     <div
@@ -238,34 +238,34 @@
           v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
           class="-mr-5 lg:hidden"
         >
-          <Swiper
-            class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
-            :pagination="true"
-            v-bind="goodstuffSwiperConfig"
-          >
-            <SwiperSlide
-              v-for="productItem in latest3Product"
-              :key="productItem.id"
-              class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+          <ClientOnly>
+            <BaseSwiper
+              class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
+              :items="latest3Product"
+              v-bind="goodstuffSwiperConfig"
             >
-              <NuxtLink :to="`/goodStuff/detail/${productItem.id}`">
-                <img
-                  class="min-h-[234px] w-full object-cover object-center"
-                  :src="productItem.cover_image"
-                  alt="cover-img"
-                />
-                <div class="bg-primary">
-                  <p class="text-shorten mb-3 px-3 pt-3 text-[14px] leading-8">
-                    {{ productItem.name }}
-                  </p>
+              <template #slide="{ item }">
+                <div class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]">
+                  <NuxtLink :to="`/goodStuff/detail/${item.id}`">
+                    <img
+                      class="min-h-[234px] w-full object-cover object-center"
+                      :src="item.cover_image"
+                      alt="cover-img"
+                    />
+                    <div class="bg-primary">
+                      <p class="text-shorten mb-3 px-3 pt-3 text-[14px] leading-8">
+                        {{ item.name }}
+                      </p>
 
-                  <span class="block px-3 pb-3 text-right text-[16px] font-medium text-yellow"
-                    >查看更多>></span
-                  >
+                      <span class="block px-3 pb-3 text-right text-[16px] font-medium text-yellow"
+                        >查看更多>></span
+                      >
+                    </div>
+                  </NuxtLink>
                 </div>
-              </NuxtLink>
-            </SwiperSlide>
-          </Swiper>
+              </template>
+            </BaseSwiper>
+          </ClientOnly>
         </div>
         <NuxtLink
           class="relative left-[100%] inline-block -translate-x-[100%] rounded-[5px] border border-solid px-5 py-1 hover:border-yellow hover:text-yellow md:px-7 md:py-2"
@@ -314,47 +314,8 @@
         <FacebookPagePlugin />
       </div>
     </div>
-    <div class="container py-8 md:py-15">
-      <h2
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, y: 50 }"
-        class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
-      >
-        FRIENDS
-      </h2>
-      <ul
-        v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
-        class="mb-6 hidden flex-wrap gap-10 md:gap-15 md:px-16 lg:flex xl:gap-20"
-      >
-        <li
-          v-for="cooperationItem in cooperationList"
-          :key="cooperationItem.name"
-          class="group relative overflow-hidden rounded-xl"
-        >
-          <img
-            class="max-w-[150px] rounded-full object-cover"
-            :src="cooperationItem.logo[0].url"
-            alt="cooperationLogo"
-          />
-        </li>
-      </ul>
 
-      <div v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }" class="-mr-5 lg:hidden">
-        <Swiper class="mb-4" v-bind="friendSwiperConfig">
-          <SwiperSlide
-            v-for="cooperationItem in cooperationList"
-            :key="cooperationItem.name"
-            class="group relative overflow-hidden rounded-xl"
-          >
-            <img
-              class="h-full w-full rounded-full object-cover"
-              :src="cooperationItem.logo[0].url"
-              alt="cooperationLogo"
-            />
-          </SwiperSlide>
-        </Swiper>
-      </div>
-    </div>
-
+    <FriendList class="container pb-8 md:py-15" :cooperation-list="cooperationList" />
     <Subscribe />
   </div>
 </template>
@@ -473,19 +434,18 @@ const topicList = [
   {
     label: '戶外裝備',
     label_en: 'goodStuff_outdoor',
-    route: '/goodStuff/outdoor/all',
+    route: '/goodStuff/outdoor/all?page=1',
     imgurl: '/home/topic/4.jpg'
   },
   {
     label: '拍攝裝備',
     label_en: 'goodStuff_photography',
-    route: '/goodStuff/photography/all',
+    route: '/goodStuff/photography/all?page=1',
     imgurl: '/home/topic/5.jpg'
   }
 ]
 
 const topicSwiperConfig = {
-  modules: [SwiperNavigation],
   slidesPerView: 2.3,
   spaceBetween: 0,
   breakpoints: {
@@ -499,7 +459,6 @@ const topicSwiperConfig = {
 }
 
 const goodstuffSwiperConfig = {
-  modules: [SwiperPagination],
   slidesPerView: 1.2,
   spaceBetween: 24,
   breakpoints: {
@@ -509,21 +468,8 @@ const goodstuffSwiperConfig = {
     768: {
       slidesPerView: 3
     }
-  }
-}
-
-const friendSwiperConfig = {
-  modules: [SwiperPagination],
-  slidesPerView: 2.8,
-  spaceBetween: 42,
-  breakpoints: {
-    545: {
-      slidesPerView: 3.7
-    },
-    768: {
-      slidesPerView: 4.7
-    }
-  }
+  },
+  pagination: true
 }
 
 const { open, close } = useModal({

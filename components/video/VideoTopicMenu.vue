@@ -31,31 +31,32 @@
       </ul>
 
       <div class="-mr-[20px] xl:hidden">
-        <Swiper
+        <BaseSwiper
           v-bind="topicMenuSwiperConfig"
           class="h-[50px] sm:h-15 md:h-20"
-          @swiper="topicMenuSwiper"
+          :items="mainTopicList"
+          @ready="onSwiperReady"
         >
-          <SwiperSlide
-            v-for="topic in mainTopicList"
-            :key="topic.label"
-            class="relative overflow-hidden rounded-[8px]"
-            :class="topicSelected === topic.label_en ? 'border-2 border-yellow' : ''"
-          >
-            <NuxtLink :to="topic.route">
-              <img
-                class="size-full w-full object-cover object-center"
-                :src="imageSrc(topic.imgurl)"
-                alt="topic-bg"
-              />
-              <span
-                class="absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
-                :class="topic.label.length > 12 ? 'w-[80%]' : ''"
-                >{{ topic.label }}</span
-              >
-            </NuxtLink>
-          </SwiperSlide>
-        </Swiper>
+          <template #slide="{ item }">
+            <div
+              class="relative h-[48px] overflow-hidden rounded-[8px] sm:h-[58px] md:h-[78px]"
+              :class="topicSelected === item.label_en ? 'border-2 border-yellow' : ''"
+            >
+              <NuxtLink :to="item.route">
+                <img
+                  class="size-full object-cover object-center"
+                  :src="imageSrc(item.imgurl)"
+                  alt="topic-bg"
+                />
+                <span
+                  class="absolute top-[50%] left-[50%] -translate-[50%] px-2 py-1 text-[16px] backdrop-blur-sm sm:text-[18px]"
+                  :class="item.label.length > 12 ? 'w-[80%]' : ''"
+                  >{{ item.label }}</span
+                >
+              </NuxtLink>
+            </div>
+          </template>
+        </BaseSwiper>
       </div>
     </div>
   </div>
@@ -83,7 +84,6 @@ const mainTopicList = computed(() => {
 })
 
 const topicMenuSwiperConfig = ref({
-  modules: [SwiperPagination, SwiperNavigation],
   slidesPerView: 1.4,
   spaceBetween: 12,
   breakpoints: {
@@ -95,16 +95,16 @@ const topicMenuSwiperConfig = ref({
       spaceBetween: 24
     },
     1024: {
-      slidesPerView: 2.9
+      slidesPerView: 3
     }
-  }
+  },
+  autoplay: false
 })
 
-const topicMenuSwiper = (swiper) => {
+const onSwiperReady = (swiper) => {
   const topicSelectedIndex = mainTopicList.value.findIndex(
     (topic) => topic.label_en === props.topicSelected
   )
-
   swiper.slideTo(topicSelectedIndex)
 }
 </script>

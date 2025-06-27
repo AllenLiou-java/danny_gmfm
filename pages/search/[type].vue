@@ -164,7 +164,7 @@ const resultPostsPerPage = computed(() => {
 const getPostsBytype = async () => {
   const { type } = useRoute().params
   let tempInfo = []
-  if (type === 'video') {
+  if (type === 'videos') {
     const { videos } = storeToRefs(useVideoStore())
 
     if (videos.value.length === 0) {

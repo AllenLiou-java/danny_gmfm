@@ -8,7 +8,7 @@
     <div
       class="container flex flex-col justify-between pt-4 tracking-[3.5px] sm:pt-8 sm:tracking-[4.67px] lg:gap-x-12 xl:flex-row"
     >
-      <div class="xl:max-w-[850px]">
+      <div class="mx-auto w-full lg:max-w-[850px]">
         <BreadCrumb
           :bigcategory="bigcategoryRoute"
           :smallcategory="smallcategoryRoute"
@@ -30,117 +30,128 @@
         >
           {{ videoDetail.content }}
         </p>
-        <p class="mb-4 sm:border-b sm:border-[#54595b] sm:pb-2">
-          <img
-            class="hidden w-[257px] sm:block"
-            :src="imageSrc('/video/font-related-post.png')"
-            alt="font_img"
-          />
-          <img
-            class="w-[206px] sm:hidden"
-            :src="imageSrc('/video/font-related-post-mobile.png')"
-            alt="font_img"
-          />
-        </p>
 
-        <div class="relative">
-          <ClientOnly>
-            <Swiper id="relatedPost" v-bind="relatedVideoSwiperConfig">
-              <SwiperSlide
-                v-for="video in relatedVideoList"
-                :key="video.id"
-                class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+        <div v-if="relatedVideoList !== null">
+          <p class="mb-4 sm:border-b sm:border-[#54595b] sm:pb-2">
+            <img
+              class="hidden w-[257px] sm:block"
+              :src="imageSrc('/video/font-related-post.png')"
+              alt="font_img"
+            />
+            <img
+              class="w-[206px] sm:hidden"
+              :src="imageSrc('/video/font-related-post-mobile.png')"
+              alt="font_img"
+            />
+          </p>
+
+          <div class="relative">
+            <ClientOnly>
+              <BaseSwiper
+                id="relatedPost"
+                class=""
+                :items="relatedVideoList"
+                v-bind="relatedVideoSwiperConfig"
               >
-                <NuxtLink :to="`/video/detail/${video.id}`">
-                  <div class="relative">
-                    <img
-                      class="max-h-[185px] w-full object-cover object-center sm:max-h-[214px]"
-                      :src="video.cover_image"
-                      alt="cover_img"
-                    />
-                    <p class="text-shorten absolute bottom-0 w-full px-3 pb-3 backdrop-blur-md">
-                      {{ video.title }}
-                    </p>
+                <template #slide="{ item }">
+                  <div
+                    class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+                  >
+                    <NuxtLink :to="`/video/detail/${item.id}`">
+                      <div class="relative">
+                        <img
+                          class="max-h-[185px] w-full object-cover object-center sm:max-h-[214px]"
+                          :src="item.cover_image"
+                          alt="cover_img"
+                        />
+                        <p class="text-shorten absolute bottom-0 w-full px-3 pb-3 backdrop-blur-md">
+                          {{ item.title }}
+                        </p>
+                      </div>
+                    </NuxtLink>
                   </div>
-                </NuxtLink>
-              </SwiperSlide>
-            </Swiper>
-          </ClientOnly>
+                </template>
 
-          <div
-            class="swiper-prev absolute top-[50%] -left-4 z-10 hidden -translate-y-[50%] cursor-pointer md:block"
-          >
-            <img
-              class="size-10 object-cover object-center"
-              :src="imageSrc('/video/btn-left.png')"
-              alt="btn-left"
-            />
-          </div>
-          <div
-            class="swiper-next absolute top-[50%] -right-4 z-10 hidden -translate-y-[50%] cursor-pointer md:block"
-          >
-            <img
-              class="size-10 object-cover object-center"
-              :src="imageSrc('/video/btn-right.png')"
-              alt="btn-right"
-            />
+                <!-- 自訂左右箭頭 -->
+                <template #navigation-prev>
+                  <button
+                    class="swiper-prev absolute top-[calc(50%-21px)] -left-4 z-10 hidden h-10 w-10 -translate-y-[50%] cursor-pointer bg-[url(~/assets/images/video/btn-left.png)] bg-cover bg-center md:block"
+                  />
+                </template>
+                <template #navigation-next>
+                  <button
+                    class="swiper-next absolute top-[calc(50%-21px)] -right-4 z-10 hidden h-10 w-10 -translate-y-[50%] cursor-pointer bg-[url(~/assets/images/video/btn-right.png)] bg-cover bg-center md:block"
+                  />
+                </template>
+
+                <!-- 自訂 pagination 樣式 -->
+                <template #pagination>
+                  <div class="swiper-pagination md:hidden" />
+                </template>
+              </BaseSwiper>
+            </ClientOnly>
           </div>
         </div>
       </div>
-      <div class="flex flex-col">
-        <div class="flex flex-col gap-6 pt-8 sm:flex-row lg:block lg:pt-19">
-          <div class="sm:max-w-[290px]">
+      <div class="mx-auto w-full max-w-[850px] xl:w-[290px]">
+        <div class="flex flex-col-reverse gap-6 pt-8 xl:block xl:pt-19">
+          <div class="max-w-[335px]">
             <p class="mb-4 border-b border-[#54595b] pb-2">關於我</p>
-            <div class="max-w-[290px]">
-              <img
-                class="mb-4 h-[290px] w-[290px] object-cover object-center"
-                :src="imageSrc('/aboutMe/aboutMe.png')"
-                alt="aboutMe_img"
-              />
-              <ul class="flex-center mb-8 gap-x-5 sm:flex-row md:gap-x-[22px]">
-                <li v-for="mediaItem in filteredSocialMediaList" :key="mediaItem.instagram">
-                  <a class="" :href="mediaItem.src" target="_blank">
-                    <Icon
-                      :name="mediaItem.iconName"
-                      class="text-[30px] duration-300 hover:scale-125 sm:text-[40px]"
-                    />
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <img
+              class="mx-auto mb-4 h-[290px] w-[290px] object-cover object-center"
+              :src="imageSrc('/aboutMe/aboutMe.png')"
+              alt="aboutMe_img"
+            />
+            <ul class="flex-center mb-8 gap-x-5 sm:flex-row md:gap-x-[22px]">
+              <li v-for="mediaItem in filteredSocialMediaList" :key="mediaItem.instagram">
+                <a class="" :href="mediaItem.src" target="_blank">
+                  <Icon
+                    :name="mediaItem.iconName"
+                    class="text-[30px] duration-300 hover:scale-125 sm:text-[40px]"
+                  />
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="sm:max-w-[290px]">
+          <div v-if="relatedProductList !== null" class="">
             <p class="mb-4 border-b border-[#54595b] pb-2">好物推薦</p>
-            <div v-if="relatedProductList !== null">
+            <div>
               <ClientOnly>
-                <Swiper
+                <BaseSwiper
                   id="goodstuff"
-                  v-bind="goodstuffSwiperConfig"
                   class="-mr-5 mb-4 min-h-[332px] sm:-mr-6"
+                  :items="relatedProductList"
+                  v-bind="goodstuffSwiperConfig"
                 >
-                  <SwiperSlide
-                    v-for="product in relatedProductList"
-                    :key="product.id"
-                    class="w-[255px] overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
-                  >
-                    <NuxtLink :to="`/goodStuff/detail/${product.id}`">
-                      <img
-                        class="max-h-[266px] w-full object-cover object-center"
-                        :src="product.cover_image"
-                        alt="cover-img"
-                      />
-                      <div class="bg-primary tracking-[0]">
-                        <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">
-                          {{ product.name }}
-                        </p>
+                  <template #slide="{ item }">
+                    <div
+                      class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
+                    >
+                      <NuxtLink :to="`/goodStuff/detail/${item.id}`">
+                        <img
+                          class="max-h-[266px] w-full object-cover object-center"
+                          :src="item.cover_image"
+                          alt="cover-img"
+                        />
+                        <div class="bg-primary tracking-[0]">
+                          <p class="text-shorten mb-1 px-4 pt-4 text-[14px] leading-8 tracking-[0]">
+                            {{ item.name }}
+                          </p>
 
-                        <span class="block px-3 pb-1 text-right text-[16px] font-medium text-yellow"
-                          >查看更多>></span
-                        >
-                      </div>
-                    </NuxtLink>
-                  </SwiperSlide>
-                </Swiper>
+                          <span
+                            class="block px-3 pb-1 text-right text-[16px] font-medium text-yellow"
+                            >查看更多>></span
+                          >
+                        </div>
+                      </NuxtLink>
+                    </div>
+                  </template>
+
+                  <!-- 自訂 pagination 樣式 -->
+                  <template #pagination>
+                    <div class="swiper-pagination" />
+                  </template>
+                </BaseSwiper>
               </ClientOnly>
             </div>
           </div>
@@ -208,22 +219,21 @@ const { data: relatedProductList } = await useAsyncData('productList', () => {
 })
 
 const goodstuffSwiperConfig = {
-  modules: [SwiperPagination],
-  slidesPerView: 1.2,
+  slidesPerView: 1.3,
   spaceBetween: 24,
   height: 214,
   breakpoints: {
     480: {
-      slidesPerView: 1.6
+      slidesPerView: 1.8
     },
     640: {
+      slidesPerView: 2.6
+    },
+    1280: {
       slidesPerView: 1
     }
   },
-  pagination: {
-    dynamicBullets: true,
-    clickable: true
-  }
+  pagination: true
 }
 
 const { data: relatedVideoList } = await useAsyncData('videoList', () => {
@@ -243,13 +253,10 @@ const { data: relatedVideoList } = await useAsyncData('videoList', () => {
 })
 
 const relatedVideoSwiperConfig = {
-  modules: [SwiperPagination, SwiperNavigation],
   slidesPerView: 1,
   spaceBetween: 24,
-  navigation: {
-    nextEl: '.swiper-next',
-    prevEl: '.swiper-prev'
-  },
+  navigation: true,
+  pagination: true,
   breakpoints: {
     480: {
       slidesPerView: 1.7
@@ -261,10 +268,7 @@ const relatedVideoSwiperConfig = {
       slidesPerView: 2.2
     }
   },
-  pagination: {
-    dynamicBullets: true,
-    clickable: true
-  }
+  autoplay: true
 }
 
 const bigcategoryRoute = computed(() => {
@@ -278,11 +282,18 @@ const bigcategoryRoute = computed(() => {
     (code) => code.id === videoDetail.value.category
   )[0]
 
-  const route = `/video/${currentBigcategory.label_en}/north?page=1`
+  if (currentBigcategory) {
+    const route = `/video/${currentBigcategory.label_en}/north?page=1`
 
-  return {
-    labelName: currentBigcategory.label,
-    route
+    return {
+      labelName: currentBigcategory.label,
+      route
+    }
+  } else {
+    return {
+      labelName: 'All',
+      route: '/video/allTopic?page=1'
+    }
   }
 })
 
@@ -301,10 +312,17 @@ const smallcategoryRoute = computed(() => {
     return code.id === videoDetail.value.smallcategory
   })[0]
 
-  const route = `/video/${currentBigcategory.label_en}/${currentSmallcategory.label_en}?page=1`
-  return {
-    labelName: currentSmallcategory.label,
-    route
+  if (currentBigcategory && currentSmallcategory) {
+    const route = `/video/${currentBigcategory.label_en}/${currentSmallcategory.label_en}?page=1`
+    return {
+      labelName: currentSmallcategory.label,
+      route
+    }
+  } else {
+    return {
+      labelName: null,
+      route: ''
+    }
   }
 })
 </script>
@@ -325,9 +343,7 @@ const smallcategoryRoute = computed(() => {
   padding-bottom: 42px;
 }
 
-#relatedPost::v-deep(.swiper-pagination) {
-  @media (min-width: 768px) {
-    display: none;
-  }
+::v-deep(.swiper-button-disabled) {
+  opacity: 0.6;
 }
 </style>

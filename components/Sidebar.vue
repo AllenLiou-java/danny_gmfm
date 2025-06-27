@@ -1,6 +1,6 @@
 <template>
   <GSAPTransition :hidden="{ y: -50 }">
-    <div v-if="isShow" class="fixed top-[70%] right-1 sm:right-2">
+    <div v-if="isShow" class="fixed top-[70%] right-1 z-999 sm:right-2">
       <ul>
         <li class="cursor-pointer duration-300 hover:scale-110" @click="moveToTop">
           <img

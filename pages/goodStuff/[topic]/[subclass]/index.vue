@@ -53,28 +53,31 @@
           </ul>
 
           <div class="md:hidden">
-            <Swiper v-bind="smallcategorySwiperConfig" @swiper="smallcategorySwiper">
-              <SwiperSlide
-                v-for="smallcategory in productSmallcategoryNavigator"
-                :key="smallcategory.label_en"
-                class="max-w-[160px] rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428] sm:max-w-[120px]"
-                :class="smallcategorySelected === smallcategory.label_en ? 'border-yellow' : ''"
+            <ClientOnly>
+              <BaseSwiper
+                :items="productSmallcategoryNavigator"
+                v-bind="smallcategorySwiperConfig"
+                @ready="onSwiperReady"
               >
-                <NuxtLink
-                  class="flex-center px-[7px] py-[8px] sm:flex-col"
-                  :to="smallcategory.route"
-                >
-                  <img
-                    class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
-                    :src="imageSrc(smallcategory.imgurl)"
-                    alt=""
-                  />
-                  <span class="text-[16px] tracking-[4.67px] text-nowrap lg:text-[18px]">{{
-                    smallcategory.label
-                  }}</span>
-                </NuxtLink>
-              </SwiperSlide>
-            </Swiper>
+                <template #slide="{ item }">
+                  <div
+                    class="rounded-[5px] border-2 border-[#1c2428] bg-[#1c2428]"
+                    :class="smallcategorySelected === item.label_en ? 'border-yellow' : ''"
+                  >
+                    <NuxtLink class="flex-center px-[7px] py-[8px] sm:flex-col" :to="item.route">
+                      <img
+                        class="mr-2 size-[25px] object-contain object-center sm:mr-0 sm:mb-2 sm:size-19"
+                        :src="imageSrc(item.imgurl)"
+                        alt=""
+                      />
+                      <span class="text-[16px] tracking-[4.67px] text-nowrap lg:text-[18px]">{{
+                        item.label
+                      }}</span>
+                    </NuxtLink>
+                  </div>
+                </template>
+              </BaseSwiper>
+            </ClientOnly>
           </div>
         </div>
         <div>
@@ -109,11 +112,20 @@ useSeoMeta({
 })
 
 const smallcategorySwiperConfig = ref({
-  slidesPerView: 'auto',
-  spaceBetween: 12
+  slidesPerView: 2.3,
+  spaceBetween: 12,
+  breakpoints: {
+    480: {
+      slidesPerView: 2.5
+    },
+    640: {
+      slidesPerView: 4.5
+    }
+  },
+  autoplay: false
 })
 
-const smallcategorySwiper = (swiper) => {
+const onSwiperReady = (swiper) => {
   if (productSmallcategoryNavigator.value === null) return
   const selectedIndex = productSmallcategoryNavigator.value.findIndex(
     (category) => category.label_en === smallcategorySelected.value
