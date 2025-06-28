@@ -9,14 +9,24 @@
         </li>
       </ul>
       <div class="mb-4 flex gap-x-2 md:mb-6 md:gap-x-4">
-        <input
-          ref="refInputKeywod"
-          v-model="inputKeyword"
-          class="w-full max-w-[724px] rounded-sm px-3 py-[10px] text-[14px] outline-1 -outline-offset-1 outline-[#85888a] placeholder:text-white focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow md:px-6 md:py-4 md:text-[18px]"
-          placeholder="請輸入關鍵字"
-          type="text"
-          @keyup.enter="searchResult"
-        />
+        <div class="relative w-full">
+          <input
+            ref="refInputKeywod"
+            v-model="inputKeyword"
+            class="w-full max-w-[724px] rounded-sm px-3 py-[10px] text-[14px] outline-1 -outline-offset-1 outline-[#85888a] placeholder:text-white focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow md:px-6 md:py-4 md:text-[18px]"
+            placeholder="請輸入關鍵字"
+            type="text"
+            @keyup.enter="searchResult"
+          />
+          <img
+            v-if="inputKeyword !== null"
+            class="absolute top-[50%] right-2 size-6 -translate-y-[50%] cursor-pointer rounded-full bg-gray-600 p-1.5 hover:bg-gray-600 md:size-8 md:bg-transparent"
+            :src="imageSrc('/close.png')"
+            alt="closeBtn"
+            @click="clearKeyword"
+          />
+        </div>
+
         <div
           class="flex-center size-10 cursor-pointer rounded-[5px] bg-yellow p-2 duration-300 hover:bg-[#ffe145] md:size-15 md:p-[14px]"
           @click="searchResult"
@@ -44,8 +54,8 @@
         <ul>
           <li
             v-for="result in resultPostsPerPage"
-            :key="result.id"
-            v-gsap.whenVisible.from.once.reversible="{ opacity: 0, x: -50 }"
+            :key="result.title"
+            v-gsap.whenVisible.from.once="{ opacity: 0, x: -50 }"
           >
             <NuxtLink
               class="mb-3 flex flex-col gap-x-6 rounded-[5px] bg-secondary p-3 hover:bg-secondary md:mb-5 md:flex-row md:bg-transparent md:px-4 md:py-5"
@@ -55,6 +65,7 @@
                 class="mb-2 flex shrink-0 gap-x-3 border-b-1 border-[#303538] pb-2 md:border-b-0"
               >
                 <img
+                  loading="lazy"
                   class="size-[60px] rounded-[5px] object-cover object-center md:size-[150px]"
                   :src="result.cover_image"
                   alt="coverImg"
@@ -98,6 +109,8 @@
 </template>
 
 <script setup>
+const { imageSrc } = getImageSrc()
+
 useSeoMeta({
   title: '影片｜好物推薦 搜尋',
   ogTitle: '影片｜好物推薦 搜尋'
@@ -207,7 +220,7 @@ const filterPostByKeyword = () => {
   const posts = postsBytype.value
 
   if (keyword === null || keyword === '') {
-    resultPosts.value = posts
+    resultPosts.value = []
   } else {
     resultPosts.value = posts.filter((post) => {
       const tag = ['title', 'content']
@@ -277,6 +290,10 @@ const turnPage = (pageNo) => {
 const fillinKeyword = (keyword) => {
   inputKeyword.value = keyword
   refInputKeywod.value.focus()
+}
+
+const clearKeyword = () => {
+  inputKeyword.value = null
 }
 
 onMounted(() => {

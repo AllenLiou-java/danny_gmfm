@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary font-notoSansTC text-white">
-    <!-- <CustomLoading /> -->
+    <CustomLoading />
 
     <div>
       <LayoutHeader />
