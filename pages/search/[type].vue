@@ -13,6 +13,7 @@
           <input
             ref="refInputKeywod"
             v-model="inputKeyword"
+            style="font-size: initial"
             class="w-full max-w-[724px] rounded-sm px-3 py-[10px] text-[14px] outline-1 -outline-offset-1 outline-[#85888a] placeholder:text-white focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-yellow md:px-6 md:py-4 md:text-[18px]"
             placeholder="請輸入關鍵字"
             type="text"

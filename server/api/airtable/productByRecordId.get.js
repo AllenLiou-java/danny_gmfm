@@ -1,28 +1,13 @@
-export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const url = `/product/${body.id}`
+export default defineEventHandler((event) => {
+  const query = getQuery(event)
+
+  // video 表單的 id
+  const tableId = 'tbl20P7hV6ZXZTRsm'
+  const url = `/${tableId}/${query.id}`
 
   const data = airtableApi(url)
     .then((record) => {
       const { id, fields } = record
-
-      const relatedProduct = []
-
-      const productIndex = ['one', 'two', 'three', 'four']
-
-      productIndex.forEach((index) => {
-        const id = fields[`product_${index}_id`]
-        const name = fields[`product_${index}_name`]
-        const image = fields[`product_${index}_image`]
-
-        if (id && name && image) {
-          relatedProduct.push({
-            id,
-            name,
-            cover_image: image[0].url
-          })
-        }
-      })
 
       return {
         id,
@@ -34,7 +19,7 @@ export default defineEventHandler(async (event) => {
         smallcategory: fields.smallcategory,
         product_no: fields.product_no,
         cover_image: fields.cover_image[0].url,
-        relatedProduct
+        related_product: fields.related_product
       }
     })
     .catch((error) => {

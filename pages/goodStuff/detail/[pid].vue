@@ -92,7 +92,7 @@
               class="grid grid-cols-1 gap-x-6 gap-y-3 px-10 sm:grid-cols-2 sm:gap-y-6 sm:px-0 xl:gap-x-10"
             >
               <li
-                v-for="product in productDetail.relatedProduct"
+                v-for="product in relatedProductList"
                 :key="product.id"
                 class="overflow-hidden rounded-[8px] card-shadow duration-300 hover:scale-[calc(255/240)] lg:max-w-[240px]"
               >
@@ -148,14 +148,29 @@ const { products, codeProductBigcategoryList, codeProductSmallcategoryList } =
 
 const { data: productDetail } = await useAsyncData('productInfo', () => {
   if (products.value.length === 0) {
-    return $fetch('/api/airtable/productById', {
-      method: 'post',
-      body: {
-        id: pid
-      }
-    })
+    return $fetch(`/api/airtable/productByRecordId?id=${pid}`)
   } else {
     return products.value.filter((product) => product.id === pid)[0]
+  }
+})
+
+const { data: relatedProductList } = await useAsyncData('productList', () => {
+  if (!productDetail.value.related_product) return null
+
+  const productList = productDetail.value.related_product.split(',')
+
+  const allProducts = products.value
+  if (allProducts.length > 0) {
+    return allProducts.filter((product) => productList.includes(product.product_no))
+  } else {
+    const formula = `OR(${productList.map((num) => `AND({product_no}=${num}, {launched}='true')`).join(',')})`
+
+    return $fetch('/api/airtable/product', {
+      method: 'post',
+      body: {
+        filterByFormula: formula
+      }
+    })
   }
 })
 

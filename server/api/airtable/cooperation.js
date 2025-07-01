@@ -1,5 +1,8 @@
 export default defineEventHandler((event) => {
-  const data = airtableApi('/cooperation/listRecords', {
+  const tableId = 'tblcS2gHPXLNnkP1S'
+  const url = `/${tableId}/listRecords`
+
+  const data = airtableApi(url, {
     method: 'post',
     body: {
       sort: [{ field: 'name', direction: 'asc' }]

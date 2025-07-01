@@ -154,6 +154,6 @@
 }
 
 .img-shadow {
-  @apply bg-gradient-to-b from-transparent from-60% to-primary to-100% 
+  @apply bg-gradient-to-b from-transparent from-60% to-primary to-110% 
 }
 

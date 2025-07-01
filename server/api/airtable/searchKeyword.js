@@ -1,5 +1,8 @@
 export default defineEventHandler((event) => {
-  const data = airtableApi('/search_keyword/listRecords', {
+  const tableId = 'tblrPOnMILcSu4Uzs'
+  const url = `/${tableId}/listRecords`
+
+  const data = airtableApi(url, {
     method: 'post',
     body: {
       sort: [{ field: 'keyword', direction: 'asc' }]

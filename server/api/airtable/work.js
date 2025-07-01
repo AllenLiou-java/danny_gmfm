@@ -6,7 +6,10 @@ export default defineEventHandler(async (event) => {
       body.offset = offset
     }
 
-    const data = await airtableApi('/work/listRecords', {
+    const tableId = 'tbl9kcGpjPKdA9cNA'
+    const url = `/${tableId}/listRecords`
+
+    const data = await airtableApi(url, {
       method: 'post',
       body: {
         sort: [{ field: 'work_id', direction: 'desc' }],

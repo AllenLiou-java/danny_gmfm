@@ -177,9 +177,7 @@ export const useVideoStore = defineStore('video', () => {
     latest5Video.value = await $fetch('/api/airtable/video', {
       method: 'post',
       body: {
-        maxRecords: 5,
-        sort: [{ field: 'video_no', direction: 'desc' }],
-        filterByFormula: "{launched}='true'"
+        maxRecords: 5
       }
     })
   }
@@ -187,14 +185,11 @@ export const useVideoStore = defineStore('video', () => {
   const getVideos = async () => {
     if (videos.value.length > 0) return
     const infos = await $fetch('/api/airtable/video', {
-      method: 'post',
-      body: {
-        sort: [{ field: 'video_no', direction: 'desc' }],
-        filterByFormula: "{launched}='true'"
-      }
+      method: 'post'
     })
 
     videos.value = infos
+    latest5Video.value = infos.slice(0, 5)
     return infos
   }
 

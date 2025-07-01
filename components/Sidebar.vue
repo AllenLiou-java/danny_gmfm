@@ -57,9 +57,11 @@ const showSocialGroup = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', () => {
-    showSocialGroup()
-  })
+  window.addEventListener('scroll', showSocialGroup)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', showSocialGroup)
 })
 </script>
 

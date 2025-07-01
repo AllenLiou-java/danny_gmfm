@@ -55,6 +55,7 @@
               >
                 <template #slide="{ item }">
                   <div
+                    v-if="item.id"
                     class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
                   >
                     <NuxtLink :to="`/video/detail/${item.id}`">
@@ -125,6 +126,7 @@
                 >
                   <template #slide="{ item }">
                     <div
+                      v-if="item.id"
                       class="overflow-hidden rounded-[5px] shadow-[2px_4px_20px_0_rgba(0,0,0,0.5)]"
                     >
                       <NuxtLink :to="`/goodStuff/detail/${item.id}`">
@@ -175,18 +177,15 @@ const { imageSrc } = getImageSrc()
 const { videos, codeVideoBigcategoryList, codeVideoSmallcategoryList } =
   storeToRefs(useVideoStore())
 
+const { products } = storeToRefs(useProductStore())
+
 const { data: videoDetail } = await useAsyncData('videoDetail', () => {
   const vid = route.params.vid
   const video = videos.value.filter((video) => video.id === vid)
   if (video.length > 0) {
     return video[0]
   } else {
-    return $fetch('/api/airtable/videoById', {
-      method: 'post',
-      body: {
-        id: route.params.vid
-      }
-    })
+    return $fetch(`/api/airtable/videoByRecordId?id=${route.params.vid}`)
   }
 })
 
@@ -207,15 +206,19 @@ const { data: relatedProductList } = await useAsyncData('productList', () => {
 
   const productList = videoDetail.value.related_product.split(',')
 
-  const formula = `OR(${productList.map((num) => `AND({product_no}=${num}, {launched}='true')`).join(',')})`
+  const allProducts = products.value
+  if (allProducts.length > 0) {
+    return allProducts.filter((product) => productList.includes(product.product_no))
+  } else {
+    const formula = `OR(${productList.map((num) => `AND({product_no}=${num}, {launched}='true')`).join(',')})`
 
-  return $fetch('/api/airtable/product', {
-    method: 'post',
-    body: {
-      sort: [{ field: 'product_no', direction: 'desc' }],
-      filterByFormula: formula
-    }
-  })
+    return $fetch('/api/airtable/product', {
+      method: 'post',
+      body: {
+        filterByFormula: formula
+      }
+    })
+  }
 })
 
 const goodstuffSwiperConfig = {
@@ -240,16 +243,22 @@ const { data: relatedVideoList } = await useAsyncData('videoList', () => {
   if (!videoDetail.value.related_video) return null
 
   const relatedVideoList = videoDetail.value.related_video.split(',')
-  // video資料篩選條件：指定的video_no & launched=true
-  const formula = `OR(${relatedVideoList.map((num) => `AND({video_no}=${num},{launched}='true')`).join(',')})`
 
-  return $fetch('/api/airtable/video', {
-    method: 'post',
-    body: {
-      sort: [{ field: 'video_no', direction: 'desc' }],
-      filterByFormula: `${formula}`
-    }
-  })
+  const allVideos = videos.value
+  if (allVideos.length > 0) {
+    return allVideos.filter((video) => relatedVideoList.includes(video.video_no))
+  } else {
+    // video資料篩選條件：指定的video_no & launched=true
+    const formula = `OR(${relatedVideoList.map((num) => `AND({video_no}=${num},{launched}='true')`).join(',')})`
+
+    return $fetch('/api/airtable/video', {
+      method: 'post',
+      body: {
+        sort: [{ field: 'video_no', direction: 'desc' }],
+        filterByFormula: `${formula}`
+      }
+    })
+  }
 })
 
 const relatedVideoSwiperConfig = {

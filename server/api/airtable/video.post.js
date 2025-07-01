@@ -1,15 +1,28 @@
 export default defineEventHandler(async (event) => {
-  const body = (await readBody(event)) || {}
+  const reqBody = (await readBody(event)) || {}
+
   let allRecords = []
   let offset = null
+
   do {
     if (offset) {
-      body.offset = offset
+      reqBody.offset = offset
     }
 
-    const data = await airtableApi('/video/listRecords', {
+    const defaultConfig = {
+      sort: [{ field: 'video_no', direction: 'desc' }],
+      filterByFormula: "{launched}='true'"
+    }
+
+    const tableId = 'tbl90RkFluAvuEePL'
+    const url = `/${tableId}/listRecords`
+
+    const data = await airtableApi(url, {
       method: 'post',
-      body
+      body: {
+        ...defaultConfig,
+        ...reqBody
+      }
     })
       .then((res) => {
         return res
@@ -48,25 +61,4 @@ export default defineEventHandler(async (event) => {
   })
 
   return result
-
-  // const data = airtableApi('/video/listRecords', {
-  //   method: 'post',
-  //   body
-  // })
-  //   .then((res) => {
-  //     return res
-  //   })
-  //   .catch((error) => {
-  //     const statusCode = error.statusCode
-  //     const message = error.data.error
-  //     const statusMessage = error.statusMessage
-
-  //     throw createError({
-  //       statusCode,
-  //       message,
-  //       statusMessage
-  //     })
-  //   })
-
-  // return data
 })

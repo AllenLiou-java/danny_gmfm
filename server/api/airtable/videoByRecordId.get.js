@@ -1,6 +1,9 @@
-export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const url = `/video/${body.id}`
+export default defineEventHandler((event) => {
+  const query = getQuery(event)
+
+  // video 表單的 id
+  const tableId = 'tbl90RkFluAvuEePL'
+  const url = `/${tableId}/${query.id}`
 
   const data = airtableApi(url)
     .then((record) => {

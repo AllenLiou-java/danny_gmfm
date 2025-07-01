@@ -133,15 +133,13 @@ export const useProductStore = defineStore('product', () => {
   }
 
   const getLatest3Product = async () => {
-    if (latest3Product.value > 0) return
+    if (latest3Product.value.length > 0) return
 
     latest3Product.value = await $fetch('/api/airtable/product', {
       method: 'post',
       body: {
         maxRecords: 3,
-        sort: [{ field: 'product_no', direction: 'desc' }],
-        fields: ['name', 'category', 'cover_image', 'product_no'],
-        filterByFormula: "{launched}='true'"
+        fields: ['name', 'category', 'cover_image', 'product_no']
       }
     })
   }
@@ -149,14 +147,11 @@ export const useProductStore = defineStore('product', () => {
   const getProducts = async () => {
     if (products.value.length > 0) return
     const infos = await $fetch('/api/airtable/product', {
-      method: 'post',
-      body: {
-        sort: [{ field: 'product_no', direction: 'desc' }],
-        filterByFormula: "{launched}='true'"
-      }
+      method: 'post'
     })
 
     products.value = infos
+    latest3Product.value = infos.slice(0, 3)
     return infos
   }
 
