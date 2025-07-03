@@ -70,7 +70,7 @@ export default defineNuxtConfig({
   },
   image: {
     // 若使用 Vercel 本機圖片放在 public 資料夾（如 /public/images/）
-    domains: [],
+    domains: ['v5.airtableusercontent.com'],
     screens: {
       sm: 640,
       md: 768,

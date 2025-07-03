@@ -15,10 +15,18 @@
         :key="cooperationItem.name"
         class="group relative overflow-hidden rounded-xl"
       >
-        <img
+        <!-- <img
           class="max-w-[150px] rounded-full object-cover"
           :src="cooperationItem.logo[0].url"
           alt="cooperationLogo"
+        /> -->
+        <NuxtImg
+          :src="cooperationItem.logo[0].url"
+          alt="cooperationLogo"
+          loading="lazy"
+          format="webp"
+          sizes=""
+          class="max-w-[150px] rounded-full object-cover"
         />
       </li>
     </ul>
