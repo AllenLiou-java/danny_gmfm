@@ -50,7 +50,8 @@ export default defineNuxtConfig({
     'v-gsap-nuxt',
     '@vee-validate/nuxt',
     'nuxt-nodemailer',
-    'nuxt-toast'
+    'nuxt-toast',
+    '@nuxt/image'
   ],
   swiper: {
     modules: ['navigation', 'pagination', 'thumbs'],
@@ -66,6 +67,18 @@ export default defineNuxtConfig({
         dir: './assets/my-icon'
       }
     ]
+  },
+  image: {
+    // 若使用 Vercel 本機圖片放在 public 資料夾（如 /public/images/）
+    domains: [],
+    screens: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280
+    }
+    // 若你有放外部圖片 CDN，如 imgur、Cloudinary 等，可以加在 domains 中
+    // domains: ['i.imgur.com', 'res.cloudinary.com']
   },
   runtimeConfig: {
     airtableApiKey: '',
