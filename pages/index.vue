@@ -271,7 +271,7 @@
         >
       </div>
     </div>
-    <div class="container py-8 md:py-15">
+    <!-- <div class="container py-8 md:py-15">
       <h2
         v-gsap.whenVisible.from.once="{ opacity: 0, y: 50 }"
         class="mb-6 text-center font-paintinfChoco text-[32px] leading-[1] text-yellow sm:mb-15 sm:text-[100px]"
@@ -310,7 +310,7 @@
         </div>
         <FacebookPagePlugin />
       </div>
-    </div>
+    </div> -->
 
     <FriendList class="container pb-8 md:py-15" :cooperation-list="cooperationList" />
     <Subscribe />
@@ -339,13 +339,14 @@ const productStore = useProductStore()
 const { latest3Product, productBigcategoryNavigator } = storeToRefs(productStore)
 
 const commonStore = useCommonStore()
-const { cooperationList, isInitScreenClosed, latest6InstagramMediaObj } = storeToRefs(commonStore)
+const { cooperationList, isInitScreenClosed } = storeToRefs(commonStore)
+// const { latest6InstagramMediaObj } = storeToRefs(commonStore)
 
 await callOnce(async () => {
   await videoStore.getLatest5Video()
   await productStore.getLatest3Product()
   await commonStore.getCooperationList()
-  await commonStore.getLatest6InstagramMediaObj()
+  // await commonStore.getLatest6InstagramMediaObj()
 })
 
 const socialMediaList = ref([
